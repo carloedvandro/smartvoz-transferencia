@@ -1,9 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery, useServerFn } from "@tanstack/react-query";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { Suspense } from "react";
-import { getWallet, getMyProfile, listTransactions } from "@/lib/wallet.functions";
+import { useQuery } from "@tanstack/react-query";
 import { useServerFn as useSFn } from "@tanstack/react-start";
+import { getWallet, getMyProfile, listTransactions } from "@/lib/wallet.functions";
 import { BalanceCard } from "@/components/premium/BalanceCard";
 import { ArrowLeftRight, Receipt, Wallet as WalletIcon, ArrowRight } from "lucide-react";
 import walletImg from "@/assets/wallet-3d.png";
