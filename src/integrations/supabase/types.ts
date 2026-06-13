@@ -14,13 +14,145 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string
+          id: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name: string
+          id: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string
+          id?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          counterpart_name: string | null
+          counterpart_user_id: string | null
+          created_at: string
+          description: string | null
+          fee: number
+          id: string
+          net_amount: number
+          status: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          counterpart_name?: string | null
+          counterpart_user_id?: string | null
+          created_at?: string
+          description?: string | null
+          fee?: number
+          id?: string
+          net_amount: number
+          status?: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          counterpart_name?: string | null
+          counterpart_user_id?: string | null
+          created_at?: string
+          description?: string | null
+          fee?: number
+          id?: string
+          net_amount?: number
+          status?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      wallets: {
+        Row: {
+          balance_available: number
+          balance_locked: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance_available?: number
+          balance_locked?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance_available?: number
+          balance_locked?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      withdrawal_requests: {
+        Row: {
+          amount: number
+          created_at: string
+          fee: number
+          id: string
+          net_amount: number
+          processed_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          fee: number
+          id?: string
+          net_amount: number
+          processed_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          fee?: number
+          id?: string
+          net_amount?: number
+          processed_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      request_withdrawal: { Args: { p_amount: number }; Returns: Json }
+      search_users: {
+        Args: { p_query: string }
+        Returns: {
+          avatar_url: string
+          display_name: string
+          id: string
+          username: string
+        }[]
+      }
+      transfer_funds: {
+        Args: { p_amount: number; p_to_user: string }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never
