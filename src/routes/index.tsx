@@ -928,6 +928,13 @@ function WithdrawModal({
               <span>Taxa (3%):</span>
               <span className="tabular-nums font-semibold text-[var(--sv-orange)]">− {brl(fee)}</span>
             </div>
+            <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
+              <span className="inline-flex items-center gap-1">
+                Saldo bloqueado
+                <span className="text-[10px] md:text-xs text-[var(--sv-muted)]/80">(auto-débito)</span>
+              </span>
+              <span className="tabular-nums font-semibold text-[var(--sv-orange)]">− {brl(locked)}</span>
+            </div>
             <div className="h-px bg-[var(--sv-lilac-border)]" />
             <div className="flex items-center justify-between">
               <span className="font-bold text-[var(--sv-purple-deep)] text-sm md:text-lg">Valor líquido:</span>
@@ -936,6 +943,7 @@ function WithdrawModal({
               </span>
             </div>
           </div>
+
 
           <div className="grid grid-cols-2 gap-3 mt-5 md:mt-7 sm:flex sm:justify-end">
             <button onClick={close} className="sv-btn-ghost h-10 md:h-12 w-full sm:w-auto px-5 md:px-7 text-sm md:text-base rounded-xl">
