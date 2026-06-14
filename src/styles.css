@@ -568,4 +568,98 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 
   }
 }
 
+/* ============================================================
+   Modern compact action buttons (Transferir / Novo Saque)
+   ============================================================ */
+.sv-btn-action {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease, background .15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.sv-btn-action:active { transform: translateY(0); }
+
+.sv-btn-action-gold {
+  background: #FFFFFF;
+  border: 1.5px solid var(--sv-gold);
+  color: var(--sv-purple-deep);
+  box-shadow: 0 4px 12px rgba(246,199,86,.20);
+}
+.sv-btn-action-gold:hover {
+  background: #FFFBEC;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(246,199,86,.35);
+}
+
+.sv-btn-action-purple {
+  background: linear-gradient(180deg, #B84CFF 0%, #7A1FD0 55%, #5B0DAD 100%);
+  border: 1.5px solid var(--sv-gold);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(106,13,173,.35), 0 0 0 1px rgba(246,199,86,.30);
+}
+.sv-btn-action-purple:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(106,13,173,.45), 0 0 0 1px rgba(246,199,86,.45);
+}
+
+/* ============================================================
+   Filter grid — clean alignment on mobile + desktop
+   ============================================================ */
+.sv-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.sv-filters-grid > .sv-search-wrap { grid-column: 1 / -1; }
+
+@media (min-width: 768px) {
+  .sv-filters-grid {
+    grid-template-columns: auto auto auto minmax(220px, 1fr) auto auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .sv-filters-grid > .sv-search-wrap { grid-column: auto; }
+}
+
+.sv-search-wrap { position: relative; width: 100%; }
+.sv-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--sv-muted);
+  pointer-events: none;
+}
+.sv-search-input { width: 100%; padding-left: 38px !important; }
+
+/* ============================================================
+   Aggressive scrollbar kill — desktop and mobile
+   ============================================================ */
+html, body {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  overflow-x: hidden;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+  -webkit-appearance: none !important;
+}
+* { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+
+
 
