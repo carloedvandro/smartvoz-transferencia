@@ -466,10 +466,17 @@ function SaquesPage() {
                     </div>
                     <div className="flex items-center justify-between gap-2 pl-[56px]">
                       <div className="flex items-center gap-2">
-                        <span className="sv-badge-level" style={{ width: 64, height: 28, fontSize: 11 }}>{m.nivel}</span>
+                        <span className={nivelClass(m.nivel)} style={{ minWidth: 64, height: 28, fontSize: 11 }}>{m.nivel}</span>
                         <StatusBadge status={m.status} />
                       </div>
-                      <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-8 px-3 text-xs">
+                      <button
+                        onClick={() => {
+                          playCategorySound(m.categoria);
+                          fireCategoryFX(m.categoria);
+                          setDetalhe(m);
+                        }}
+                        className="sv-btn-premium h-8 px-3 text-xs"
+                      >
                         Visualizar
                       </button>
                     </div>
