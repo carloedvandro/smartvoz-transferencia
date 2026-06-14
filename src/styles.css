@@ -174,16 +174,16 @@
       #3C1A85 100%
     );
     text-shadow:
-      0 1px 0 rgba(245,235,255,.85),
-      0 2px 0 rgba(170,120,240,.45),
-      0 6px 12px rgba(60,26,133,.22);
+      0 1px 0 rgba(255,248,213,.95),
+      0 2px 0 rgba(255,214,90,.55),
+      0 6px 12px rgba(168,108,0,.25);
     filter:
-      drop-shadow(0 3px 6px rgba(126,84,217,.22))
-      drop-shadow(0 0 8px rgba(180,140,255,.18));
+      drop-shadow(0 3px 6px rgba(246,199,86,.28))
+      drop-shadow(0 0 8px rgba(255,220,120,.28));
   }
   .sv-amount-hero {
-    font-size: 44px !important;
-    letter-spacing: -1.5px !important;
+    font-size: 34px !important;
+    letter-spacing: -1.2px !important;
   }
   .sv-amount-green {
     background-image: linear-gradient(
