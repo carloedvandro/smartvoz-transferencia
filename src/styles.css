@@ -458,6 +458,26 @@ select.sv-filter-pill {
     0 0 18px rgba(246,199,86,.45);
 }
 
+/* Trophy icon (gold) inside N1..N4 badges */
+.sv-badge-level-trophy {
+  padding-left: 30px;
+  padding-right: 14px;
+}
+.sv-badge-level-trophy::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F6C756' stroke='%237a4a00' stroke-width='1.2' stroke-linejoin='round'><path d='M7 4h10v3a5 5 0 0 1-10 0V4z'/><path d='M5 5H3v2a3 3 0 0 0 3 3'/><path d='M19 5h2v2a3 3 0 0 1-3 3'/><path d='M9 14h6l-.5 3h-5L9 14z'/><path d='M8 20h8v-2H8v2z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.35));
+  pointer-events: none;
+}
+
 
 /* ===== Piggy explosion animations ===== */
 @keyframes sv-piggy-shake {
@@ -631,6 +651,16 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 
   .sv-filters-grid > .sv-search-wrap { grid-column: auto; }
 }
 
+.sv-filters-grid > select.sv-filter-pill,
+.sv-filters-grid > button.sv-filter-pill { width: 100%; }
+
+/* On mobile, when a 3rd select sits alone on row 2, span both cols for tidy alignment */
+.sv-filters-grid > select.sv-filter-pill:nth-of-type(3) { grid-column: 1 / -1; }
+
+@media (min-width: 768px) {
+  .sv-filters-grid > select.sv-filter-pill:nth-of-type(3) { grid-column: auto; }
+}
+
 .sv-search-wrap { position: relative; width: 100%; }
 .sv-search-icon {
   position: absolute;
@@ -640,7 +670,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 
   color: var(--sv-muted);
   pointer-events: none;
 }
-.sv-search-input { width: 100%; padding-left: 38px !important; }
+.sv-search-input { width: 100%; padding-left: 42px !important; }
 
 /* ============================================================
    Aggressive scrollbar kill — desktop and mobile
