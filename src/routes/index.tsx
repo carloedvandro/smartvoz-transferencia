@@ -78,74 +78,9 @@ const PAGE_SIZE = 8;
 
 function SaquesPage() {
   const [saldo, setSaldo] = useState(50);
-  const [bloqueado] = useState(0);
-  const [movimentos, setMovimentos] = useState<Movimento[]>([
-    {
-      id: "seed-1",
-      titulo: "Saldo disponível",
-      cliente: "Carteira SmartVoz",
-      nivel: "—",
-      data: new Date(),
-      status: "Disponível",
-      valor: 50,
-      tipo: "Saldo",
-      categoria: "Carteira",
-      descricao: "Saldo disponível para saque ou transferência.",
-      icone: walletImg,
-    },
-    {
-      id: "seed-2",
-      titulo: "Comissão de rede",
-      cliente: "Rede SmartVoz",
-      nivel: "N2",
-      data: new Date(Date.now() - 86400000 * 2),
-      status: "Concluído",
-      valor: 18.5,
-      tipo: "Saldo",
-      categoria: "Comissão",
-      descricao: "Bônus de níveis da sua rede ativa.",
-      icone: moneyImg,
-    },
-    {
-      id: "seed-3",
-      titulo: "Indicação ativa",
-      cliente: "Mariana Lopes",
-      nivel: "N1",
-      data: new Date(Date.now() - 86400000 * 5),
-      status: "Concluído",
-      valor: 12,
-      tipo: "Saldo",
-      categoria: "Parceria",
-      descricao: "Novo parceiro habilitado em sua rede.",
-      icone: partnershipImg,
-    },
-    {
-      id: "seed-4",
-      titulo: "Avanço de nível",
-      cliente: "Programa SmartVoz",
-      nivel: "N3",
-      data: new Date(Date.now() - 86400000 * 9),
-      status: "Concluído",
-      valor: 25,
-      tipo: "Saldo",
-      categoria: "Níveis",
-      descricao: "Você subiu de nível e ganhou bônus.",
-      icone: levelsImg,
-    },
-    {
-      id: "seed-5",
-      titulo: "Rede expandida",
-      cliente: "Rede SmartVoz",
-      nivel: "N2",
-      data: new Date(Date.now() - 86400000 * 14),
-      status: "Concluído",
-      valor: 8,
-      tipo: "Saldo",
-      categoria: "Rede",
-      descricao: "Sua rede ativa cresceu este mês.",
-      icone: networkImg,
-    },
-  ]);
+  const [bloqueado, setBloqueado] = useState(35);
+  const [movimentos, setMovimentos] = useState<Movimento[]>([]);
+
 
   const [busca, setBusca] = useState("");
   const [fTipo, setFTipo] = useState<"todos" | TipoMov>("todos");
