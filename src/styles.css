@@ -176,6 +176,31 @@
   }
   .sv-btn-ghost:hover { background: var(--sv-lilac); border-color: var(--sv-purple-light); }
 
+  .sv-btn-gold-ghost {
+    background: #FFFFFF;
+    border: 2px solid var(--sv-gold);
+    border-radius: 18px;
+    color: var(--sv-purple-deep);
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(246,199,86,.25);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .sv-btn-gold-ghost:hover {
+    background: #FFFBEC;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(246,199,86,.45), 0 0 0 4px rgba(246,199,86,.15);
+  }
+
+  .sv-glow-gold {
+    border-color: var(--sv-gold) !important;
+    box-shadow: 0 0 0 4px rgba(246,199,86,.18), 0 0 25px rgba(246,199,86,.35) !important;
+    animation: sv-pulse-gold 1.4s ease-in-out infinite;
+  }
+  @keyframes sv-pulse-gold {
+    0%,100% { box-shadow: 0 0 0 4px rgba(246,199,86,.18), 0 0 20px rgba(246,199,86,.3); }
+    50%     { box-shadow: 0 0 0 6px rgba(246,199,86,.25), 0 0 35px rgba(246,199,86,.55); }
+  }
+
   .sv-input-premium {
     background: #FFFFFF;
     border: 2px solid var(--sv-lilac-border);
