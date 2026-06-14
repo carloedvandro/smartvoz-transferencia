@@ -24,6 +24,7 @@ import walletImg from "@/assets/wallet-3d.png";
 import transferImg from "@/assets/wallet-transfer-3d.png";
 import piggyImg from "@/assets/piggy-3d.png";
 import moneyImg from "@/assets/money-3d.png";
+import viewImg from "@/assets/view-3d.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -365,7 +366,14 @@ function SaquesPage() {
                     {m.valor < 0 ? "− " : ""}
                     {brl(Math.abs(m.valor))}
                   </span>
-                  <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm">
+                  <button
+                    onClick={() => {
+                      playClick();
+                      setDetalhe(m);
+                    }}
+                    className="sv-btn-premium h-10 pl-2 pr-4 text-sm inline-flex items-center gap-2"
+                  >
+                    <img src={viewImg} alt="" width={28} height={28} style={{ width: 28, height: 28 }} className="sv-icon-3d" />
                     Visualizar
                   </button>
                 </li>
