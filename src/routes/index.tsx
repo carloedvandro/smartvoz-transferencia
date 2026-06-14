@@ -104,7 +104,7 @@ function SaquesPage() {
       tipo: "Saldo",
       categoria: "Comissão",
       descricao: "Bônus de níveis da sua rede ativa.",
-      icone: coinsImg,
+      icone: moneyImg,
     },
     {
       id: "seed-3",
