@@ -335,7 +335,7 @@ function SaquesPage() {
         {/* MOVIMENTAÇÕES */}
         <section className="sv-card-premium sv-section-bare p-5 md:p-7">
           <div className="mb-5">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--sv-purple-deep)]">Movimentações de Saques</h2>
+            <h2 className="text-lg md:text-3xl font-extrabold text-[var(--sv-purple-deep)] whitespace-nowrap">Movimentações de Saques</h2>
             <p className="text-[var(--sv-muted)] text-sm md:text-base mt-1">
               Cada lançamento mostra origem, status, data, valor e ação disponível.
             </p>
@@ -396,34 +396,31 @@ function SaquesPage() {
 
                   {/* Mobile layout */}
                   <div className="md:hidden flex flex-col gap-2">
-                    <div className="flex items-start gap-3">
-                      <img src={m.icone} alt="" width={44} height={44} style={{ width: 44, height: 44 }} className="sv-icon-3d shrink-0" />
+                    <div className="flex items-center gap-2">
+                      <img src={m.icone} alt="" width={36} height={36} style={{ width: 36, height: 36 }} className="sv-icon-3d shrink-0" />
                       <div className="min-w-0 flex-1">
-                        <p className="font-extrabold text-[var(--sv-purple-deep)] truncate text-sm">{m.titulo}</p>
-                        <p className="text-xs text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
-                        <p className="text-[11px] text-[var(--sv-muted)] mt-0.5">{m.data.toLocaleDateString("pt-BR")}</p>
+                        <p className="font-extrabold text-[var(--sv-purple-deep)] text-[13px] whitespace-nowrap overflow-hidden text-ellipsis">{m.titulo}</p>
+                        <p className="text-[11px] text-[var(--sv-muted)] whitespace-nowrap overflow-hidden text-ellipsis">
+                          Cliente: {m.cliente} · {nivelLabel(m.nivel)} · {m.data.toLocaleDateString("pt-BR")}
+                        </p>
                       </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-2 pl-[44px]">
                       <span
-                        className={`font-black tabular-nums whitespace-nowrap text-base text-right shrink-0 ${
+                        className={`font-black tabular-nums whitespace-nowrap text-base ${
                           m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
                         }`}
                       >
                         {m.valor < 0 ? "−\u00A0" : ""}
                         {brl(Math.abs(m.valor))}
                       </span>
-                    </div>
-                    <div className="flex items-center justify-between gap-2 pl-[56px]">
-                      <div className="flex items-center gap-2">
-                        <span className="font-extrabold text-[var(--sv-purple-deep)] text-xs whitespace-nowrap">{nivelLabel(m.nivel)}</span>
-
-                      </div>
                       <button
                         onClick={() => {
                           playCategorySound(m.categoria);
                           fireCategoryFX(m.categoria);
                           setDetalhe(m);
                         }}
-                        className="sv-btn-premium h-8 px-3 text-xs"
+                        className="sv-btn-premium h-8 px-4 text-xs"
                       >
                         Visualizar
                       </button>
