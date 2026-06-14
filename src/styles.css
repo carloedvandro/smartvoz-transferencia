@@ -132,18 +132,16 @@
     border-radius: 24px;
   }
   .sv-text-green {
-    background: linear-gradient(180deg, #9DF5C7 0%, #4FE3A2 45%, #1FB877 100%);
+    color: #1FB877;
+    text-shadow: 0 1px 0 rgba(255,255,255,.4), 0 2px 4px rgba(0, 120, 70, .15);
+    letter-spacing: -0.01em;
+  }
+  .sv-text-gold {
+    background: var(--gradient-gold-shine);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    text-shadow:
-      0 1px 0 rgba(255,255,255,.55),
-      0 6px 14px rgba(0, 170, 100, .35),
-      0 2px 4px rgba(0, 80, 50, .25);
-    -webkit-text-stroke: 0.5px rgba(0, 110, 70, .35);
-    filter: drop-shadow(0 4px 8px rgba(0, 200, 130, .25));
-    letter-spacing: -0.01em;
   }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
@@ -266,21 +264,15 @@
 .sv-hide-scrollbar::-webkit-scrollbar { display: none; }
 
 .sv-balance-mega {
-  font-size: 58px;
+  font-size: 52px;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(180deg, #B6F8D6 0%, #4FE3A2 45%, #1FB877 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  -webkit-text-stroke: 0.6px rgba(0, 110, 70, .45);
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.6),
-    0 8px 22px rgba(0, 200, 130, .35),
-    0 3px 6px rgba(0, 80, 50, .25);
-  filter: drop-shadow(0 6px 14px rgba(0, 200, 130, .25));
+  color: #1FB877;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5), 0 3px 6px rgba(0, 120, 70, .18);
   letter-spacing: -0.02em;
+}
+@media (max-width: 640px) {
+  .sv-balance-mega { font-size: 38px; }
 }
 
 .sv-icon-3d {
