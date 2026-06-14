@@ -359,10 +359,11 @@ function TransferModal({
 
       {step === "done" && (
         <div className="py-8 text-center">
-          <img src={transferImg} alt="" width={120} height={120} style={{ width: 120, height: 120 }} className="mx-auto drop-shadow-[0_15px_30px_rgba(246,199,86,.5)]" />
+          <img src={transferImg} alt="" width={120} height={120} style={{ width: 120, height: 120 }} className="mx-auto sv-icon-3d animate-sv-premium-success" />
           <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Transferência realizada com sucesso!</h3>
-          <p className="mt-2 text-[var(--sv-muted)] text-lg">{brl(amt)} enviado para {selected?.name}.</p>
-          <button onClick={close} className="sv-btn-premium h-14 px-10 mt-7 text-lg">Concluir</button>
+          <p className="mt-3 sv-balance-mega tabular-nums">{brl(amt)}</p>
+          <p className="mt-2 text-[var(--sv-muted)] text-lg">enviado para {selected?.name}.</p>
+          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">Concluir</button>
         </div>
       )}
     </PremiumModal>
