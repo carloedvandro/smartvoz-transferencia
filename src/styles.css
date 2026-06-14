@@ -494,22 +494,41 @@ select.sv-filter-pill {
 
 /* ===== Piggy explosion animations ===== */
 @keyframes sv-piggy-shake {
-  0%, 100% { transform: translateX(0) rotate(0); }
-  15% { transform: translateX(-6px) rotate(-4deg); }
-  30% { transform: translateX(6px) rotate(4deg); }
-  45% { transform: translateX(-5px) rotate(-3deg); }
-  60% { transform: translateX(5px) rotate(3deg); }
-  75% { transform: translateX(-3px) rotate(-2deg); }
+  0%, 100% { transform: translate(0,0) rotate(0) scale(1); }
+  10% { transform: translate(-6px,2px) rotate(-5deg) scale(1.02,.98); }
+  22% { transform: translate(7px,-2px) rotate(6deg)  scale(.97,1.03); }
+  34% { transform: translate(-8px,3px) rotate(-7deg) scale(1.03,.97); }
+  46% { transform: translate(8px,-3px) rotate(7deg)  scale(.96,1.04); }
+  58% { transform: translate(-9px,4px) rotate(-8deg) scale(1.05,.95); }
+  70% { transform: translate(9px,-4px) rotate(8deg)  scale(.95,1.06); }
+  82% { transform: translate(-5px,2px) rotate(-4deg) scale(1.08,.92); }
 }
-.sv-piggy-shake { animation: sv-piggy-shake .45s ease-in-out; transform-origin: center; }
+.sv-piggy-shake { animation: sv-piggy-shake .9s ease-in-out; transform-origin: center bottom; }
 
 @keyframes sv-piggy-burst {
   0%   { transform: scale(1) rotate(0); opacity: 1; filter: brightness(1); }
-  20%  { transform: scale(1.35) rotate(-6deg); filter: brightness(1.8) drop-shadow(0 0 30px #FFD700); }
-  45%  { transform: scale(1.55) rotate(4deg); filter: brightness(1.4) drop-shadow(0 0 40px #FFB300); opacity: 1; }
-  100% { transform: scale(1.1) rotate(0); opacity: 1; filter: brightness(1.1) drop-shadow(0 0 18px rgba(255,200,80,.6)); }
+  18%  { transform: scale(1.6) rotate(-4deg); filter: brightness(2.2) drop-shadow(0 0 50px #FFD700); }
+  35%  { transform: scale(1.85) rotate(5deg); filter: brightness(1.8) drop-shadow(0 0 60px #FFB300); opacity: .95; }
+  60%  { transform: scale(1.4) rotate(-2deg) translateY(20px); opacity: .55; filter: brightness(1.3) blur(2px); }
+  100% { transform: scale(.6) rotate(0) translateY(60px); opacity: 0; filter: brightness(1) blur(6px); }
 }
-.sv-piggy-burst { animation: sv-piggy-burst 1.2s cubic-bezier(.2,.8,.2,1) both; transform-origin: center; }
+.sv-piggy-burst { animation: sv-piggy-burst 1.4s cubic-bezier(.2,.8,.2,1) both; transform-origin: center; }
+
+/* Crack overlay revealed during shake */
+@keyframes sv-crack-show {
+  0%, 60% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.sv-piggy-crack {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 47%, rgba(40,10,60,.85) 48%, rgba(40,10,60,.85) 49%, transparent 50%),
+    linear-gradient(70deg, transparent 49%, rgba(40,10,60,.7) 50%, transparent 51%),
+    linear-gradient(160deg, transparent 48%, rgba(40,10,60,.6) 50%, transparent 52%);
+  mix-blend-mode: multiply;
+  animation: sv-crack-show .9s ease-out both;
+}
+
 
 @keyframes sv-halo-pulse {
   0%, 100% { transform: scale(.9); opacity: .55; }

@@ -26,13 +26,14 @@ export function CelebrationOverlay({
     const t1 = setTimeout(() => {
       setPhase("burst");
       firePiggyExplosion();
-    }, 450);
-    const t2 = setTimeout(onClose, 5200);
+    }, 900);
+    const t2 = setTimeout(onClose, 5600);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
     };
   }, [open, onClose]);
+
 
   if (!open) return null;
   const amountBrl = amount.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -66,6 +67,8 @@ export function CelebrationOverlay({
             style={{ width: 200, height: 200 }}
             className={`relative sv-icon-3d ${phase === "shake" ? "sv-piggy-shake" : "sv-piggy-burst"}`}
           />
+          {phase === "shake" && <span aria-hidden className="sv-piggy-crack" />}
+
         </div>
 
         <h2
