@@ -131,15 +131,9 @@ export function firePiggyExplosion() {
       ticks: 360,
     });
     if (Date.now() < end) setTimeout(rain, 90);
-
-      colors: GOLD,
-      shapes: ["circle"],
-      scalar: 1.2,
-      ticks: 320,
-    });
-    if (Date.now() < end) setTimeout(rain, 90);
   })();
 }
+
 
 /** Standard withdrawal success — kept for compatibility. */
 export function fireWithdrawalSuccess() {
