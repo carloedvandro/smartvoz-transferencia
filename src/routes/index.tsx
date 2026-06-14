@@ -1043,7 +1043,7 @@ function DetalheModal({ item, onClose }: { item: Movimento | null; onClose: () =
 
           <p
             className={`mt-5 text-center font-black tabular-nums ${
-              item.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
+              item.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-green"
             }`}
             style={{ fontSize: 44 }}
           >
