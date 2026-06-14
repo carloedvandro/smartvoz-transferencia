@@ -164,16 +164,16 @@
     filter: drop-shadow(0 4px 6px rgba(0,0,0,.14)) drop-shadow(0 10px 14px rgba(0,0,0,.10));
   }
   .sv-amount-3d {
-    background-image: linear-gradient(180deg, #D6FFE7 0%, #7BEFB1 38%, #2BC97A 72%, #0E6E43 100%);
+    background-image: linear-gradient(180deg, #F3E6FF 0%, #D9B8FF 38%, #B98BFF 72%, #6A2BC9 100%);
     text-shadow:
-      0 1px 0 #3fc684,
-      0 2px 0 #34b677,
-      0 3px 0 #2aa66b,
-      0 4px 0 #1f955e,
-      0 5px 0 #168651,
-      0 6px 0 #0e7745,
+      0 1px 0 #c6a3ee,
+      0 2px 0 #b693e0,
+      0 3px 0 #a682d2,
+      0 4px 0 #9572c4,
+      0 5px 0 #8463b6,
+      0 6px 0 #7355a8,
       0 7px 1px rgba(0,0,0,.10),
-      0 10px 16px rgba(10, 90, 55, .28);
+      0 10px 16px rgba(80, 20, 140, .28);
   }
   .sv-amount-3d-neg {
     background-image: linear-gradient(180deg, #FFE0E0 0%, #FF9B9B 38%, #E63946 72%, #7A0E14 100%);
