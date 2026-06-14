@@ -4,11 +4,6 @@ import {
   ArrowLeftRight,
   Plus,
   Search,
-  Wallet,
-  Lock,
-  PiggyBank,
-  Info,
-  ShieldCheck,
   X,
   AlertCircle,
   Download,
@@ -21,7 +16,7 @@ import { fireWithdrawalSuccess } from "@/components/premium/SuccessFX";
 import { CelebrationOverlay } from "@/components/premium/CelebrationOverlay";
 import { playClick } from "@/lib/sound";
 import walletImg from "@/assets/wallet-3d.png";
-import transferImg from "@/assets/wallet-transfer-3d.png";
+import transferImg from "@/assets/transfer-3d.png";
 import piggyImg from "@/assets/piggy-3d.png";
 import moneyImg from "@/assets/money-3d.png";
 import coinsImg from "@/assets/coins-3d.png";
@@ -29,6 +24,9 @@ import networkImg from "@/assets/network-3d.png";
 import levelsImg from "@/assets/levels-3d.png";
 import partnershipImg from "@/assets/partnership-3d.png";
 import searchImg from "@/assets/search-3d.png";
+import lockImg from "@/assets/lock-3d.png";
+import infoImg from "@/assets/info-3d.png";
+import shieldImg from "@/assets/shield-3d.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -757,13 +755,15 @@ function TransferModal({
             className="mt-5 flex items-start gap-3 rounded-2xl p-4"
             style={{ background: "#FFF9E8", border: "1.5px solid var(--sv-gold)" }}
           >
-            <span
-              className="size-10 rounded-xl grid place-items-center shrink-0"
-              style={{ background: "var(--gradient-gold-shine)", border: "1.5px solid var(--sv-gold)" }}
-            >
-              <ShieldCheck className="size-5 text-[var(--sv-purple-deep)]" />
-            </span>
-            <p className="text-sm font-semibold text-[var(--sv-purple-deep)] leading-snug">
+            <img
+              src={shieldImg}
+              alt=""
+              width={44}
+              height={44}
+              style={{ width: 44, height: 44 }}
+              className="sv-icon-3d shrink-0"
+            />
+            <p className="text-sm font-semibold text-[var(--sv-purple-deep)] leading-snug self-center">
               Você só pode transferir para usuários da sua rede: quem indicou você ou seus indicados.
             </p>
           </div>
@@ -901,18 +901,18 @@ function WithdrawModal({
         <>
           <div className="sv-card-balance p-5 mb-5 space-y-3">
             <Row
-              icon={<PiggyBank className="size-4 text-[var(--sv-purple-deep)]" />}
+              icon={piggyImg}
               label="Disponível para saque"
               value={<span className="sv-text-green font-black text-2xl tabular-nums">{brl(balance)}</span>}
             />
             <Row
-              icon={<Lock className="size-4 text-[var(--sv-purple-deep)]" />}
+              icon={lockImg}
               label="Saldo bloqueado"
               value={<span className="text-[var(--sv-orange)] font-bold text-xl tabular-nums">{brl(locked)}</span>}
             />
             <div className="h-px bg-[var(--sv-lilac-border)]" />
             <Row
-              icon={<Wallet className="size-4 text-[var(--sv-purple-deep)]" />}
+              icon={walletImg}
               label={<span className="font-bold text-[var(--sv-purple-deep)]">Saldo total</span>}
               value={
                 <span className="font-black text-[var(--sv-purple-deep)] text-2xl tabular-nums">{brl(total)}</span>
@@ -924,13 +924,15 @@ function WithdrawModal({
             className="flex items-start gap-3 rounded-2xl p-4 mb-5"
             style={{ background: "#FFF9E8", border: "1.5px solid var(--sv-gold)" }}
           >
-            <span
-              className="size-10 rounded-xl grid place-items-center shrink-0"
-              style={{ background: "var(--gradient-gold-shine)", border: "1.5px solid var(--sv-gold)" }}
-            >
-              <Info className="size-5 text-[var(--sv-purple-deep)]" />
-            </span>
-            <p className="text-sm font-semibold text-[var(--sv-purple-deep)] leading-snug">
+            <img
+              src={infoImg}
+              alt=""
+              width={44}
+              height={44}
+              style={{ width: 44, height: 44 }}
+              className="sv-icon-3d shrink-0"
+            />
+            <p className="text-sm font-semibold text-[var(--sv-purple-deep)] leading-snug self-center">
               Cada saque terá uma taxa de <b>3%</b> sobre o valor solicitado.
             </p>
           </div>
@@ -1063,16 +1065,18 @@ function DetalheLinha({ label, value }: { label: string; value: React.ReactNode 
   );
 }
 
-function Row({ icon, label, value }: { icon: React.ReactNode; label: React.ReactNode; value: React.ReactNode }) {
+function Row({ icon, label, value }: { icon: string; label: React.ReactNode; value: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-4">
-      <div className="flex items-center gap-2 text-[var(--sv-muted)]">
-        <span
-          className="size-7 rounded-lg grid place-items-center"
-          style={{ background: "var(--gradient-gold-shine)", border: "1px solid var(--sv-gold)" }}
-        >
-          {icon}
-        </span>
+      <div className="flex items-center gap-3 text-[var(--sv-muted)]">
+        <img
+          src={icon}
+          alt=""
+          width={36}
+          height={36}
+          style={{ width: 36, height: 36 }}
+          className="sv-icon-3d shrink-0"
+        />
         {label}
       </div>
       {value}
