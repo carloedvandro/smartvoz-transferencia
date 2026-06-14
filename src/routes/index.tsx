@@ -360,7 +360,7 @@ function SaquesPage() {
                   {/* Desktop layout */}
                   <div
                     className="hidden md:grid items-center gap-4"
-                    style={{ gridTemplateColumns: "64px minmax(0,1fr) 110px 110px 130px 160px 120px" }}
+                    style={{ gridTemplateColumns: "64px minmax(0,1fr) 110px 130px 200px 120px" }}
                   >
                     <img src={m.icone} alt="" width={56} height={56} style={{ width: 56, height: 56 }} className="sv-icon-3d" />
                     <div className="min-w-0">
@@ -373,15 +373,12 @@ function SaquesPage() {
                     <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap text-center">
                       {m.data.toLocaleDateString("pt-BR")}
                     </span>
-                    <div className="flex justify-center">
-                      <StatusBadge status={m.status} />
-                    </div>
                     <span
                       className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
                         m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
                       }`}
                     >
-                      {m.valor < 0 ? "− " : ""}
+                      {m.valor < 0 ? "−\u00A0" : ""}
                       {brl(Math.abs(m.valor))}
                     </span>
                     <button
@@ -395,6 +392,7 @@ function SaquesPage() {
                       Visualizar
                     </button>
                   </div>
+
 
                   {/* Mobile layout */}
                   <div className="md:hidden flex flex-col gap-2">
