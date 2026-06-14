@@ -434,7 +434,14 @@ function SaquesPage() {
                       {m.valor < 0 ? "− " : ""}
                       {brl(Math.abs(m.valor))}
                     </span>
-                    <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm w-full">
+                    <button
+                      onClick={() => {
+                        playCategorySound(m.categoria);
+                        fireCategoryFX(m.categoria);
+                        setDetalhe(m);
+                      }}
+                      className="sv-btn-premium h-9 px-4 text-sm w-full"
+                    >
                       Visualizar
                     </button>
                   </div>
