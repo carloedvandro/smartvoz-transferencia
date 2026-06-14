@@ -26,13 +26,14 @@ export function CelebrationOverlay({
     const t1 = setTimeout(() => {
       setPhase("burst");
       firePiggyExplosion();
-    }, 450);
-    const t2 = setTimeout(onClose, 5200);
+    }, 900);
+    const t2 = setTimeout(onClose, 5600);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
     };
   }, [open, onClose]);
+
 
   if (!open) return null;
   const amountBrl = amount.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
