@@ -619,7 +619,7 @@ function SaldoModal({
       <div className="sv-card-balance p-5 space-y-3">
         <div className="flex justify-between text-[var(--sv-muted)]">
           <span>Saldo disponível</span>
-          <span className="sv-amount-3d text-2xl tabular-nums">{brl(saldo)}</span>
+          <span className="sv-amount-green text-2xl tabular-nums">{brl(saldo)}</span>
         </div>
         <div className="flex justify-between items-center text-[var(--sv-muted)]">
           <span>Saldo bloqueado</span>
