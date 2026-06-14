@@ -95,7 +95,19 @@ function SaquesPage() {
           <h2 className="text-2xl font-extrabold text-[var(--sv-purple-deep)] mb-4">Histórico de Saques</h2>
           <div className="sv-card-premium p-6 md:p-8">
             {history.length === 0 ? (
-              <p className="text-center text-[var(--sv-muted)] py-10">Nenhum saque encontrado.</p>
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <img
+                  src={piggyImg}
+                  alt=""
+                  width={120}
+                  height={120}
+                  style={{ width: 120, height: 120, opacity: 0.5 }}
+                  className="sv-icon-3d sv-float"
+                />
+                <p className="mt-5 text-[var(--sv-muted)] text-lg font-medium">
+                  Nenhuma solicitação de saque realizada ainda.
+                </p>
+              </div>
             ) : (
               <ul className="divide-y divide-[var(--sv-lilac-border)]">
                 {history.map((h) => (
