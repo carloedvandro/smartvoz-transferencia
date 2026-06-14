@@ -318,13 +318,10 @@ function SaquesPage() {
 
         {/* FILTERS */}
         <section className="sv-card-premium sv-section-bare p-4 md:p-5">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="sv-filters-grid">
             <select
               value={fTipo}
-              onChange={(e) => {
-                setFTipo(e.target.value as typeof fTipo);
-                setPage(1);
-              }}
+              onChange={(e) => { setFTipo(e.target.value as typeof fTipo); setPage(1); }}
               className="sv-filter-pill"
             >
               <option value="todos">Todos os tipos</option>
@@ -335,10 +332,7 @@ function SaquesPage() {
 
             <select
               value={fStatus}
-              onChange={(e) => {
-                setFStatus(e.target.value as typeof fStatus);
-                setPage(1);
-              }}
+              onChange={(e) => { setFStatus(e.target.value as typeof fStatus); setPage(1); }}
               className="sv-filter-pill"
             >
               <option value="todos">Todos status</option>
@@ -349,10 +343,7 @@ function SaquesPage() {
 
             <select
               value={fPeriodo}
-              onChange={(e) => {
-                setFPeriodo(e.target.value as typeof fPeriodo);
-                setPage(1);
-              }}
+              onChange={(e) => { setFPeriodo(e.target.value as typeof fPeriodo); setPage(1); }}
               className="sv-filter-pill"
             >
               <option value="todos">Todos períodos</option>
@@ -361,28 +352,25 @@ function SaquesPage() {
               <option value="90">Últimos 90 dias</option>
             </select>
 
-            <div className="relative flex-1 min-w-[220px]">
-              <Search className="size-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--sv-muted)] pointer-events-none" />
+            <div className="sv-search-wrap">
+              <Search className="size-4 sv-search-icon" />
               <input
                 value={busca}
-                onChange={(e) => {
-                  setBusca(e.target.value);
-                  setPage(1);
-                }}
+                onChange={(e) => { setBusca(e.target.value); setPage(1); }}
                 placeholder="Buscar por cliente ou título"
-                className="sv-filter-pill w-full pl-11"
+                className="sv-filter-pill sv-search-input"
               />
             </div>
 
-
-            <button onClick={exportCSV} className="sv-filter-pill inline-flex items-center gap-2 font-bold">
+            <button onClick={exportCSV} className="sv-filter-pill inline-flex items-center justify-center gap-2 font-bold">
               <Download className="size-4" /> CSV
             </button>
-            <button onClick={exportPDF} className="sv-filter-pill inline-flex items-center gap-2 font-bold">
+            <button onClick={exportPDF} className="sv-filter-pill inline-flex items-center justify-center gap-2 font-bold">
               <FileText className="size-4" /> PDF
             </button>
           </div>
         </section>
+
 
         {/* MOVIMENTAÇÕES */}
         <section className="sv-card-premium sv-section-bare p-5 md:p-7">
