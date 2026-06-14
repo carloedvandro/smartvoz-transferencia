@@ -81,6 +81,19 @@ function SaquesPage() {
   const [bloqueado] = useState(0);
   const [movimentos, setMovimentos] = useState<Movimento[]>([
     {
+      id: "seed-1",
+      titulo: "Saldo disponível",
+      cliente: "Carteira SmartVoz",
+      nivel: "—",
+      data: new Date(),
+      status: "Disponível",
+      valor: 50,
+      tipo: "Saldo",
+      categoria: "Carteira",
+      descricao: "Saldo disponível para saque ou transferência.",
+      icone: walletImg,
+    },
+    {
       id: "seed-2",
       titulo: "Comissão de rede",
       cliente: "Rede SmartVoz",
