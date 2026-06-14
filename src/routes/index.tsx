@@ -234,7 +234,7 @@ function SaquesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--sv-lilac)]">
+    <div className="min-h-screen bg-white">
       <div className="max-w-[1480px] mx-auto px-5 md:px-8 py-10 md:py-12 space-y-7 animate-sv-fade-up">
         {/* HEADER */}
         <header className="flex items-start justify-between gap-6 flex-wrap">

@@ -121,15 +121,28 @@
 
 @layer components {
   .sv-card-premium {
-    background: #FFFFFF;
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.35) 100%),
+      rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(20px) saturate(140%);
     border-radius: 32px;
-    border: 1px solid var(--sv-lilac-border);
-    box-shadow: var(--shadow-premium);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 8px 32px rgba(106, 13, 173, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
   .sv-card-balance {
-    background: var(--gradient-lilac-card);
-    border: 1px solid var(--sv-lilac-border);
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.35) 100%),
+      rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 24px;
+    box-shadow:
+      0 8px 32px rgba(106, 13, 173, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
   .sv-text-green {
     color: #1FB877;
@@ -578,14 +591,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 
   .sv-modal-icon  { width: 64px !important; height: 64px !important; }
   .sv-modal-icon img { width: 64px !important; height: 64px !important; }
 
-  /* "Bare" sections on mobile: remove white card from filters & movimentações */
-  .sv-section-bare {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-  }
+  /* Keep glass cards on mobile */
 }
 
 /* ============================================================
