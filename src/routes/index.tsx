@@ -83,7 +83,7 @@ function SaquesPage() {
       tipo: "Saldo",
       categoria: "Carteira",
       descricao: "Saldo disponível para saque ou transferência.",
-      icone: walletImg,
+      icone: moneyImg,
     },
   ]);
 
