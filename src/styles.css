@@ -153,43 +153,39 @@
   .sv-amount-3d,
   .sv-amount-3d-neg {
     font-weight: 900;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    padding-bottom: 12px;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    padding: 4px 2px 14px;
     display: inline-block;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    filter: drop-shadow(0 6px 8px rgba(0,0,0,.18)) drop-shadow(0 14px 18px rgba(0,0,0,.12));
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,.14)) drop-shadow(0 10px 14px rgba(0,0,0,.10));
   }
   .sv-amount-3d {
-    background-image: linear-gradient(180deg, #B7FFD8 0%, #6BE9A5 35%, #2BC97A 70%, #138A53 100%);
+    background-image: linear-gradient(180deg, #D6FFE7 0%, #7BEFB1 38%, #2BC97A 72%, #0E6E43 100%);
     text-shadow:
-      0 1px 0 #4ad690,
-      0 2px 0 #3fc684,
-      0 3px 0 #34b677,
-      0 4px 0 #2aa66b,
-      0 5px 0 #1f955e,
-      0 6px 0 #168651,
-      0 7px 0 #0e7745,
-      0 8px 0 #086a3c,
-      0 9px 1px rgba(0,0,0,.08),
-      0 12px 18px rgba(10, 90, 55, .35);
+      0 1px 0 #3fc684,
+      0 2px 0 #34b677,
+      0 3px 0 #2aa66b,
+      0 4px 0 #1f955e,
+      0 5px 0 #168651,
+      0 6px 0 #0e7745,
+      0 7px 1px rgba(0,0,0,.10),
+      0 10px 16px rgba(10, 90, 55, .28);
   }
   .sv-amount-3d-neg {
-    background-image: linear-gradient(180deg, #FFD0D0 0%, #FF8A8A 35%, #EF4444 70%, #8B0F0F 100%);
+    background-image: linear-gradient(180deg, #FFE0E0 0%, #FF9B9B 38%, #E63946 72%, #7A0E14 100%);
     text-shadow:
-      0 1px 0 #ef5a5a,
-      0 2px 0 #df4a4a,
-      0 3px 0 #ce3a3a,
-      0 4px 0 #bd2d2d,
-      0 5px 0 #aa2424,
-      0 6px 0 #971c1c,
-      0 7px 0 #841414,
-      0 8px 0 #6f0e0e,
-      0 9px 1px rgba(0,0,0,.08),
-      0 12px 18px rgba(110, 10, 10, .35);
+      0 1px 0 #df4a4a,
+      0 2px 0 #ce3a3a,
+      0 3px 0 #bd2d2d,
+      0 4px 0 #aa2424,
+      0 5px 0 #971c1c,
+      0 6px 0 #841414,
+      0 7px 1px rgba(0,0,0,.10),
+      0 10px 16px rgba(110, 10, 10, .28);
   }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
