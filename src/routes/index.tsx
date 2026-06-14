@@ -279,7 +279,7 @@ function SaquesPage() {
             label="Transferências"
             value={brl(totalTransferido)}
             hint="Enviar saldo para rede"
-            valueClass="text-[var(--sv-purple)]"
+            valueClass="sv-text-green"
             onClick={() => {
               playClick();
               setOpenTransfer(true);
@@ -290,7 +290,7 @@ function SaquesPage() {
             label="Saques do mês"
             value={brl(totalSaques)}
             hint="Solicitações registradas"
-            valueClass="text-[var(--sv-purple)]"
+            valueClass="sv-text-green"
             onClick={() => {
               playClick();
               setCelebrate({
