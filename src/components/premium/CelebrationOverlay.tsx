@@ -62,9 +62,9 @@ export function CelebrationOverlay({
             width={200}
             height={200}
             style={{ width: 200, height: 200 }}
-            className={`relative sv-icon-3d ${phase === "shake" ? "sv-piggy-shake" : "sv-piggy-burst"}`}
+            className="relative sv-icon-3d sv-piggy-shake"
           />
-          {phase === "shake" && <span aria-hidden className="sv-piggy-crack" />}
+
 
         </div>
 
