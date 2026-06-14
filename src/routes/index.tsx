@@ -238,15 +238,14 @@ function SaquesPage() {
       <div className="max-w-[1480px] mx-auto px-5 md:px-8 py-10 md:py-12 space-y-7 animate-sv-fade-up">
         {/* HEADER */}
         <header className="flex items-start justify-between gap-6 flex-wrap">
-          <div className="flex items-center gap-4">
-            <img src={walletImg} alt="" width={84} height={84} style={{ width: 84, height: 84 }} className="sv-icon-3d" />
-            <div>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--sv-purple-deep)] tracking-tight">Saques</h1>
-              <p className="text-[var(--sv-muted)] text-base md:text-lg mt-1">
-                Gerencie seu saldo, transferências e solicitações no padrão Premium SmartVoz.
-              </p>
-            </div>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--sv-purple-deep)] tracking-tight">Saques</h1>
+            <p className="text-[var(--sv-muted)] text-base md:text-lg mt-1">
+              Gerencie seu saldo, transferências e solicitações no padrão Premium SmartVoz.
+            </p>
           </div>
+
+
 
           <div className="flex items-center gap-3">
             <button
@@ -361,7 +360,7 @@ function SaquesPage() {
             </select>
 
             <div className="relative flex-1 min-w-[220px]">
-              <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--sv-muted)]" />
+              <Search className="size-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--sv-muted)] pointer-events-none" />
               <input
                 value={busca}
                 onChange={(e) => {
@@ -369,9 +368,10 @@ function SaquesPage() {
                   setPage(1);
                 }}
                 placeholder="Buscar por cliente ou título"
-                className="sv-filter-pill w-full pl-9"
+                className="sv-filter-pill w-full pl-11"
               />
             </div>
+
 
             <button onClick={exportCSV} className="sv-filter-pill inline-flex items-center gap-2 font-bold">
               <Download className="size-4" /> CSV
@@ -552,9 +552,16 @@ function SaquesPage() {
             },
             ...h,
           ]);
-          fireWithdrawalSuccess();
+          fireCategoryFX("Transferência de saldo");
+          setCelebrate({
+            open: true,
+            amount,
+            title: "Transferência enviada!",
+            subtitle: `Saldo enviado para ${to} com sucesso.`,
+          });
         }}
       />
+
 
       <WithdrawModal
         open={openWithdraw}

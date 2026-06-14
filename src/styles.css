@@ -284,25 +284,52 @@
   padding: 0 42px;
   border-radius: 22px;
   font-size: 18px;
+  letter-spacing: .02em;
+  background: linear-gradient(180deg, #D27BFF 0%, #8A2BE2 50%, #4B0A8C 100%);
+  border: 2px solid var(--sv-gold);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.40),
+    inset 0 -3px 0 rgba(30,0,70,.45),
+    0 14px 30px rgba(106,13,173,.45),
+    0 0 24px rgba(246,199,86,.35);
+}
+.sv-btn-premium-tall:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.45),
+    inset 0 -3px 0 rgba(30,0,70,.50),
+    0 18px 36px rgba(106,13,173,.55),
+    0 0 32px rgba(246,199,86,.55);
 }
 
 .sv-btn-gold-tall {
   height: 72px;
   padding: 0 32px;
   border-radius: 22px;
-  background: #FFF;
+  background: linear-gradient(180deg, #FFFBEC 0%, #FFF2C2 100%);
   border: 2px solid var(--sv-gold);
   color: var(--sv-purple-deep);
   font-weight: 800;
   font-size: 18px;
-  box-shadow: 0 8px 20px rgba(246, 199, 86, .15);
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  letter-spacing: .02em;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.85),
+    inset 0 -3px 0 rgba(180,130,20,.25),
+    0 10px 24px rgba(246, 199, 86, .35),
+    0 0 0 1px rgba(246,199,86,.35);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, filter .15s ease;
 }
 .sv-btn-gold-tall:hover {
-  background: #FFFBEC;
-  transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(246, 199, 86, .35);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFE89A 100%);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.95),
+    inset 0 -3px 0 rgba(180,130,20,.30),
+    0 14px 30px rgba(246, 199, 86, .55),
+    0 0 0 2px rgba(246,199,86,.55);
 }
+
 
 .sv-search-field {
   height: 78px !important;
@@ -350,7 +377,19 @@
   box-shadow: 0 0 0 3px rgba(184, 76, 255, .18);
 }
 
-/* Level badge — 3D pill, base (default = purple "Rede/Saque/—") */
+/* Native <select> using sv-filter-pill: custom chevron close to text */
+select.sv-filter-pill {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236A0DAD' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px 12px;
+  padding-right: 30px;
+}
+
+/* Level badge — unified purple + gold for all tiers */
 .sv-badge-level {
   position: relative;
   display: inline-flex;
@@ -385,50 +424,40 @@
 }
 .sv-badge-level:hover { transform: translateY(-1px); }
 
-/* Tier variants — N1 bronze, N2 silver, N3 gold, N4 diamond */
-.sv-badge-level-n1 {
-  background: linear-gradient(180deg, #F4C28A 0%, #C97A33 55%, #7A3E0B 100%);
-  border-color: #FFE0A8;
-  box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.55),
-    inset 0 -3px 0 rgba(70,30,0,.45),
-    0 6px 14px rgba(180,90,20,.40),
-    0 0 0 1px rgba(255,220,160,.45);
+/* Tiers N1..N4 — same purple/gold language, intensity grows */
+.sv-badge-level-n1,
+.sv-badge-level-n2,
+.sv-badge-level-n3,
+.sv-badge-level-n4 {
+  background: linear-gradient(180deg, #B97BFF 0%, #8A2BE2 55%, #5B0DAD 100%);
+  color: #FFFFFF;
+  border-color: var(--sv-gold);
+  text-shadow: 0 1px 1px rgba(0,0,0,.35);
 }
 .sv-badge-level-n2 {
-  background: linear-gradient(180deg, #F5F7FA 0%, #C8CFD9 50%, #7E8898 100%);
-  border-color: #FFFFFF;
-  color: #2A2F3A;
-  text-shadow: 0 1px 0 rgba(255,255,255,.6);
   box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.9),
-    inset 0 -3px 0 rgba(50,60,80,.35),
-    0 6px 14px rgba(110,125,150,.40),
-    0 0 0 1px rgba(255,255,255,.7);
+    inset 0 2px 0 rgba(255,255,255,.55),
+    inset 0 -3px 0 rgba(40,0,90,.45),
+    0 7px 16px rgba(106,13,173,.40),
+    0 0 0 1px rgba(246,199,86,.45);
 }
 .sv-badge-level-n3 {
-  background: linear-gradient(180deg, #FFF1A8 0%, #FFD24A 40%, #E8A100 75%, #8C5400 100%);
-  border-color: #FFF3B0;
-  color: #3A1E00;
-  text-shadow: 0 1px 0 rgba(255,255,255,.55);
   box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.95),
-    inset 0 -3px 0 rgba(100,55,0,.35),
-    0 8px 18px rgba(217,154,0,.45),
-    0 0 0 1px rgba(255,220,120,.55);
+    inset 0 2px 0 rgba(255,255,255,.60),
+    inset 0 -3px 0 rgba(40,0,90,.50),
+    0 8px 18px rgba(106,13,173,.50),
+    0 0 0 1px rgba(246,199,86,.55),
+    0 0 14px rgba(246,199,86,.30);
 }
 .sv-badge-level-n4 {
-  background: linear-gradient(180deg, #E8F8FF 0%, #7FD8FF 40%, #B084FF 75%, #6A0DAD 100%);
-  border-color: #FFFFFF;
-  color: #1B0A33;
-  text-shadow: 0 1px 0 rgba(255,255,255,.6);
   box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.95),
-    inset 0 -3px 0 rgba(50,0,100,.45),
-    0 8px 20px rgba(150,80,255,.45),
-    0 0 0 1px rgba(255,255,255,.65),
-    0 0 14px rgba(180,120,255,.45);
+    inset 0 2px 0 rgba(255,255,255,.65),
+    inset 0 -3px 0 rgba(40,0,90,.55),
+    0 10px 22px rgba(106,13,173,.55),
+    0 0 0 2px rgba(246,199,86,.65),
+    0 0 18px rgba(246,199,86,.45);
 }
+
 
 /* ===== Piggy explosion animations ===== */
 @keyframes sv-piggy-shake {
