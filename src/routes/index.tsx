@@ -247,13 +247,13 @@ function SaquesPage() {
 
 
 
-          <div className="flex items-center gap-3">
+          <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:items-center sm:justify-center sm:w-auto">
             <button
               onClick={() => {
                 playClick();
                 setOpenTransfer(true);
               }}
-              className="sv-btn-action sv-btn-action-gold inline-flex items-center gap-2"
+              className="sv-btn-action sv-btn-action-gold inline-flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <ArrowLeftRight className="size-4" /> Transferir
             </button>
@@ -262,7 +262,7 @@ function SaquesPage() {
                 playClick();
                 setOpenWithdraw(true);
               }}
-              className="sv-btn-action sv-btn-action-purple inline-flex items-center gap-2"
+              className="sv-btn-action sv-btn-action-purple inline-flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <Plus className="size-4" /> Novo Saque
             </button>
