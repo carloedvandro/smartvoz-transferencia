@@ -163,57 +163,75 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
+  /* Purple fill with gold outline/glow */
   .sv-amount-3d {
     background-image: linear-gradient(
       180deg,
-      #FFF8D5 0%,
-      #FFE88A 15%,
-      #FFD24D 35%,
-      #F6C756 55%,
-      #D89A00 75%,
-      #A86C00 100%
+      #C8A6FF 0%,
+      #A977FF 20%,
+      #8A2BE2 45%,
+      #6A0DAD 70%,
+      #3F0775 100%
     );
     text-shadow:
-      0 1px 0 rgba(255,255,255,.95),
-      0 2px 0 rgba(255,214,90,.55),
-      0 6px 12px rgba(168,108,0,.18);
+      -1px -1px 0 #FFE88A,
+       1px -1px 0 #FFE88A,
+      -1px  1px 0 #D89A00,
+       1px  1px 0 #A86C00,
+       0 2px 0 rgba(168,108,0,.55),
+       0 4px 0 rgba(120,70,0,.35),
+       0 8px 14px rgba(80,20,140,.35);
     filter:
-      drop-shadow(0 3px 6px rgba(246,199,86,.20))
-      drop-shadow(0 0 8px rgba(255,220,120,.18));
+      drop-shadow(0 2px 4px rgba(255,210,90,.35))
+      drop-shadow(0 0 8px rgba(138,43,226,.25));
   }
   .sv-amount-hero {
     font-size: 44px !important;
     letter-spacing: -1.5px !important;
   }
+  /* Inner purple with gold outline (used inside expanded cards) */
   .sv-amount-green {
     background-image: linear-gradient(
       180deg,
-      #E8FFE8 0%,
-      #A7F3B8 15%,
-      #4ED57E 35%,
-      #1FB877 55%,
-      #0E8F58 75%,
-      #06633A 100%
+      #C8A6FF 0%,
+      #A977FF 20%,
+      #8A2BE2 45%,
+      #6A0DAD 70%,
+      #3F0775 100%
     );
     text-shadow:
-      0 1px 0 rgba(255,255,255,.9),
-      0 2px 0 rgba(120,220,150,.45),
-      0 6px 12px rgba(10,100,60,.20);
+      -1px -1px 0 #FFE88A,
+       1px -1px 0 #FFE88A,
+      -1px  1px 0 #D89A00,
+       1px  1px 0 #A86C00,
+       0 2px 0 rgba(168,108,0,.55),
+       0 4px 0 rgba(120,70,0,.35),
+       0 8px 14px rgba(80,20,140,.35);
     filter:
-      drop-shadow(0 3px 6px rgba(40,180,110,.20))
-      drop-shadow(0 0 8px rgba(140,230,170,.18));
+      drop-shadow(0 2px 4px rgba(255,210,90,.35))
+      drop-shadow(0 0 8px rgba(138,43,226,.25));
   }
+  /* Negative: red fill with gold outline */
   .sv-amount-3d-neg {
-    background-image: linear-gradient(180deg, #FFE0E0 0%, #FF9B9B 38%, #E63946 72%, #7A0E14 100%);
+    background-image: linear-gradient(
+      180deg,
+      #FFB3B3 0%,
+      #FF6B6B 25%,
+      #E63946 55%,
+      #B0202B 80%,
+      #7A0E14 100%
+    );
     text-shadow:
-      0 1px 0 #df4a4a,
-      0 2px 0 #ce3a3a,
-      0 3px 0 #bd2d2d,
-      0 4px 0 #aa2424,
-      0 5px 0 #971c1c,
-      0 6px 0 #841414,
-      0 7px 1px rgba(0,0,0,.10),
-      0 10px 16px rgba(110, 10, 10, .28);
+      -1px -1px 0 #FFE88A,
+       1px -1px 0 #FFE88A,
+      -1px  1px 0 #D89A00,
+       1px  1px 0 #A86C00,
+       0 2px 0 rgba(168,108,0,.55),
+       0 4px 0 rgba(120,70,0,.35),
+       0 8px 14px rgba(140,20,30,.35);
+    filter:
+      drop-shadow(0 2px 4px rgba(255,210,90,.35))
+      drop-shadow(0 0 8px rgba(230,57,70,.25));
   }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
