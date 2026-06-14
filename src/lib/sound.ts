@@ -48,70 +48,83 @@ export function playTap() {
   o.stop(now + 0.25);
 }
 
-/** Whistle + balloon-pop + sparkle for the piggy explosion. */
+/** Piggy rattle → ceramic smash → cascade of coin clinks. */
 export function playPiggyPop() {
   const ac = getCtx();
   if (!ac) return;
   const now = ac.currentTime;
 
-  // 1) Rising whistle (0 → 0.45s)
-  const w = ac.createOscillator();
-  const wg = ac.createGain();
-  w.type = "sine";
-  w.frequency.setValueAtTime(600, now);
-  w.frequency.exponentialRampToValueAtTime(2400, now + 0.45);
-  wg.gain.setValueAtTime(0.0001, now);
-  wg.gain.exponentialRampToValueAtTime(0.18, now + 0.05);
-  wg.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
-  w.connect(wg).connect(ac.destination);
-  w.start(now);
-  w.stop(now + 0.55);
-
-  // 2) Balloon pop at 0.5s (short noise burst via square + fast envelope)
-  const popTime = now + 0.5;
-  const pop = ac.createOscillator();
-  const pg = ac.createGain();
-  pop.type = "square";
-  pop.frequency.setValueAtTime(180, popTime);
-  pop.frequency.exponentialRampToValueAtTime(40, popTime + 0.08);
-  pg.gain.setValueAtTime(0.0001, popTime);
-  pg.gain.exponentialRampToValueAtTime(0.4, popTime + 0.005);
-  pg.gain.exponentialRampToValueAtTime(0.0001, popTime + 0.12);
-  pop.connect(pg).connect(ac.destination);
-  pop.start(popTime);
-  pop.stop(popTime + 0.15);
-
-  // 3) Noise burst overlay
-  const burstLen = 0.18;
-  const buf = ac.createBuffer(1, Math.floor(ac.sampleRate * burstLen), ac.sampleRate);
-  const data = buf.getChannelData(0);
-  for (let i = 0; i < data.length; i++) {
-    data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 2);
-  }
-  const noise = ac.createBufferSource();
-  const ng = ac.createGain();
-  noise.buffer = buf;
-  ng.gain.setValueAtTime(0.35, popTime);
-  ng.gain.exponentialRampToValueAtTime(0.0001, popTime + burstLen);
-  noise.connect(ng).connect(ac.destination);
-  noise.start(popTime);
-
-  // 4) Sparkle arpeggio (cash-rain feeling) 0.55 → 1.6s
-  const sparkleStart = now + 0.55;
-  const notes = [1046.5, 1318.5, 1568, 1975.5, 2349, 1568, 1975.5, 2637];
-  notes.forEach((f, i) => {
+  // 1) Rattle/shake (coins jingling inside) — short metallic ticks 0→0.85s
+  for (let i = 0; i < 10; i++) {
+    const t = now + i * 0.08 + Math.random() * 0.02;
     const o = ac.createOscillator();
     const g = ac.createGain();
     o.type = "triangle";
-    o.frequency.setValueAtTime(f, sparkleStart + i * 0.11);
-    g.gain.setValueAtTime(0.0001, sparkleStart + i * 0.11);
-    g.gain.exponentialRampToValueAtTime(0.16, sparkleStart + i * 0.11 + 0.015);
-    g.gain.exponentialRampToValueAtTime(0.0001, sparkleStart + i * 0.11 + 0.28);
+    o.frequency.setValueAtTime(1800 + Math.random() * 900, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.12, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
     o.connect(g).connect(ac.destination);
-    o.start(sparkleStart + i * 0.11);
-    o.stop(sparkleStart + i * 0.11 + 0.3);
-  });
+    o.start(t);
+    o.stop(t + 0.1);
+  }
+
+  // 2) Ceramic SMASH at 0.9s — noise burst + low thud
+  const popTime = now + 0.9;
+  const thud = ac.createOscillator();
+  const tg = ac.createGain();
+  thud.type = "square";
+  thud.frequency.setValueAtTime(140, popTime);
+  thud.frequency.exponentialRampToValueAtTime(35, popTime + 0.18);
+  tg.gain.setValueAtTime(0.0001, popTime);
+  tg.gain.exponentialRampToValueAtTime(0.5, popTime + 0.005);
+  tg.gain.exponentialRampToValueAtTime(0.0001, popTime + 0.25);
+  thud.connect(tg).connect(ac.destination);
+  thud.start(popTime);
+  thud.stop(popTime + 0.3);
+
+  // Bright shatter noise (ceramic shards)
+  const burstLen = 0.45;
+  const buf = ac.createBuffer(1, Math.floor(ac.sampleRate * burstLen), ac.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < data.length; i++) {
+    data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 1.4);
+  }
+  const noise = ac.createBufferSource();
+  const ng = ac.createGain();
+  const hp = ac.createBiquadFilter();
+  hp.type = "highpass";
+  hp.frequency.value = 1800;
+  noise.buffer = buf;
+  ng.gain.setValueAtTime(0.5, popTime);
+  ng.gain.exponentialRampToValueAtTime(0.0001, popTime + burstLen);
+  noise.connect(hp).connect(ng).connect(ac.destination);
+  noise.start(popTime);
+
+  // 3) Cascade of coin clinks (gold coins hitting surface) 1.0s → 2.6s
+  const cascadeStart = now + 1.0;
+  for (let i = 0; i < 24; i++) {
+    const t = cascadeStart + i * 0.065 + Math.random() * 0.04;
+    const freqs = [2200, 2640, 3140, 3520, 2960, 2480, 1980];
+    const f = freqs[i % freqs.length] + (Math.random() - 0.5) * 200;
+    // Two-tone clink: high ping + harmonic
+    [f, f * 1.5].forEach((freq, k) => {
+      const o = ac.createOscillator();
+      const g = ac.createGain();
+      o.type = k === 0 ? "triangle" : "sine";
+      o.frequency.setValueAtTime(freq, t);
+      o.frequency.exponentialRampToValueAtTime(freq * 0.6, t + 0.18);
+      const peak = k === 0 ? 0.14 : 0.06;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(peak, t + 0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+      o.connect(g).connect(ac.destination);
+      o.start(t);
+      o.stop(t + 0.25);
+    });
+  }
 }
+
 
 /** Celebratory chime — for success / Parabéns popup. */
 export function playCelebrate() {
