@@ -408,7 +408,7 @@ function SaquesPage() {
                     <div className="flex items-center justify-between gap-2 pl-[44px]">
                       <span
                         className={`font-black tabular-nums whitespace-nowrap text-base ${
-                          m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
+                          m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-green"
                         }`}
                       >
                         {m.valor < 0 ? "−\u00A0" : ""}
