@@ -79,7 +79,32 @@ const PAGE_SIZE = 8;
 function SaquesPage() {
   const [saldo, setSaldo] = useState(50);
   const [bloqueado] = useState(35);
-  const [movimentos, setMovimentos] = useState<Movimento[]>([]);
+  const [movimentos, setMovimentos] = useState<Movimento[]>(() => {
+    const day = 86400000;
+    const seeds: Array<{ d: number; v: number }> = [
+      { d: 6, v: 1247.8 },
+      { d: 22, v: 3189.55 },
+      { d: 41, v: 4762.3 },
+      { d: 65, v: 5438.9 },
+      { d: 89, v: 7124.6 },
+      { d: 112, v: 8956.25 },
+      { d: 138, v: 9871.4 },
+      { d: 168, v: 12483.7 },
+    ];
+    return seeds.map((s, i) => ({
+      id: `seed-saque-${i + 1}`,
+      titulo: "Solicitação de saque",
+      cliente: "Carteira SmartVoz",
+      nivel: "—",
+      data: new Date(Date.now() - s.d * day),
+      status: "Concluído" as StatusMov,
+      valor: -s.v,
+      tipo: "Saque" as TipoMov,
+      categoria: "Saque",
+      descricao: "Saque realizado e creditado em sua conta bancária.",
+      icone: piggyImg,
+    }));
+  });
 
 
   const [busca, setBusca] = useState("");
