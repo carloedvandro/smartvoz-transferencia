@@ -408,3 +408,17 @@
     inset 0 -3px 0 rgba(120,50,0,.22),
     0 6px 12px rgba(220,100,30,.20);
 }
+
+/* ============================================================
+   MOBILE — hide horizontal scrollbars, shrink buttons
+   ============================================================ */
+html, body { overflow-x: hidden; }
+body::-webkit-scrollbar { width: 0; height: 0; background: transparent; }
+body { scrollbar-width: none; -ms-overflow-style: none; }
+
+@media (max-width: 640px) {
+  .sv-btn-premium-tall { height: 52px !important; padding: 0 20px !important; font-size: 15px !important; border-radius: 16px !important; }
+  .sv-btn-gold-tall { height: 52px !important; padding: 0 18px !important; font-size: 15px !important; border-radius: 16px !important; }
+  .sv-search-field { height: 56px !important; font-size: 16px !important; border-radius: 16px !important; }
+  .sv-card-premium { border-radius: 22px !important; }
+}

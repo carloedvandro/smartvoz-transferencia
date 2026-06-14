@@ -30,12 +30,96 @@ export function playClick() {
   });
 }
 
-/** Celebratory chime — for success / Parabéns popup. */
-export function playCelebrate() {
+/** Soft coin/icon tap — for sub-icons (levels, network, etc). */
+export function playTap() {
   const ac = getCtx();
   if (!ac) return;
   const now = ac.currentTime;
-  const notes = [523.25, 659.25, 783.99, 1046.5]; // C E G C
+  const o = ac.createOscillator();
+  const g = ac.createGain();
+  o.type = "sine";
+  o.frequency.setValueAtTime(1760, now);
+  o.frequency.exponentialRampToValueAtTime(660, now + 0.18);
+  g.gain.setValueAtTime(0.0001, now);
+  g.gain.exponentialRampToValueAtTime(0.18, now + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+  o.connect(g).connect(ac.destination);
+  o.start(now);
+  o.stop(now + 0.25);
+}
+
+/** Whistle + balloon-pop + sparkle for the piggy explosion. */
+export function playPiggyPop() {
+  const ac = getCtx();
+  if (!ac) return;
+  const now = ac.currentTime;
+
+  // 1) Rising whistle (0 → 0.45s)
+  const w = ac.createOscillator();
+  const wg = ac.createGain();
+  w.type = "sine";
+  w.frequency.setValueAtTime(600, now);
+  w.frequency.exponentialRampToValueAtTime(2400, now + 0.45);
+  wg.gain.setValueAtTime(0.0001, now);
+  wg.gain.exponentialRampToValueAtTime(0.18, now + 0.05);
+  wg.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+  w.connect(wg).connect(ac.destination);
+  w.start(now);
+  w.stop(now + 0.55);
+
+  // 2) Balloon pop at 0.5s (short noise burst via square + fast envelope)
+  const popTime = now + 0.5;
+  const pop = ac.createOscillator();
+  const pg = ac.createGain();
+  pop.type = "square";
+  pop.frequency.setValueAtTime(180, popTime);
+  pop.frequency.exponentialRampToValueAtTime(40, popTime + 0.08);
+  pg.gain.setValueAtTime(0.0001, popTime);
+  pg.gain.exponentialRampToValueAtTime(0.4, popTime + 0.005);
+  pg.gain.exponentialRampToValueAtTime(0.0001, popTime + 0.12);
+  pop.connect(pg).connect(ac.destination);
+  pop.start(popTime);
+  pop.stop(popTime + 0.15);
+
+  // 3) Noise burst overlay
+  const burstLen = 0.18;
+  const buf = ac.createBuffer(1, Math.floor(ac.sampleRate * burstLen), ac.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < data.length; i++) {
+    data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 2);
+  }
+  const noise = ac.createBufferSource();
+  const ng = ac.createGain();
+  noise.buffer = buf;
+  ng.gain.setValueAtTime(0.35, popTime);
+  ng.gain.exponentialRampToValueAtTime(0.0001, popTime + burstLen);
+  noise.connect(ng).connect(ac.destination);
+  noise.start(popTime);
+
+  // 4) Sparkle arpeggio (cash-rain feeling) 0.55 → 1.6s
+  const sparkleStart = now + 0.55;
+  const notes = [1046.5, 1318.5, 1568, 1975.5, 2349, 1568, 1975.5, 2637];
+  notes.forEach((f, i) => {
+    const o = ac.createOscillator();
+    const g = ac.createGain();
+    o.type = "triangle";
+    o.frequency.setValueAtTime(f, sparkleStart + i * 0.11);
+    g.gain.setValueAtTime(0.0001, sparkleStart + i * 0.11);
+    g.gain.exponentialRampToValueAtTime(0.16, sparkleStart + i * 0.11 + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, sparkleStart + i * 0.11 + 0.28);
+    o.connect(g).connect(ac.destination);
+    o.start(sparkleStart + i * 0.11);
+    o.stop(sparkleStart + i * 0.11 + 0.3);
+  });
+}
+
+/** Celebratory chime — for success / Parabéns popup. */
+export function playCelebrate() {
+  playPiggyPop();
+  const ac = getCtx();
+  if (!ac) return;
+  const now = ac.currentTime + 0.1;
+  const notes = [523.25, 659.25, 783.99, 1046.5];
   notes.forEach((f, i) => {
     const o = ac.createOscillator();
     const g = ac.createGain();
