@@ -144,6 +144,17 @@
       0 8px 32px rgba(106, 13, 173, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
+  .sv-card-purple {
+    background:
+      linear-gradient(180deg, rgba(168, 110, 240, 0.18) 0%, rgba(106, 43, 201, 0.12) 100%),
+      rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(140%);
+    border: 1.5px solid var(--sv-gold);
+    box-shadow:
+      0 8px 32px rgba(106, 13, 173, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 0 0 1px rgba(246, 199, 86, 0.25);
+  }
   .sv-text-green {
     color: #1FB877;
     text-shadow: 0 1px 0 rgba(255,255,255,.4), 0 2px 4px rgba(0, 120, 70, .15);
