@@ -988,12 +988,11 @@ function WithdrawModal({
             </p>
           </div>
 
-          <label className="block font-bold text-[var(--sv-purple-deep)] mb-2 text-lg">Valor do saque</label>
+          <label className="block font-bold text-[var(--sv-purple-deep)] mb-2 text-base md:text-lg">Valor do saque</label>
           <input
             autoFocus
             inputMode="decimal"
-            className={`sv-input-premium ${amt > 0 ? "sv-glow-gold" : ""}`}
-            style={{ height: 72, fontSize: 32, fontWeight: 800, padding: "0 24px", borderRadius: 22 }}
+            className={`sv-input-premium h-14 text-2xl md:h-[72px] md:text-[32px] font-extrabold px-6 rounded-2xl ${amt > 0 ? "sv-glow-gold" : ""}`}
             placeholder="R$ 0,00"
             value={amount}
             onChange={(e) => setAmount(e.target.value.replace(/[^0-9.,]/g, ""))}
@@ -1004,29 +1003,26 @@ function WithdrawModal({
             </p>
           )}
 
-          <div className="sv-card-balance p-5 mt-5 space-y-3">
-            <div className="flex justify-between text-[var(--sv-muted)]">
+          <div className="sv-card-balance p-4 md:p-5 mt-4 md:mt-5 space-y-2 md:space-y-3">
+            <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
               <span>Valor solicitado:</span>
               <span className="tabular-nums font-semibold text-[var(--sv-purple-deep)]">{brl(amt)}</span>
             </div>
-            <div className="flex justify-between text-[var(--sv-muted)]">
+            <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
               <span>Taxa (3%):</span>
               <span className="tabular-nums font-semibold text-[var(--sv-orange)]">− {brl(fee)}</span>
             </div>
             <div className="h-px bg-[var(--sv-lilac-border)]" />
             <div className="flex items-center justify-between">
-              <span className="font-bold text-[var(--sv-purple-deep)] text-lg">Valor líquido:</span>
-              <span
-                className="sv-text-green font-black tabular-nums"
-                style={{ fontSize: 40, textShadow: "0 0 20px rgba(0,210,106,.25)" }}
-              >
+              <span className="font-bold text-[var(--sv-purple-deep)] text-sm md:text-lg">Valor líquido:</span>
+              <span className="sv-text-green font-black tabular-nums text-2xl md:text-[40px]">
                 {brl(net)}
               </span>
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 mt-7">
-            <button onClick={close} className="sv-btn-ghost h-[60px] px-8 text-lg">
+          <div className="flex justify-end gap-2 md:gap-3 mt-5 md:mt-7">
+            <button onClick={close} className="sv-btn-ghost h-10 md:h-12 px-5 md:px-7 text-sm md:text-base rounded-xl">
               Cancelar
             </button>
             <button
@@ -1035,8 +1031,7 @@ function WithdrawModal({
                 onConfirm(amt, net, fee);
                 setDone(true);
               }}
-              className="sv-btn-premium h-[60px] px-10 text-lg"
-              style={{ borderRadius: 18 }}
+              className="sv-btn-premium h-10 md:h-12 px-6 md:px-8 text-sm md:text-base rounded-xl"
             >
               Continuar
             </button>
