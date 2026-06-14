@@ -175,6 +175,10 @@
       0 7px 1px rgba(0,0,0,.10),
       0 10px 16px rgba(80, 20, 140, .28);
   }
+  .sv-amount-hero {
+    font-size: 58px !important;
+    letter-spacing: -2.5px !important;
+  }
   .sv-amount-3d-neg {
     background-image: linear-gradient(180deg, #FFE0E0 0%, #FF9B9B 38%, #E63946 72%, #7A0E14 100%);
     text-shadow:
