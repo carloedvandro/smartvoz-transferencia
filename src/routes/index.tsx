@@ -253,20 +253,21 @@ function SaquesPage() {
                 playClick();
                 setOpenTransfer(true);
               }}
-              className="sv-btn-gold-tall inline-flex items-center gap-2"
+              className="sv-btn-action sv-btn-action-gold inline-flex items-center gap-2"
             >
-              <ArrowLeftRight className="size-5" /> Transferir
+              <ArrowLeftRight className="size-4" /> Transferir
             </button>
             <button
               onClick={() => {
                 playClick();
                 setOpenWithdraw(true);
               }}
-              className="sv-btn-premium sv-btn-premium-tall inline-flex items-center gap-2"
+              className="sv-btn-action sv-btn-action-purple inline-flex items-center gap-2"
             >
-              <Plus className="size-5" /> Novo Saque
+              <Plus className="size-4" /> Novo Saque
             </button>
           </div>
+
         </header>
 
         {/* SUMMARY CARDS */}
