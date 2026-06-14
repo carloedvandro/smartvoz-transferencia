@@ -28,6 +28,7 @@ import coinsImg from "@/assets/coins-3d.png";
 import networkImg from "@/assets/network-3d.png";
 import levelsImg from "@/assets/levels-3d.png";
 import partnershipImg from "@/assets/partnership-3d.png";
+import searchImg from "@/assets/search-3d.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -263,7 +264,7 @@ function SaquesPage() {
         </header>
 
         {/* SUMMARY CARDS */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
           <SummaryCard
             icon={moneyImg}
             label="Saldo disponível"
@@ -400,28 +401,32 @@ function SaquesPage() {
               {pageItems.map((m) => (
                 <li
                   key={m.id}
-                  className="grid items-center gap-3 py-4"
-                  style={{ gridTemplateColumns: "64px 1fr auto auto auto auto auto" }}
+                  className="grid items-center gap-4 py-4"
+                  style={{ gridTemplateColumns: "64px minmax(0,1fr) 140px 110px 130px 160px 120px" }}
                 >
                   <img src={m.icone} alt="" width={56} height={56} style={{ width: 56, height: 56 }} className="sv-icon-3d" />
                   <div className="min-w-0">
                     <p className="font-extrabold text-[var(--sv-purple-deep)] truncate">{m.titulo}</p>
                     <p className="text-sm text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
                   </div>
-                  <span className="sv-badge-level">{m.nivel}</span>
-                  <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap">
+                  <div className="flex justify-center">
+                    <span className="sv-badge-level w-full text-center">{m.nivel}</span>
+                  </div>
+                  <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap text-center">
                     {m.data.toLocaleDateString("pt-BR")}
                   </span>
-                  <StatusBadge status={m.status} />
+                  <div className="flex justify-center">
+                    <StatusBadge status={m.status} />
+                  </div>
                   <span
-                    className={`font-black tabular-nums whitespace-nowrap text-lg ${
+                    className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
                       m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
                     }`}
                   >
                     {m.valor < 0 ? "− " : ""}
                     {brl(Math.abs(m.valor))}
                   </span>
-                  <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm">
+                  <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm w-full">
                     Visualizar
                   </button>
                 </li>
@@ -564,15 +569,17 @@ function SummaryCard({
   return (
     <button
       onClick={onClick}
-      className="sv-card-premium text-left p-5 flex items-center gap-4 hover:-translate-y-0.5 transition"
+      className="sv-card-premium text-left p-5 flex items-center gap-4 hover:-translate-y-0.5 transition h-full min-h-[124px]"
     >
-      <img src={icon} alt="" width={72} height={72} style={{ width: 72, height: 72 }} className="sv-icon-3d shrink-0" />
-      <div className="min-w-0">
-        <p className="text-sm font-bold text-[var(--sv-muted)]">{label}</p>
-        <p className={`text-3xl font-black tracking-tight tabular-nums ${valueClass ?? "text-[var(--sv-purple)]"}`}>
+      <span className="shrink-0 grid place-items-center" style={{ width: 84, height: 84 }}>
+        <img src={icon} alt="" width={80} height={80} style={{ width: 80, height: 80, objectFit: "contain" }} className="sv-icon-3d" />
+      </span>
+      <div className="min-w-0 flex-1 flex flex-col justify-center">
+        <p className="text-sm font-bold text-[var(--sv-muted)] truncate">{label}</p>
+        <p className={`text-3xl font-black tracking-tight tabular-nums truncate ${valueClass ?? "text-[var(--sv-purple)]"}`}>
           {value}
         </p>
-        <p className="text-xs text-[var(--sv-muted)] mt-1">{hint}</p>
+        <p className="text-xs text-[var(--sv-muted)] mt-1 truncate">{hint}</p>
       </div>
     </button>
   );
@@ -693,12 +700,14 @@ function TransferModal({
         <>
           <label className="block font-bold text-[var(--sv-purple-deep)] mb-2 text-lg">Buscar usuário</label>
           <div className="relative">
-            <span
-              className="absolute left-4 top-1/2 -translate-y-1/2 size-12 rounded-2xl grid place-items-center sv-icon-3d"
-              style={{ background: "var(--gradient-gold-shine)", border: "2px solid var(--sv-gold)" }}
-            >
-              <Search className="size-5 text-[var(--sv-purple-deep)]" />
-            </span>
+            <img
+              src={searchImg}
+              alt=""
+              width={56}
+              height={56}
+              style={{ width: 56, height: 56 }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 sv-icon-3d pointer-events-none"
+            />
             <input
               autoFocus
               className="sv-input-premium sv-search-field pl-20 pr-5"
