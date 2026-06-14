@@ -375,7 +375,7 @@ function SaquesPage() {
                     </span>
                     <span
                       className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
-                        m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
+                        m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-green"
                       }`}
                     >
                       {m.valor < 0 ? "−\u00A0" : ""}
@@ -408,7 +408,7 @@ function SaquesPage() {
                     <div className="flex items-center justify-between gap-2 pl-[44px]">
                       <span
                         className={`font-black tabular-nums whitespace-nowrap text-base ${
-                          m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
+                          m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-green"
                         }`}
                       >
                         {m.valor < 0 ? "−\u00A0" : ""}
@@ -619,7 +619,7 @@ function SaldoModal({
       <div className="sv-card-balance p-5 space-y-3">
         <div className="flex justify-between text-[var(--sv-muted)]">
           <span>Saldo disponível</span>
-          <span className="sv-amount-3d text-2xl tabular-nums">{brl(saldo)}</span>
+          <span className="sv-amount-green text-2xl tabular-nums">{brl(saldo)}</span>
         </div>
         <div className="flex justify-between items-center text-[var(--sv-muted)]">
           <span>Saldo bloqueado</span>
@@ -631,7 +631,7 @@ function SaldoModal({
           <span className="sv-badge-status sv-badge-gold">Disponível</span>
         </div>
       </div>
-      <p className="sv-amount-3d tabular-nums text-center mt-5 block" style={{ fontSize: 48 }}>{brl(saldo)}</p>
+      <p className="sv-amount-green tabular-nums text-center mt-5 block" style={{ fontSize: 48 }}>{brl(saldo)}</p>
       <div className="flex justify-end mt-6">
         <button onClick={onClose} className="sv-btn-premium sv-btn-premium-tall">
           Fechar
@@ -1043,7 +1043,7 @@ function DetalheModal({ item, onClose }: { item: Movimento | null; onClose: () =
 
           <p
             className={`mt-5 text-center font-black tabular-nums ${
-              item.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
+              item.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-green"
             }`}
             style={{ fontSize: 44 }}
           >
