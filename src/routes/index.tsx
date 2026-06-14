@@ -24,6 +24,10 @@ import walletImg from "@/assets/wallet-3d.png";
 import transferImg from "@/assets/wallet-transfer-3d.png";
 import piggyImg from "@/assets/piggy-3d.png";
 import moneyImg from "@/assets/money-3d.png";
+import coinsImg from "@/assets/coins-3d.png";
+import networkImg from "@/assets/network-3d.png";
+import levelsImg from "@/assets/levels-3d.png";
+import partnershipImg from "@/assets/partnership-3d.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,7 +83,59 @@ function SaquesPage() {
       tipo: "Saldo",
       categoria: "Carteira",
       descricao: "Saldo disponível para saque ou transferência.",
-      icone: walletImg,
+      icone: moneyImg,
+    },
+    {
+      id: "seed-2",
+      titulo: "Comissão de rede",
+      cliente: "Rede SmartVoz",
+      nivel: "N2",
+      data: new Date(Date.now() - 86400000 * 2),
+      status: "Concluído",
+      valor: 18.5,
+      tipo: "Saldo",
+      categoria: "Comissão",
+      descricao: "Bônus de níveis da sua rede ativa.",
+      icone: coinsImg,
+    },
+    {
+      id: "seed-3",
+      titulo: "Indicação ativa",
+      cliente: "Mariana Lopes",
+      nivel: "N1",
+      data: new Date(Date.now() - 86400000 * 5),
+      status: "Concluído",
+      valor: 12,
+      tipo: "Saldo",
+      categoria: "Parceria",
+      descricao: "Novo parceiro habilitado em sua rede.",
+      icone: partnershipImg,
+    },
+    {
+      id: "seed-4",
+      titulo: "Avanço de nível",
+      cliente: "Programa SmartVoz",
+      nivel: "N3",
+      data: new Date(Date.now() - 86400000 * 9),
+      status: "Concluído",
+      valor: 25,
+      tipo: "Saldo",
+      categoria: "Níveis",
+      descricao: "Você subiu de nível e ganhou bônus.",
+      icone: levelsImg,
+    },
+    {
+      id: "seed-5",
+      titulo: "Rede expandida",
+      cliente: "Rede SmartVoz",
+      nivel: "N2",
+      data: new Date(Date.now() - 86400000 * 14),
+      status: "Concluído",
+      valor: 8,
+      tipo: "Saldo",
+      categoria: "Rede",
+      descricao: "Sua rede ativa cresceu este mês.",
+      icone: networkImg,
     },
   ]);
 
