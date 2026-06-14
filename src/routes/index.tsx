@@ -78,7 +78,7 @@ const PAGE_SIZE = 8;
 
 function SaquesPage() {
   const [saldo, setSaldo] = useState(50);
-  const [bloqueado, setBloqueado] = useState(35);
+  const [bloqueado] = useState(35);
   const [movimentos, setMovimentos] = useState<Movimento[]>([]);
 
 
