@@ -31,11 +31,11 @@ export function PremiumModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#21004B]/40 backdrop-blur-sm"
+      className="sv-modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div
-        className="sv-card-premium animate-sv-scale-in w-full max-w-[860px] max-h-[90vh] overflow-y-auto relative"
+        className="sv-card-premium sv-hide-scrollbar animate-sv-scale-in w-full max-w-[860px] max-h-[90vh] overflow-y-auto relative"
         style={{ padding: 36 }}
         onClick={(e) => e.stopPropagation()}
       >

@@ -42,7 +42,7 @@ function SaquesPage() {
         {/* HEADER */}
         <header className="flex items-start justify-between gap-6 flex-wrap">
           <div className="flex items-center gap-4">
-            <img src={walletImg} alt="" width={84} height={84} style={{ width: 84, height: 84 }} className="drop-shadow-[0_10px_20px_rgba(106,13,173,.25)]" />
+            <img src={walletImg} alt="" width={84} height={84} style={{ width: 84, height: 84 }} className="sv-icon-3d" />
             <div>
               <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--sv-purple-deep)] tracking-tight">Saques</h1>
               <p className="text-[var(--sv-muted)] text-lg md:text-xl mt-1">Gerencie seus saques e visualize seu histórico</p>
@@ -50,10 +50,10 @@ function SaquesPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={() => setOpenTransfer(true)} className="sv-btn-gold-ghost h-14 px-7 inline-flex items-center gap-2 text-base">
+            <button onClick={() => setOpenTransfer(true)} className="sv-btn-gold-tall inline-flex items-center gap-2">
               <ArrowLeftRight className="size-5" /> Transferir
             </button>
-            <button onClick={() => setOpenWithdraw(true)} className="sv-btn-premium h-14 px-7 inline-flex items-center gap-2 text-base">
+            <button onClick={() => setOpenWithdraw(true)} className="sv-btn-premium sv-btn-premium-tall inline-flex items-center gap-2">
               <Plus className="size-5" /> Novo Saque
             </button>
           </div>
@@ -77,10 +77,7 @@ function SaquesPage() {
 
           <div className="flex items-center justify-between gap-6 flex-wrap">
             <p className="text-[var(--sv-muted)] text-lg">Disponível para saque</p>
-            <p
-              className="font-black tabular-nums sv-text-green"
-              style={{ fontSize: 48, lineHeight: 1, textShadow: "0 0 20px rgba(0,210,106,.25)" }}
-            >
+            <p className="sv-balance-mega tabular-nums">
               {brl(balance)}
             </p>
           </div>
@@ -98,7 +95,19 @@ function SaquesPage() {
           <h2 className="text-2xl font-extrabold text-[var(--sv-purple-deep)] mb-4">Histórico de Saques</h2>
           <div className="sv-card-premium p-6 md:p-8">
             {history.length === 0 ? (
-              <p className="text-center text-[var(--sv-muted)] py-10">Nenhum saque encontrado.</p>
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <img
+                  src={piggyImg}
+                  alt=""
+                  width={120}
+                  height={120}
+                  style={{ width: 120, height: 120, opacity: 0.5 }}
+                  className="sv-icon-3d sv-float"
+                />
+                <p className="mt-5 text-[var(--sv-muted)] text-lg font-medium">
+                  Nenhuma solicitação de saque realizada ainda.
+                </p>
+              </div>
             ) : (
               <ul className="divide-y divide-[var(--sv-lilac-border)]">
                 {history.map((h) => (
@@ -216,15 +225,14 @@ function TransferModal({
           <label className="block font-bold text-[var(--sv-purple-deep)] mb-2 text-lg">Buscar usuário</label>
           <div className="relative">
             <span
-              className="absolute left-3 top-1/2 -translate-y-1/2 size-9 rounded-xl grid place-items-center"
-              style={{ background: "var(--gradient-gold-shine)", border: "1.5px solid var(--sv-gold)" }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 size-12 rounded-2xl grid place-items-center sv-icon-3d"
+              style={{ background: "var(--gradient-gold-shine)", border: "2px solid var(--sv-gold)" }}
             >
-              <Search className="size-4 text-[var(--sv-purple-deep)]" />
+              <Search className="size-5 text-[var(--sv-purple-deep)]" />
             </span>
             <input
               autoFocus
-              className="sv-input-premium pl-16 pr-5"
-              style={{ height: 64, fontSize: 18 }}
+              className="sv-input-premium sv-search-field pl-20 pr-5"
               placeholder="Digite o nome ou código (ex: SV123456)"
               value={q}
               onChange={(e) => setQ(e.target.value)}
@@ -351,10 +359,11 @@ function TransferModal({
 
       {step === "done" && (
         <div className="py-8 text-center">
-          <img src={transferImg} alt="" width={120} height={120} style={{ width: 120, height: 120 }} className="mx-auto drop-shadow-[0_15px_30px_rgba(246,199,86,.5)]" />
+          <img src={transferImg} alt="" width={120} height={120} style={{ width: 120, height: 120 }} className="mx-auto sv-icon-3d animate-sv-premium-success" />
           <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Transferência realizada com sucesso!</h3>
-          <p className="mt-2 text-[var(--sv-muted)] text-lg">{brl(amt)} enviado para {selected?.name}.</p>
-          <button onClick={close} className="sv-btn-premium h-14 px-10 mt-7 text-lg">Concluir</button>
+          <p className="mt-3 sv-balance-mega tabular-nums">{brl(amt)}</p>
+          <p className="mt-2 text-[var(--sv-muted)] text-lg">enviado para {selected?.name}.</p>
+          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">Concluir</button>
         </div>
       )}
     </PremiumModal>
@@ -495,12 +504,11 @@ function WithdrawModal({
         </>
       ) : (
         <div className="py-8 text-center">
-          <img src={piggyImg} alt="" width={130} height={130} style={{ width: 130, height: 130 }} className="mx-auto drop-shadow-[0_15px_30px_rgba(246,199,86,.5)]" />
+          <img src={piggyImg} alt="" width={130} height={130} style={{ width: 130, height: 130 }} className="mx-auto sv-icon-3d animate-sv-premium-success" />
           <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Saque solicitado!</h3>
-          <p className="mt-2 text-[var(--sv-muted)] text-lg">
-            Valor líquido de <b className="sv-text-green">{brl(net)}</b> em processamento.
-          </p>
-          <button onClick={close} className="sv-btn-premium h-14 px-10 mt-7 text-lg">Concluir</button>
+          <p className="mt-3 sv-balance-mega tabular-nums">{brl(net)}</p>
+          <p className="mt-2 text-[var(--sv-muted)] text-lg">em processamento.</p>
+          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">Concluir</button>
         </div>
       )}
     </PremiumModal>
