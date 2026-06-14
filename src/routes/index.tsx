@@ -18,9 +18,12 @@ import {
 } from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
 import { fireWithdrawalSuccess } from "@/components/premium/SuccessFX";
+import { CelebrationOverlay } from "@/components/premium/CelebrationOverlay";
+import { playClick } from "@/lib/sound";
 import walletImg from "@/assets/wallet-3d.png";
-import transferImg from "@/assets/transfer-3d.png";
+import transferImg from "@/assets/wallet-transfer-3d.png";
 import piggyImg from "@/assets/piggy-3d.png";
+import moneyImg from "@/assets/money-3d.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -90,6 +93,10 @@ function SaquesPage() {
   const [openWithdraw, setOpenWithdraw] = useState(false);
   const [openSaldo, setOpenSaldo] = useState(false);
   const [detalhe, setDetalhe] = useState<Movimento | null>(null);
+  const [celebrate, setCelebrate] = useState<{ open: boolean; amount: number; title?: string; subtitle?: string }>({
+    open: false,
+    amount: 0,
+  });
 
   const filtrados = useMemo(() => {
     const now = Date.now();
@@ -178,11 +185,20 @@ function SaquesPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={() => setOpenTransfer(true)} className="sv-btn-gold-tall inline-flex items-center gap-2">
+            <button
+              onClick={() => {
+                playClick();
+                setOpenTransfer(true);
+              }}
+              className="sv-btn-gold-tall inline-flex items-center gap-2"
+            >
               <ArrowLeftRight className="size-5" /> Transferir
             </button>
             <button
-              onClick={() => setOpenWithdraw(true)}
+              onClick={() => {
+                playClick();
+                setOpenWithdraw(true);
+              }}
               className="sv-btn-premium sv-btn-premium-tall inline-flex items-center gap-2"
             >
               <Plus className="size-5" /> Novo Saque
@@ -193,12 +209,15 @@ function SaquesPage() {
         {/* SUMMARY CARDS */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <SummaryCard
-            icon={walletImg}
+            icon={moneyImg}
             label="Saldo disponível"
             value={brl(saldo)}
             hint="Ver saldo detalhado"
             valueClass="sv-text-green"
-            onClick={() => setOpenSaldo(true)}
+            onClick={() => {
+              playClick();
+              setOpenSaldo(true);
+            }}
           />
           <SummaryCard
             icon={transferImg}
@@ -206,7 +225,10 @@ function SaquesPage() {
             value={brl(totalTransferido)}
             hint="Enviar saldo para rede"
             valueClass="text-[var(--sv-purple)]"
-            onClick={() => setOpenTransfer(true)}
+            onClick={() => {
+              playClick();
+              setOpenTransfer(true);
+            }}
           />
           <SummaryCard
             icon={piggyImg}
@@ -214,7 +236,18 @@ function SaquesPage() {
             value={brl(totalSaques)}
             hint="Solicitações registradas"
             valueClass="text-[var(--sv-purple)]"
-            onClick={() => setOpenWithdraw(true)}
+            onClick={() => {
+              playClick();
+              setCelebrate({
+                open: true,
+                amount: totalSaques,
+                title: totalSaques > 0 ? "Parabéns!" : "Pronto pra sacar!",
+                subtitle:
+                  totalSaques > 0
+                    ? "Você já sacou este mês"
+                    : "Você ainda não realizou saques. Que tal começar agora?",
+              });
+            }}
           />
         </section>
 
@@ -434,10 +467,24 @@ function SaquesPage() {
             ...h,
           ]);
           fireWithdrawalSuccess();
+          setCelebrate({
+            open: true,
+            amount: net,
+            title: "Parabéns!",
+            subtitle: `Saque solicitado com sucesso. Você receberá`,
+          });
         }}
       />
 
       <DetalheModal item={detalhe} onClose={() => setDetalhe(null)} />
+
+      <CelebrationOverlay
+        open={celebrate.open}
+        onClose={() => setCelebrate((c) => ({ ...c, open: false }))}
+        amount={celebrate.amount}
+        title={celebrate.title}
+        subtitle={celebrate.subtitle}
+      />
     </div>
   );
 }
