@@ -929,6 +929,22 @@ function WithdrawModal({
             </p>
           </div>
 
+          <div className="mb-4 md:mb-5">
+            <p className="font-bold text-[var(--sv-purple-deep)] mb-2 text-base md:text-lg">Saldo disponível</p>
+            <div className="sv-card-balance p-4 md:p-5 flex items-center justify-between gap-3">
+              <span className="sv-text-green font-black tabular-nums text-2xl md:text-[28px]">
+                {brl(balance)}
+              </span>
+              <button
+                type="button"
+                onClick={() => setAmount(String(balance).replace(".", ","))}
+                className="text-xs md:text-sm font-bold text-[var(--sv-purple)] hover:text-[var(--sv-purple-deep)] underline-offset-2 hover:underline"
+              >
+                Usar tudo
+              </button>
+            </div>
+          </div>
+
           <label className="block font-bold text-[var(--sv-purple-deep)] mb-2 text-base md:text-lg">Valor do saque</label>
           <input
             autoFocus
