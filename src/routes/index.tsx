@@ -360,7 +360,7 @@ function SaquesPage() {
             </select>
 
             <div className="relative flex-1 min-w-[220px]">
-              <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--sv-muted)]" />
+              <Search className="size-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--sv-muted)] pointer-events-none" />
               <input
                 value={busca}
                 onChange={(e) => {
@@ -368,9 +368,10 @@ function SaquesPage() {
                   setPage(1);
                 }}
                 placeholder="Buscar por cliente ou título"
-                className="sv-filter-pill w-full pl-9"
+                className="sv-filter-pill w-full pl-11"
               />
             </div>
+
 
             <button onClick={exportCSV} className="sv-filter-pill inline-flex items-center gap-2 font-bold">
               <Download className="size-4" /> CSV
