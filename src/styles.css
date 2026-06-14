@@ -243,3 +243,84 @@
 .animate-sv-scale-in { animation: sv-scale-in .25s ease both; }
 .animate-sv-shake { animation: sv-shake .4s ease both; }
 .animate-sv-fade-up { animation: sv-fade-up .35s ease both; }
+
+/* ============================================================
+   PREMIUM ADD-ONS — modal overlay, balance display, animations
+   ============================================================ */
+.sv-modal-overlay {
+  background: rgba(80, 40, 120, .22);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+.sv-hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sv-hide-scrollbar::-webkit-scrollbar { display: none; }
+
+.sv-balance-mega {
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(180deg, #00E38C 0%, #00A861 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 4px 14px rgba(0, 217, 126, .20);
+  letter-spacing: -0.02em;
+}
+
+.sv-icon-3d {
+  filter: drop-shadow(0 8px 18px rgba(106, 13, 173, .22));
+}
+
+.sv-btn-premium-tall {
+  height: 72px;
+  padding: 0 42px;
+  border-radius: 22px;
+  font-size: 18px;
+}
+
+.sv-btn-gold-tall {
+  height: 72px;
+  padding: 0 32px;
+  border-radius: 22px;
+  background: #FFF;
+  border: 2px solid var(--sv-gold);
+  color: var(--sv-purple-deep);
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 8px 20px rgba(246, 199, 86, .15);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.sv-btn-gold-tall:hover {
+  background: #FFFBEC;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(246, 199, 86, .35);
+}
+
+.sv-search-field {
+  height: 78px !important;
+  border: 2px solid var(--sv-purple-light) !important;
+  border-radius: 24px !important;
+  font-size: 22px !important;
+  font-weight: 600;
+}
+.sv-search-field:focus {
+  border-color: var(--sv-purple) !important;
+  box-shadow: 0 0 0 4px rgba(184, 76, 255, .18), 0 0 25px rgba(184, 76, 255, .25) !important;
+}
+
+@keyframes sv-premium-success {
+  0%   { transform: scale(.92); }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.animate-sv-premium-success { animation: sv-premium-success .55s cubic-bezier(.34,1.56,.64,1) both; }
+
+@keyframes sv-float-pig {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.sv-float { animation: sv-float-pig 3s ease-in-out infinite; }
