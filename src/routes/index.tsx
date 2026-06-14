@@ -15,18 +15,18 @@ import { PremiumModal } from "@/components/premium/PremiumModal";
 import { fireWithdrawalSuccess, fireCategoryFX } from "@/components/premium/SuccessFX";
 import { CelebrationOverlay } from "@/components/premium/CelebrationOverlay";
 import { playClick, playCategorySound } from "@/lib/sound";
-import walletImg from "@/assets/wallet-3d.png";
-import transferImg from "@/assets/transfer-3d.png";
+import walletImg from "@/assets/wallet-3d.svg";
+import transferImg from "@/assets/transfer-3d.svg";
 import piggyImg from "@/assets/piggy-3d.png";
-import moneyImg from "@/assets/money-3d.png";
-import coinsImg from "@/assets/coins-3d.png";
-import networkImg from "@/assets/network-3d.png";
-import levelsImg from "@/assets/levels-3d.png";
-import partnershipImg from "@/assets/partnership-3d.png";
-import searchImg from "@/assets/search-3d.png";
-import lockImg from "@/assets/lock-3d.png";
-import infoImg from "@/assets/info-3d.png";
-import shieldImg from "@/assets/shield-3d.png";
+import moneyImg from "@/assets/money-3d.svg";
+import coinsImg from "@/assets/coins-3d.svg";
+import networkImg from "@/assets/network-3d.svg";
+import levelsImg from "@/assets/levels-3d.svg";
+import partnershipImg from "@/assets/partnership-3d.svg";
+import searchImg from "@/assets/search-3d.svg";
+import lockImg from "@/assets/lock-3d.svg";
+import infoImg from "@/assets/info-3d.svg";
+import shieldImg from "@/assets/shield-3d.svg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
