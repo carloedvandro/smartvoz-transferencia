@@ -24,6 +24,7 @@ import walletImg from "@/assets/wallet-3d.png";
 import transferImg from "@/assets/wallet-transfer-3d.png";
 import piggyImg from "@/assets/piggy-3d.png";
 import moneyImg from "@/assets/money-3d.png";
+import viewImg from "@/assets/view-3d.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
