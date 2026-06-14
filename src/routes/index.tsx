@@ -1,6 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ArrowLeftRight, Plus, Search, Wallet, Lock, PiggyBank, Info, ShieldCheck, X, AlertCircle } from "lucide-react";
+import {
+  ArrowLeftRight,
+  Plus,
+  Search,
+  Wallet,
+  Lock,
+  PiggyBank,
+  Info,
+  ShieldCheck,
+  X,
+  AlertCircle,
+  Download,
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
 import { fireWithdrawalSuccess } from "@/components/premium/SuccessFX";
 import walletImg from "@/assets/wallet-3d.png";
@@ -11,11 +26,28 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Saques — SmartVoz" },
-      { name: "description", content: "Gerencie seus saques e transferências SmartVoz com identidade visual premium." },
+      { name: "description", content: "Gerencie saldo, transferências e saques no padrão Premium SmartVoz." },
     ],
   }),
   component: SaquesPage,
 });
+
+type TipoMov = "Saldo" | "Transferência" | "Saque";
+type StatusMov = "Disponível" | "Concluído" | "Pendente";
+
+type Movimento = {
+  id: string;
+  titulo: string;
+  cliente: string;
+  nivel: string;
+  data: Date;
+  status: StatusMov;
+  valor: number; // signed
+  tipo: TipoMov;
+  categoria: string;
+  descricao: string;
+  icone: string;
+};
 
 const brl = (v: number) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -27,25 +59,121 @@ const REDE_MOCK = [
   { code: "SV456789", name: "Beatriz Cunha" },
 ];
 
+const PAGE_SIZE = 8;
+
 function SaquesPage() {
-  const [balance, setBalance] = useState(50.0);
-  const [locked] = useState(0);
+  const [saldo, setSaldo] = useState(50);
+  const [bloqueado] = useState(0);
+  const [movimentos, setMovimentos] = useState<Movimento[]>([
+    {
+      id: "seed-1",
+      titulo: "Saldo disponível",
+      cliente: "Carteira SmartVoz",
+      nivel: "—",
+      data: new Date(),
+      status: "Disponível",
+      valor: 50,
+      tipo: "Saldo",
+      categoria: "Carteira",
+      descricao: "Saldo disponível para saque ou transferência.",
+      icone: walletImg,
+    },
+  ]);
+
+  const [busca, setBusca] = useState("");
+  const [fTipo, setFTipo] = useState<"todos" | TipoMov>("todos");
+  const [fStatus, setFStatus] = useState<"todos" | StatusMov>("todos");
+  const [fPeriodo, setFPeriodo] = useState<"todos" | "7" | "30" | "90">("todos");
+  const [page, setPage] = useState(1);
+
   const [openTransfer, setOpenTransfer] = useState(false);
   const [openWithdraw, setOpenWithdraw] = useState(false);
-  const [history, setHistory] = useState<
-    { id: string; type: "saque" | "transferencia"; amount: number; net?: number; to?: string; at: Date }[]
-  >([]);
+  const [openSaldo, setOpenSaldo] = useState(false);
+  const [detalhe, setDetalhe] = useState<Movimento | null>(null);
+
+  const filtrados = useMemo(() => {
+    const now = Date.now();
+    const days = fPeriodo === "todos" ? Infinity : Number(fPeriodo);
+    return movimentos.filter((m) => {
+      const buscaOk =
+        !busca ||
+        m.cliente.toLowerCase().includes(busca.toLowerCase()) ||
+        m.titulo.toLowerCase().includes(busca.toLowerCase());
+      const tipoOk = fTipo === "todos" || m.tipo === fTipo;
+      const statusOk = fStatus === "todos" || m.status === fStatus;
+      const periodoOk = days === Infinity || (now - m.data.getTime()) / 86400000 <= days;
+      return buscaOk && tipoOk && statusOk && periodoOk;
+    });
+  }, [movimentos, busca, fTipo, fStatus, fPeriodo]);
+
+  const totalPages = Math.max(1, Math.ceil(filtrados.length / PAGE_SIZE));
+  const pageItems = filtrados.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const totalSaques = movimentos
+    .filter((m) => m.tipo === "Saque")
+    .reduce((acc, m) => acc + Math.abs(m.valor), 0);
+  const totalTransferido = movimentos
+    .filter((m) => m.tipo === "Transferência")
+    .reduce((acc, m) => acc + Math.abs(m.valor), 0);
+
+  function exportCSV() {
+    const rows = [
+      ["Título", "Cliente", "Tipo", "Status", "Data", "Valor"],
+      ...filtrados.map((m) => [
+        m.titulo,
+        m.cliente,
+        m.tipo,
+        m.status,
+        m.data.toLocaleString("pt-BR"),
+        m.valor.toFixed(2).replace(".", ","),
+      ]),
+    ];
+    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(";")).join("\n");
+    const blob = new Blob([`\ufeff${csv}`], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `saques-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function exportPDF() {
+    const win = window.open("", "_blank");
+    if (!win) return;
+    win.document.write(`
+      <html><head><title>Saques SmartVoz</title>
+      <style>body{font-family:Inter,sans-serif;padding:24px;color:#21003f}
+      h1{color:#6a0dad}table{width:100%;border-collapse:collapse;margin-top:12px}
+      th,td{padding:8px;border-bottom:1px solid #eee;text-align:left;font-size:13px}
+      th{background:#f7f0fb}</style></head><body>
+      <h1>Saques SmartVoz</h1>
+      <table><thead><tr><th>Título</th><th>Cliente</th><th>Tipo</th><th>Status</th><th>Data</th><th>Valor</th></tr></thead>
+      <tbody>${filtrados
+        .map(
+          (m) =>
+            `<tr><td>${m.titulo}</td><td>${m.cliente}</td><td>${m.tipo}</td><td>${m.status}</td><td>${m.data.toLocaleString(
+              "pt-BR",
+            )}</td><td>${brl(m.valor)}</td></tr>`,
+        )
+        .join("")}</tbody></table>
+      <script>window.onload=()=>window.print()</script></body></html>
+    `);
+    win.document.close();
+  }
 
   return (
     <div className="min-h-screen bg-[var(--sv-lilac)]">
-      <div className="max-w-6xl mx-auto px-5 md:px-8 py-10 md:py-14 space-y-8 animate-sv-fade-up">
+      <div className="max-w-[1480px] mx-auto px-5 md:px-8 py-10 md:py-12 space-y-7 animate-sv-fade-up">
         {/* HEADER */}
         <header className="flex items-start justify-between gap-6 flex-wrap">
           <div className="flex items-center gap-4">
             <img src={walletImg} alt="" width={84} height={84} style={{ width: 84, height: 84 }} className="sv-icon-3d" />
             <div>
               <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--sv-purple-deep)] tracking-tight">Saques</h1>
-              <p className="text-[var(--sv-muted)] text-lg md:text-xl mt-1">Gerencie seus saques e visualize seu histórico</p>
+              <p className="text-[var(--sv-muted)] text-base md:text-lg mt-1">
+                Gerencie seu saldo, transferências e solicitações no padrão Premium SmartVoz.
+              </p>
             </div>
           </div>
 
@@ -53,94 +181,231 @@ function SaquesPage() {
             <button onClick={() => setOpenTransfer(true)} className="sv-btn-gold-tall inline-flex items-center gap-2">
               <ArrowLeftRight className="size-5" /> Transferir
             </button>
-            <button onClick={() => setOpenWithdraw(true)} className="sv-btn-premium sv-btn-premium-tall inline-flex items-center gap-2">
+            <button
+              onClick={() => setOpenWithdraw(true)}
+              className="sv-btn-premium sv-btn-premium-tall inline-flex items-center gap-2"
+            >
               <Plus className="size-5" /> Novo Saque
             </button>
           </div>
         </header>
 
-        {/* BALANCE CARD */}
-        <section className="sv-card-premium p-6 md:p-8">
-          <div className="flex items-center gap-3 mb-5">
-            <span
-              className="size-12 rounded-2xl grid place-items-center"
-              style={{
-                background: "var(--gradient-gold-shine)",
-                border: "1.5px solid var(--sv-gold)",
-                boxShadow: "var(--shadow-gold-glow)",
+        {/* SUMMARY CARDS */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <SummaryCard
+            icon={walletImg}
+            label="Saldo disponível"
+            value={brl(saldo)}
+            hint="Ver saldo detalhado"
+            valueClass="sv-text-green"
+            onClick={() => setOpenSaldo(true)}
+          />
+          <SummaryCard
+            icon={transferImg}
+            label="Transferências"
+            value={brl(totalTransferido)}
+            hint="Enviar saldo para rede"
+            valueClass="text-[var(--sv-purple)]"
+            onClick={() => setOpenTransfer(true)}
+          />
+          <SummaryCard
+            icon={piggyImg}
+            label="Saques do mês"
+            value={brl(totalSaques)}
+            hint="Solicitações registradas"
+            valueClass="text-[var(--sv-purple)]"
+            onClick={() => setOpenWithdraw(true)}
+          />
+        </section>
+
+        {/* FILTERS */}
+        <section className="sv-card-premium p-4 md:p-5">
+          <div className="flex flex-wrap items-center gap-3">
+            <select
+              value={fTipo}
+              onChange={(e) => {
+                setFTipo(e.target.value as typeof fTipo);
+                setPage(1);
               }}
+              className="sv-filter-pill"
             >
-              <Wallet className="size-6 text-[var(--sv-purple-deep)]" />
-            </span>
-            <h2 className="font-extrabold text-[var(--sv-purple-deep)] text-2xl">Saldo</h2>
-          </div>
+              <option value="todos">Todos os tipos</option>
+              <option value="Saldo">Saldo</option>
+              <option value="Transferência">Transferência</option>
+              <option value="Saque">Saque</option>
+            </select>
 
-          <div className="flex items-center justify-between gap-6 flex-wrap">
-            <p className="text-[var(--sv-muted)] text-lg">Disponível para saque</p>
-            <p className="sv-balance-mega tabular-nums">
-              {brl(balance)}
-            </p>
-          </div>
+            <select
+              value={fStatus}
+              onChange={(e) => {
+                setFStatus(e.target.value as typeof fStatus);
+                setPage(1);
+              }}
+              className="sv-filter-pill"
+            >
+              <option value="todos">Todos status</option>
+              <option value="Disponível">Disponível</option>
+              <option value="Concluído">Concluído</option>
+              <option value="Pendente">Pendente</option>
+            </select>
 
-          <div className="mt-4 flex items-center justify-between gap-6 flex-wrap">
-            <p className="text-[var(--sv-muted)] text-lg">Saldo bloqueado</p>
-            <p className="font-bold tabular-nums text-[var(--sv-orange)] text-2xl inline-flex items-center gap-2">
-              <Lock className="size-5" /> {brl(locked)}
-            </p>
+            <select
+              value={fPeriodo}
+              onChange={(e) => {
+                setFPeriodo(e.target.value as typeof fPeriodo);
+                setPage(1);
+              }}
+              className="sv-filter-pill"
+            >
+              <option value="todos">Todos períodos</option>
+              <option value="7">Últimos 7 dias</option>
+              <option value="30">Últimos 30 dias</option>
+              <option value="90">Últimos 90 dias</option>
+            </select>
+
+            <div className="relative flex-1 min-w-[220px]">
+              <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--sv-muted)]" />
+              <input
+                value={busca}
+                onChange={(e) => {
+                  setBusca(e.target.value);
+                  setPage(1);
+                }}
+                placeholder="Buscar por cliente ou título"
+                className="sv-filter-pill w-full pl-9"
+              />
+            </div>
+
+            <button onClick={exportCSV} className="sv-filter-pill inline-flex items-center gap-2 font-bold">
+              <Download className="size-4" /> CSV
+            </button>
+            <button onClick={exportPDF} className="sv-filter-pill inline-flex items-center gap-2 font-bold">
+              <FileText className="size-4" /> PDF
+            </button>
           </div>
         </section>
 
-        {/* HISTORY */}
-        <section>
-          <h2 className="text-2xl font-extrabold text-[var(--sv-purple-deep)] mb-4">Histórico de Saques</h2>
-          <div className="sv-card-premium p-6 md:p-8">
-            {history.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <img
-                  src={piggyImg}
-                  alt=""
-                  width={120}
-                  height={120}
-                  style={{ width: 120, height: 120, opacity: 0.5 }}
-                  className="sv-icon-3d sv-float"
-                />
-                <p className="mt-5 text-[var(--sv-muted)] text-lg font-medium">
-                  Nenhuma solicitação de saque realizada ainda.
-                </p>
-              </div>
-            ) : (
-              <ul className="divide-y divide-[var(--sv-lilac-border)]">
-                {history.map((h) => (
-                  <li key={h.id} className="py-3 flex items-center justify-between gap-4">
-                    <div>
-                      <p className="font-semibold text-[var(--sv-purple-deep)]">
-                        {h.type === "saque" ? "Solicitação de saque" : `Transferência para ${h.to}`}
-                      </p>
-                      <p className="text-xs text-[var(--sv-muted)]">
-                        {h.at.toLocaleString("pt-BR")}
-                        {h.type === "saque" && h.net !== undefined && (
-                          <> · líquido {brl(h.net)}</>
-                        )}
-                      </p>
-                    </div>
-                    <span className="font-extrabold text-[var(--sv-purple-deep)] whitespace-nowrap">
-                      − {brl(h.amount)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
+        {/* MOVIMENTAÇÕES */}
+        <section className="sv-card-premium p-5 md:p-7">
+          <div className="mb-5">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--sv-purple-deep)]">Movimentações de Saques</h2>
+            <p className="text-[var(--sv-muted)] text-sm md:text-base mt-1">
+              Cada lançamento mostra origem, status, data, valor e ação disponível.
+            </p>
+          </div>
+
+          {pageItems.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-14 text-center">
+              <img
+                src={piggyImg}
+                alt=""
+                width={120}
+                height={120}
+                style={{ width: 120, height: 120, opacity: 0.5 }}
+                className="sv-icon-3d sv-float"
+              />
+              <p className="mt-5 text-[var(--sv-muted)] text-lg font-medium">Nenhuma movimentação encontrada.</p>
+            </div>
+          ) : (
+            <ul className="divide-y divide-[var(--sv-lilac-border)]">
+              {pageItems.map((m) => (
+                <li
+                  key={m.id}
+                  className="grid items-center gap-3 py-4"
+                  style={{ gridTemplateColumns: "64px 1fr auto auto auto auto auto" }}
+                >
+                  <img src={m.icone} alt="" width={56} height={56} style={{ width: 56, height: 56 }} className="sv-icon-3d" />
+                  <div className="min-w-0">
+                    <p className="font-extrabold text-[var(--sv-purple-deep)] truncate">{m.titulo}</p>
+                    <p className="text-sm text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
+                  </div>
+                  <span className="sv-badge-level">{m.nivel}</span>
+                  <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap">
+                    {m.data.toLocaleDateString("pt-BR")}
+                  </span>
+                  <StatusBadge status={m.status} />
+                  <span
+                    className={`font-black tabular-nums whitespace-nowrap text-lg ${
+                      m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+                    }`}
+                  >
+                    {m.valor < 0 ? "− " : ""}
+                    {brl(Math.abs(m.valor))}
+                  </span>
+                  <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm">
+                    Visualizar
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* PAGINATION */}
+          <div className="flex items-center justify-between gap-3 mt-5 flex-wrap">
+            <span className="text-sm text-[var(--sv-muted)]">
+              Página {page} de {totalPages} · {filtrados.length} registro(s)
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="sv-filter-pill px-3 disabled:opacity-40"
+              >
+                <ChevronLeft className="size-4" />
+              </button>
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(i + 1)}
+                  className={`sv-filter-pill px-3 font-bold ${
+                    page === i + 1 ? "bg-[var(--sv-purple)] text-white border-[var(--sv-purple)]" : ""
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="sv-filter-pill px-3 disabled:opacity-40"
+              >
+                <ChevronRight className="size-4" />
+              </button>
+            </div>
           </div>
         </section>
       </div>
 
+      {/* MODAIS */}
+      <SaldoModal
+        open={openSaldo}
+        onClose={() => setOpenSaldo(false)}
+        saldo={saldo}
+        bloqueado={bloqueado}
+      />
+
       <TransferModal
         open={openTransfer}
         onClose={() => setOpenTransfer(false)}
-        balance={balance}
+        balance={saldo}
         onConfirm={(amount, to) => {
-          setBalance((b) => b - amount);
-          setHistory((h) => [{ id: crypto.randomUUID(), type: "transferencia", amount, to, at: new Date() }, ...h]);
+          setSaldo((b) => b - amount);
+          setMovimentos((h) => [
+            {
+              id: crypto.randomUUID(),
+              titulo: "Transferência enviada",
+              cliente: to,
+              nivel: "Rede",
+              data: new Date(),
+              status: "Concluído",
+              valor: -amount,
+              tipo: "Transferência",
+              categoria: "Transferência de saldo",
+              descricao: `Transferência realizada para ${to} na sua rede SmartVoz.`,
+              icone: transferImg,
+            },
+            ...h,
+          ]);
           fireWithdrawalSuccess();
         }}
       />
@@ -148,20 +413,120 @@ function SaquesPage() {
       <WithdrawModal
         open={openWithdraw}
         onClose={() => setOpenWithdraw(false)}
-        balance={balance}
-        locked={locked}
-        onConfirm={(amount, net) => {
-          setBalance((b) => b - amount);
-          setHistory((h) => [{ id: crypto.randomUUID(), type: "saque", amount, net, at: new Date() }, ...h]);
+        balance={saldo}
+        locked={bloqueado}
+        onConfirm={(amount, net, fee) => {
+          setSaldo((b) => b - amount);
+          setMovimentos((h) => [
+            {
+              id: crypto.randomUUID(),
+              titulo: "Saque solicitado",
+              cliente: "Carteira SmartVoz",
+              nivel: "Saque",
+              data: new Date(),
+              status: "Pendente",
+              valor: -net,
+              tipo: "Saque",
+              categoria: "Solicitação de saque",
+              descricao: `Solicitado ${brl(amount)} · Taxa (3%) ${brl(fee)} · Líquido ${brl(net)}.`,
+              icone: piggyImg,
+            },
+            ...h,
+          ]);
           fireWithdrawalSuccess();
         }}
       />
+
+      <DetalheModal item={detalhe} onClose={() => setDetalhe(null)} />
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* TRANSFER MODAL                                                      */
+function SummaryCard({
+  icon,
+  label,
+  value,
+  hint,
+  valueClass,
+  onClick,
+}: {
+  icon: string;
+  label: string;
+  value: string;
+  hint: string;
+  valueClass?: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="sv-card-premium text-left p-5 flex items-center gap-4 hover:-translate-y-0.5 transition"
+    >
+      <img src={icon} alt="" width={72} height={72} style={{ width: 72, height: 72 }} className="sv-icon-3d shrink-0" />
+      <div className="min-w-0">
+        <p className="text-sm font-bold text-[var(--sv-muted)]">{label}</p>
+        <p className={`text-3xl font-black tracking-tight tabular-nums ${valueClass ?? "text-[var(--sv-purple)]"}`}>
+          {value}
+        </p>
+        <p className="text-xs text-[var(--sv-muted)] mt-1">{hint}</p>
+      </div>
+    </button>
+  );
+}
+
+function StatusBadge({ status }: { status: StatusMov }) {
+  if (status === "Disponível" || status === "Concluído") {
+    return <span className="sv-badge-status sv-badge-gold">{status}</span>;
+  }
+  return <span className="sv-badge-status sv-badge-orange">{status}</span>;
+}
+
+/* ------------------------------------------------------------------ */
+function SaldoModal({
+  open,
+  onClose,
+  saldo,
+  bloqueado,
+}: {
+  open: boolean;
+  onClose: () => void;
+  saldo: number;
+  bloqueado: number;
+}) {
+  return (
+    <PremiumModal
+      open={open}
+      onClose={onClose}
+      icon={<img src={walletImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />}
+      title="Saldo detalhado"
+      description="Visão completa do seu saldo SmartVoz"
+    >
+      <div className="sv-card-balance p-5 space-y-3">
+        <div className="flex justify-between text-[var(--sv-muted)]">
+          <span>Saldo disponível</span>
+          <span className="sv-text-green font-black text-2xl tabular-nums">{brl(saldo)}</span>
+        </div>
+        <div className="flex justify-between text-[var(--sv-muted)]">
+          <span>Saldo bloqueado</span>
+          <span className="text-[var(--sv-orange)] font-bold text-xl tabular-nums">{brl(bloqueado)}</span>
+        </div>
+        <div className="h-px bg-[var(--sv-lilac-border)]" />
+        <div className="flex items-center justify-between">
+          <span className="font-bold text-[var(--sv-purple-deep)]">Status</span>
+          <span className="sv-badge-status sv-badge-gold">Disponível</span>
+        </div>
+      </div>
+      <p className="sv-balance-mega tabular-nums text-center mt-5">{brl(saldo)}</p>
+      <div className="flex justify-end mt-6">
+        <button onClick={onClose} className="sv-btn-premium sv-btn-premium-tall">
+          Fechar
+        </button>
+      </div>
+    </PremiumModal>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 function TransferModal({
   open,
@@ -182,7 +547,9 @@ function TransferModal({
   const results = useMemo(() => {
     if (q.trim().length < 2) return [];
     const lower = q.toLowerCase();
-    return REDE_MOCK.filter((u) => u.name.toLowerCase().includes(lower) || u.code.toLowerCase().includes(lower));
+    return REDE_MOCK.filter(
+      (u) => u.name.toLowerCase().includes(lower) || u.code.toLowerCase().includes(lower),
+    );
   }, [q]);
 
   const amt = Number(amount.replace(/[^0-9.,]/g, "").replace(",", ".")) || 0;
@@ -208,11 +575,10 @@ function TransferModal({
         step === "pick"
           ? "Busque pelo nome ou código do usuário para quem deseja transferir"
           : step === "amount"
-          ? `Informe o valor a transferir para ${selected?.name}`
-          : "Transferência concluída"
+            ? `Informe o valor a transferir para ${selected?.name}`
+            : "Transferência concluída"
       }
     >
-      {/* SALDO DISPONÍVEL — PREMIUM CARD */}
       <div className="sv-card-balance flex items-center justify-between gap-4 p-5 mb-6">
         <span className="text-[var(--sv-muted)] text-lg font-semibold">Saldo disponível</span>
         <span className="sv-text-green font-black tabular-nums" style={{ fontSize: 30 }}>
@@ -275,7 +641,6 @@ function TransferModal({
             </p>
           )}
 
-          {/* AVISO ESCUDO */}
           <div
             className="mt-5 flex items-start gap-3 rounded-2xl p-4"
             style={{ background: "#FFF9E8", border: "1.5px solid var(--sv-gold)" }}
@@ -342,7 +707,9 @@ function TransferModal({
           )}
 
           <div className="flex justify-end gap-3 mt-7">
-            <button onClick={close} className="sv-btn-ghost h-14 px-7 text-lg">Cancelar</button>
+            <button onClick={close} className="sv-btn-ghost h-14 px-7 text-lg">
+              Cancelar
+            </button>
             <button
               disabled={!valid}
               onClick={() => {
@@ -359,19 +726,26 @@ function TransferModal({
 
       {step === "done" && (
         <div className="py-8 text-center">
-          <img src={transferImg} alt="" width={120} height={120} style={{ width: 120, height: 120 }} className="mx-auto sv-icon-3d animate-sv-premium-success" />
-          <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Transferência realizada com sucesso!</h3>
+          <img
+            src={transferImg}
+            alt=""
+            width={120}
+            height={120}
+            style={{ width: 120, height: 120 }}
+            className="mx-auto sv-icon-3d animate-sv-premium-success"
+          />
+          <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Transferência realizada!</h3>
           <p className="mt-3 sv-balance-mega tabular-nums">{brl(amt)}</p>
           <p className="mt-2 text-[var(--sv-muted)] text-lg">enviado para {selected?.name}.</p>
-          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">Concluir</button>
+          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">
+            Concluir
+          </button>
         </div>
       )}
     </PremiumModal>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* WITHDRAW MODAL                                                      */
 /* ------------------------------------------------------------------ */
 function WithdrawModal({
   open,
@@ -384,7 +758,7 @@ function WithdrawModal({
   onClose: () => void;
   balance: number;
   locked: number;
-  onConfirm: (amount: number, net: number) => void;
+  onConfirm: (amount: number, net: number, fee: number) => void;
 }) {
   const [amount, setAmount] = useState("");
   const [done, setDone] = useState(false);
@@ -413,7 +787,6 @@ function WithdrawModal({
     >
       {!done ? (
         <>
-          {/* CARD BANCÁRIO PREMIUM */}
           <div className="sv-card-balance p-5 mb-5 space-y-3">
             <Row
               icon={<PiggyBank className="size-4 text-[var(--sv-purple-deep)]" />}
@@ -429,11 +802,12 @@ function WithdrawModal({
             <Row
               icon={<Wallet className="size-4 text-[var(--sv-purple-deep)]" />}
               label={<span className="font-bold text-[var(--sv-purple-deep)]">Saldo total</span>}
-              value={<span className="font-black text-[var(--sv-purple-deep)] text-2xl tabular-nums">{brl(total)}</span>}
+              value={
+                <span className="font-black text-[var(--sv-purple-deep)] text-2xl tabular-nums">{brl(total)}</span>
+              }
             />
           </div>
 
-          {/* AVISO TAXA */}
           <div
             className="flex items-start gap-3 rounded-2xl p-4 mb-5"
             style={{ background: "#FFF9E8", border: "1.5px solid var(--sv-gold)" }}
@@ -465,7 +839,6 @@ function WithdrawModal({
             </p>
           )}
 
-          {/* RESUMO */}
           <div className="sv-card-balance p-5 mt-5 space-y-3">
             <div className="flex justify-between text-[var(--sv-muted)]">
               <span>Valor solicitado:</span>
@@ -488,11 +861,13 @@ function WithdrawModal({
           </div>
 
           <div className="flex justify-end gap-3 mt-7">
-            <button onClick={close} className="sv-btn-ghost h-[60px] px-8 text-lg">Cancelar</button>
+            <button onClick={close} className="sv-btn-ghost h-[60px] px-8 text-lg">
+              Cancelar
+            </button>
             <button
               disabled={!valid}
               onClick={() => {
-                onConfirm(amt, net);
+                onConfirm(amt, net, fee);
                 setDone(true);
               }}
               className="sv-btn-premium h-[60px] px-10 text-lg"
@@ -504,14 +879,75 @@ function WithdrawModal({
         </>
       ) : (
         <div className="py-8 text-center">
-          <img src={piggyImg} alt="" width={130} height={130} style={{ width: 130, height: 130 }} className="mx-auto sv-icon-3d animate-sv-premium-success" />
+          <img
+            src={piggyImg}
+            alt=""
+            width={130}
+            height={130}
+            style={{ width: 130, height: 130 }}
+            className="mx-auto sv-icon-3d animate-sv-premium-success"
+          />
           <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Saque solicitado!</h3>
           <p className="mt-3 sv-balance-mega tabular-nums">{brl(net)}</p>
           <p className="mt-2 text-[var(--sv-muted)] text-lg">em processamento.</p>
-          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">Concluir</button>
+          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">
+            Concluir
+          </button>
         </div>
       )}
     </PremiumModal>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+function DetalheModal({ item, onClose }: { item: Movimento | null; onClose: () => void }) {
+  return (
+    <PremiumModal
+      open={!!item}
+      onClose={onClose}
+      icon={item ? <img src={item.icone} alt="" width={72} height={72} style={{ width: 72, height: 72 }} /> : null}
+      title={item?.titulo ?? ""}
+      description={item?.categoria}
+    >
+      {item && (
+        <>
+          <div className="sv-card-balance p-5 space-y-3">
+            <DetalheLinha label="Cliente" value={item.cliente} />
+            <DetalheLinha label="Nível" value={item.nivel} />
+            <DetalheLinha label="Data" value={item.data.toLocaleString("pt-BR")} />
+            <DetalheLinha label="Tipo" value={item.tipo} />
+            <DetalheLinha label="Status" value={<StatusBadge status={item.status} />} />
+          </div>
+
+          <p className="mt-5 text-[var(--sv-muted)] leading-relaxed">{item.descricao}</p>
+
+          <p
+            className={`mt-5 text-center font-black tabular-nums ${
+              item.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+            }`}
+            style={{ fontSize: 44 }}
+          >
+            {item.valor < 0 ? "− " : ""}
+            {brl(Math.abs(item.valor))}
+          </p>
+
+          <div className="flex justify-end mt-6">
+            <button onClick={onClose} className="sv-btn-premium sv-btn-premium-tall">
+              Fechar
+            </button>
+          </div>
+        </>
+      )}
+    </PremiumModal>
+  );
+}
+
+function DetalheLinha({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-between gap-4">
+      <span className="text-[var(--sv-muted)]">{label}</span>
+      <span className="font-bold text-[var(--sv-purple-deep)]">{value}</span>
+    </div>
   );
 }
 
@@ -519,7 +955,10 @@ function Row({ icon, label, value }: { icon: React.ReactNode; label: React.React
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-2 text-[var(--sv-muted)]">
-        <span className="size-7 rounded-lg grid place-items-center" style={{ background: "var(--gradient-gold-shine)", border: "1px solid var(--sv-gold)" }}>
+        <span
+          className="size-7 rounded-lg grid place-items-center"
+          style={{ background: "var(--gradient-gold-shine)", border: "1px solid var(--sv-gold)" }}
+        >
           {icon}
         </span>
         {label}
