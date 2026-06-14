@@ -238,15 +238,14 @@ function SaquesPage() {
       <div className="max-w-[1480px] mx-auto px-5 md:px-8 py-10 md:py-12 space-y-7 animate-sv-fade-up">
         {/* HEADER */}
         <header className="flex items-start justify-between gap-6 flex-wrap">
-          <div className="flex items-center gap-4">
-            <img src={walletImg} alt="" width={84} height={84} style={{ width: 84, height: 84 }} className="sv-icon-3d" />
-            <div>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--sv-purple-deep)] tracking-tight">Saques</h1>
-              <p className="text-[var(--sv-muted)] text-base md:text-lg mt-1">
-                Gerencie seu saldo, transferências e solicitações no padrão Premium SmartVoz.
-              </p>
-            </div>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--sv-purple-deep)] tracking-tight">Saques</h1>
+            <p className="text-[var(--sv-muted)] text-base md:text-lg mt-1">
+              Gerencie seu saldo, transferências e solicitações no padrão Premium SmartVoz.
+            </p>
           </div>
+
+
 
           <div className="flex items-center gap-3">
             <button
