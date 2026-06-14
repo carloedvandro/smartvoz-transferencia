@@ -410,7 +410,7 @@ function SaquesPage() {
                     <p className="text-sm text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
                   </div>
                   <div className="flex justify-center">
-                    <span className="sv-badge-level w-full text-center">{m.nivel}</span>
+                    <span className="sv-badge-level">{m.nivel}</span>
                   </div>
                   <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap text-center">
                     {m.data.toLocaleDateString("pt-BR")}
