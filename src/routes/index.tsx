@@ -42,7 +42,7 @@ function SaquesPage() {
         {/* HEADER */}
         <header className="flex items-start justify-between gap-6 flex-wrap">
           <div className="flex items-center gap-4">
-            <img src={walletImg} alt="" width={84} height={84} style={{ width: 84, height: 84 }} className="drop-shadow-[0_10px_20px_rgba(106,13,173,.25)]" />
+            <img src={walletImg} alt="" width={84} height={84} style={{ width: 84, height: 84 }} className="sv-icon-3d" />
             <div>
               <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--sv-purple-deep)] tracking-tight">Saques</h1>
               <p className="text-[var(--sv-muted)] text-lg md:text-xl mt-1">Gerencie seus saques e visualize seu histórico</p>
@@ -50,10 +50,10 @@ function SaquesPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={() => setOpenTransfer(true)} className="sv-btn-gold-ghost h-14 px-7 inline-flex items-center gap-2 text-base">
+            <button onClick={() => setOpenTransfer(true)} className="sv-btn-gold-tall inline-flex items-center gap-2">
               <ArrowLeftRight className="size-5" /> Transferir
             </button>
-            <button onClick={() => setOpenWithdraw(true)} className="sv-btn-premium h-14 px-7 inline-flex items-center gap-2 text-base">
+            <button onClick={() => setOpenWithdraw(true)} className="sv-btn-premium sv-btn-premium-tall inline-flex items-center gap-2">
               <Plus className="size-5" /> Novo Saque
             </button>
           </div>
