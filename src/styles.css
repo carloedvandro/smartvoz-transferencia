@@ -149,6 +149,37 @@
     text-shadow: 0 1px 0 rgba(255,255,255,.4), 0 2px 4px rgba(0, 120, 70, .15);
     letter-spacing: -0.01em;
   }
+  /* 3D extruded green amount, mirrors the "+R$ 90,00" celebration style */
+  .sv-amount-3d {
+    color: #58E39A;
+    letter-spacing: -0.02em;
+    font-weight: 900;
+    text-shadow:
+      0 1px 0 #4ad690,
+      0 2px 0 #3fc684,
+      0 3px 0 #34b677,
+      0 4px 0 #2aa66b,
+      0 5px 0 #1f955e,
+      0 6px 0 #168651,
+      0 7px 0 #0e7745,
+      0 8px 10px rgba(10, 90, 55, .35),
+      0 14px 22px rgba(10, 90, 55, .25);
+  }
+  .sv-amount-3d-neg {
+    color: #FFB37A;
+    letter-spacing: -0.02em;
+    font-weight: 900;
+    text-shadow:
+      0 1px 0 #f5a166,
+      0 2px 0 #ea9054,
+      0 3px 0 #de8044,
+      0 4px 0 #d17137,
+      0 5px 0 #c3622b,
+      0 6px 0 #b35420,
+      0 7px 0 #a14618,
+      0 8px 10px rgba(110, 50, 10, .35),
+      0 14px 22px rgba(110, 50, 10, .25);
+  }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
     -webkit-background-clip: text;

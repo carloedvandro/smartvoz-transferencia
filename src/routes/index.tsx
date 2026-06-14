@@ -237,7 +237,7 @@ function SaquesPage() {
             label="Saldo disponível"
             value={brl(saldo)}
             hint="Ver saldo detalhado"
-            valueClass="sv-text-green"
+            valueClass="sv-amount-3d"
             onClick={() => {
               playClick();
               setOpenSaldo(true);
@@ -249,7 +249,7 @@ function SaquesPage() {
             label="Transferências"
             value={brl(totalTransferido)}
             hint="Enviar saldo para rede"
-            valueClass="sv-text-green"
+            valueClass="sv-amount-3d"
             onClick={() => {
               playClick();
               setOpenTransfer(true);
@@ -260,7 +260,7 @@ function SaquesPage() {
             label="Saques do mês"
             value={brl(totalSaques)}
             hint="Solicitações registradas"
-            valueClass="sv-text-green"
+            valueClass="sv-amount-3d"
             onClick={() => {
               playClick();
               setCelebrate({
@@ -378,7 +378,7 @@ function SaquesPage() {
                     </div>
                     <span
                       className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
-                        m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+                        m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
                       }`}
                     >
                       {m.valor < 0 ? "− " : ""}
@@ -407,7 +407,7 @@ function SaquesPage() {
                       </div>
                       <span
                         className={`font-black tabular-nums whitespace-nowrap text-base text-right shrink-0 ${
-                          m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+                          m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
                         }`}
                       >
                         {m.valor < 0 ? "− " : ""}
@@ -1048,7 +1048,7 @@ function DetalheModal({ item, onClose }: { item: Movimento | null; onClose: () =
 
           <p
             className={`mt-5 text-center font-black tabular-nums ${
-              item.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+              item.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
             }`}
             style={{ fontSize: 44 }}
           >
