@@ -272,7 +272,7 @@ function SaquesPage() {
         {/* SUMMARY CARDS */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
           <SummaryCard
-            icon={moneyImg}
+            icon={walletImg}
             label="Saldo disponível"
             value={brl(saldo)}
             hint="Ver saldo detalhado"
@@ -282,6 +282,7 @@ function SaquesPage() {
               setOpenSaldo(true);
             }}
           />
+
           <SummaryCard
             icon={transferImg}
             label="Transferências"
