@@ -738,11 +738,13 @@ function TransferModal({
             : "Transferência concluída"
       }
     >
-      <div className="sv-card-balance flex items-center justify-between gap-4 p-5 mb-6">
-        <span className="text-[var(--sv-muted)] text-lg font-semibold">Saldo disponível</span>
-        <span className="sv-text-green font-black tabular-nums" style={{ fontSize: 30 }}>
-          {brl(balance)}
-        </span>
+      <div className="mb-5">
+        <p className="font-bold text-[var(--sv-purple-deep)] mb-2 text-lg">Saldo disponível</p>
+        <div className="sv-card-balance p-4 sm:p-5">
+          <span className="sv-text-green font-black tabular-nums block text-2xl md:text-[30px]">
+            {brl(balance)}
+          </span>
+        </div>
       </div>
 
       {step === "pick" && (
