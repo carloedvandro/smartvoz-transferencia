@@ -591,14 +591,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 
   .sv-modal-icon  { width: 64px !important; height: 64px !important; }
   .sv-modal-icon img { width: 64px !important; height: 64px !important; }
 
-  /* "Bare" sections on mobile: remove white card from filters & movimentações */
-  .sv-section-bare {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-  }
+  /* Keep glass cards on mobile */
 }
 
 /* ============================================================
