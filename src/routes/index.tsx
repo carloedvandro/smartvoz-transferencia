@@ -58,13 +58,13 @@ type Movimento = {
 const brl = (v: number) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-function nivelClass(nivel: string) {
+function nivelLabel(nivel: string) {
   const n = nivel.toUpperCase().trim();
-  if (n === "N1") return "sv-badge-level sv-badge-level-trophy sv-badge-level-n1";
-  if (n === "N2") return "sv-badge-level sv-badge-level-trophy sv-badge-level-n2";
-  if (n === "N3") return "sv-badge-level sv-badge-level-trophy sv-badge-level-n3";
-  if (n === "N4") return "sv-badge-level sv-badge-level-trophy sv-badge-level-n4";
-  return "sv-badge-level sv-badge-level-empty";
+  if (n === "N1") return "Nível 1";
+  if (n === "N2") return "Nível 2";
+  if (n === "N3") return "Nível 3";
+  if (n === "N4") return "Nível 4";
+  return "—";
 }
 
 const REDE_MOCK = [
