@@ -378,7 +378,7 @@ function SaquesPage() {
                     </div>
                     <span
                       className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
-                        m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+                        m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
                       }`}
                     >
                       {m.valor < 0 ? "− " : ""}
@@ -407,7 +407,7 @@ function SaquesPage() {
                       </div>
                       <span
                         className={`font-black tabular-nums whitespace-nowrap text-base text-right shrink-0 ${
-                          m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+                          m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
                         }`}
                       >
                         {m.valor < 0 ? "− " : ""}
@@ -1048,7 +1048,7 @@ function DetalheModal({ item, onClose }: { item: Movimento | null; onClose: () =
 
           <p
             className={`mt-5 text-center font-black tabular-nums ${
-              item.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+              item.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
             }`}
             style={{ fontSize: 44 }}
           >
