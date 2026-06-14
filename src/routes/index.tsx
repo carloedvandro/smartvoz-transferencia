@@ -624,11 +624,11 @@ function SaldoModal({
       <div className="sv-card-balance p-5 space-y-3">
         <div className="flex justify-between text-[var(--sv-muted)]">
           <span>Saldo disponível</span>
-          <span className="sv-text-green font-black text-2xl tabular-nums">{brl(saldo)}</span>
+          <span className="sv-amount-3d text-2xl tabular-nums">{brl(saldo)}</span>
         </div>
-        <div className="flex justify-between text-[var(--sv-muted)]">
+        <div className="flex justify-between items-center text-[var(--sv-muted)]">
           <span>Saldo bloqueado</span>
-          <span className="text-[var(--sv-orange)] font-bold text-xl tabular-nums">{brl(bloqueado)}</span>
+          <span className="sv-amount-3d-neg text-xl tabular-nums">{brl(bloqueado)}</span>
         </div>
         <div className="h-px bg-[var(--sv-lilac-border)]" />
         <div className="flex items-center justify-between">
@@ -636,7 +636,7 @@ function SaldoModal({
           <span className="sv-badge-status sv-badge-gold">Disponível</span>
         </div>
       </div>
-      <p className="sv-balance-mega tabular-nums text-center mt-5">{brl(saldo)}</p>
+      <p className="sv-amount-3d tabular-nums text-center mt-5 block" style={{ fontSize: 48 }}>{brl(saldo)}</p>
       <div className="flex justify-end mt-6">
         <button onClick={onClose} className="sv-btn-premium sv-btn-premium-tall">
           Fechar
