@@ -324,3 +324,74 @@
   50%      { transform: translateY(-8px); }
 }
 .sv-float { animation: sv-float-pig 3s ease-in-out infinite; }
+
+/* Filter pills (selects, inputs, buttons) */
+.sv-filter-pill {
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--sv-lilac-border);
+  background: #fff;
+  padding: 0 14px;
+  color: var(--sv-purple-deep);
+  font-weight: 700;
+  font-size: 14px;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.sv-filter-pill:hover:not(:disabled) {
+  border-color: var(--sv-purple-light);
+}
+.sv-filter-pill:focus {
+  outline: none;
+  border-color: var(--sv-purple);
+  box-shadow: 0 0 0 3px rgba(184, 76, 255, .18);
+}
+
+/* Level badge (lilac) */
+.sv-badge-level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 78px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #fff, #f0dcff);
+  color: var(--sv-purple);
+  border: 1px solid #c88cff;
+  font-weight: 800;
+  font-size: 12px;
+  box-shadow: inset 0 1px 0 #fff, 0 5px 10px rgba(106, 13, 173, .10);
+}
+
+/* Status badge base */
+.sv-badge-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 108px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.sv-badge-gold {
+  background: linear-gradient(180deg, #fff6b3 0%, #f7c32f 48%, #c77a00 100%);
+  border: 1px solid #a86800;
+  color: #3d2300;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.85),
+    inset 0 -3px 0 rgba(100,55,0,.22),
+    0 6px 12px rgba(217,154,0,.20);
+}
+
+.sv-badge-orange {
+  background: linear-gradient(180deg, #ffe1c2 0%, #ff9a55 60%, #d65a10 100%);
+  border: 1px solid #b54a05;
+  color: #3a1500;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.70),
+    inset 0 -3px 0 rgba(120,50,0,.22),
+    0 6px 12px rgba(220,100,30,.20);
+}
