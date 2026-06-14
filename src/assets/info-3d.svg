@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="i-p" cx=".35" cy=".3" r=".9">
+      <stop offset="0" stop-color="#B84CFF"/><stop offset="1" stop-color="#3D0072"/>
+    </radialGradient>
+    <linearGradient id="i-g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#FFE48A"/><stop offset="1" stop-color="#A86800"/>
+    </linearGradient>
+    <filter id="i-sh"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#21003F" flood-opacity=".35"/></filter>
+  </defs>
+  <g filter="url(#i-sh)">
+    <circle cx="64" cy="64" r="52" fill="url(#i-g)"/>
+    <circle cx="64" cy="64" r="44" fill="url(#i-p)" stroke="#F6C756" stroke-width="2"/>
+    <g stroke="url(#i-g)" stroke-width="3" stroke-linecap="round">
+      <line x1="64" y1="28" x2="64" y2="36"/>
+      <line x1="64" y1="92" x2="64" y2="100"/>
+      <line x1="28" y1="64" x2="36" y2="64"/>
+      <line x1="92" y1="64" x2="100" y2="64"/>
+    </g>
+    <line x1="64" y1="64" x2="64" y2="38" stroke="url(#i-g)" stroke-width="5" stroke-linecap="round"/>
+    <line x1="64" y1="64" x2="86" y2="74" stroke="url(#i-g)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="64" cy="64" r="4" fill="url(#i-g)"/>
+  </g>
+</svg>

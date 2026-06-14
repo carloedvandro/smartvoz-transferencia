@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="p-g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#FFE48A"/><stop offset=".5" stop-color="#F6C756"/><stop offset="1" stop-color="#8A5400"/>
+    </linearGradient>
+    <linearGradient id="p-p" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#8B22E6"/><stop offset="1" stop-color="#3D0072"/>
+    </linearGradient>
+    <filter id="p-sh"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#21003F" flood-opacity=".35"/></filter>
+  </defs>
+  <g filter="url(#p-sh)">
+    <!-- left cuff -->
+    <path d="M6 72 Q4 84 12 92 L34 80 Q30 70 28 60 Z" fill="url(#p-p)" stroke="#F6C756" stroke-width="1.5"/>
+    <!-- right cuff -->
+    <path d="M122 72 Q124 84 116 92 L94 80 Q98 70 100 60 Z" fill="url(#p-p)" stroke="#F6C756" stroke-width="1.5"/>
+    <!-- left arm -->
+    <path d="M28 60 Q44 56 62 70 L74 82 Q60 92 44 88 Q30 84 14 90 Z" fill="url(#p-g)" stroke="#7A4A00" stroke-width="1.5"/>
+    <!-- right arm/hand grip -->
+    <path d="M100 60 Q84 56 66 70 L54 82 Q68 92 84 88 Q98 84 114 90 Z" fill="url(#p-g)" stroke="#7A4A00" stroke-width="1.5"/>
+    <!-- thumbs accent -->
+    <path d="M58 66 Q64 60 70 66" fill="none" stroke="#7A4A00" stroke-width="1.4"/>
+    <path d="M60 76 Q64 80 68 76" fill="none" stroke="#7A4A00" stroke-width="1.4"/>
+    <!-- highlight -->
+    <path d="M22 84 Q40 80 60 84" fill="none" stroke="#FFF" stroke-width="1" opacity=".25"/>
+  </g>
+</svg>
