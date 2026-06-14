@@ -12,9 +12,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
-import { fireWithdrawalSuccess } from "@/components/premium/SuccessFX";
+import { fireWithdrawalSuccess, fireCategoryFX } from "@/components/premium/SuccessFX";
 import { CelebrationOverlay } from "@/components/premium/CelebrationOverlay";
-import { playClick } from "@/lib/sound";
+import { playClick, playCategorySound } from "@/lib/sound";
 import walletImg from "@/assets/wallet-3d.png";
 import transferImg from "@/assets/transfer-3d.png";
 import piggyImg from "@/assets/piggy-3d.png";
