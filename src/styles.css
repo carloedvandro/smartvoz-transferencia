@@ -132,11 +132,18 @@
     border-radius: 24px;
   }
   .sv-text-green {
-    background: var(--gradient-green-value);
+    background: linear-gradient(180deg, #9DF5C7 0%, #4FE3A2 45%, #1FB877 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,.55),
+      0 6px 14px rgba(0, 170, 100, .35),
+      0 2px 4px rgba(0, 80, 50, .25);
+    -webkit-text-stroke: 0.5px rgba(0, 110, 70, .35);
+    filter: drop-shadow(0 4px 8px rgba(0, 200, 130, .25));
+    letter-spacing: -0.01em;
   }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
@@ -146,7 +153,7 @@
     color: transparent;
   }
   .sv-btn-premium {
-    background: var(--gradient-purple-3d);
+    background: linear-gradient(180deg, #C66BFF 0%, #8A2BE2 55%, #5B0DAD 100%);
     border: 2px solid var(--sv-gold);
     border-radius: 22px;
     color: #FFFFFF;
@@ -262,17 +269,22 @@
   font-size: 58px;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(180deg, #00E38C 0%, #00A861 100%);
+  background: linear-gradient(180deg, #B6F8D6 0%, #4FE3A2 45%, #1FB877 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  text-shadow: 0 4px 14px rgba(0, 217, 126, .20);
+  -webkit-text-stroke: 0.6px rgba(0, 110, 70, .45);
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.6),
+    0 8px 22px rgba(0, 200, 130, .35),
+    0 3px 6px rgba(0, 80, 50, .25);
+  filter: drop-shadow(0 6px 14px rgba(0, 200, 130, .25));
   letter-spacing: -0.02em;
 }
 
 .sv-icon-3d {
-  filter: drop-shadow(0 8px 18px rgba(106, 13, 173, .22));
+  filter: drop-shadow(0 10px 22px rgba(138, 43, 226, .30));
 }
 
 .sv-btn-premium-tall {
@@ -352,16 +364,19 @@
   align-items: center;
   justify-content: center;
   width: 96px;
-  height: 34px;
+  height: 36px;
   padding: 0 12px;
   border-radius: 999px;
-  background: linear-gradient(145deg, #fff, #f0dcff);
-  color: var(--sv-purple);
-  border: 1px solid #c88cff;
-  font-weight: 800;
-  font-size: 13px;
-  letter-spacing: 0.3px;
-  box-shadow: inset 0 1px 0 #fff, 0 5px 10px rgba(106, 13, 173, .10);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5E6FF 55%, #E6CCFF 100%);
+  color: #6A0DAD;
+  border: 1.5px solid #B470FF;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -2px 0 rgba(180, 112, 255, .25),
+    0 6px 14px rgba(138, 43, 226, .18);
 }
 
 /* Status badge base */
@@ -379,13 +394,15 @@
 }
 
 .sv-badge-gold {
-  background: linear-gradient(180deg, #fff6b3 0%, #f7c32f 48%, #c77a00 100%);
-  border: 1px solid #a86800;
-  color: #3d2300;
+  background: linear-gradient(180deg, #FFF1A8 0%, #FFD24A 35%, #E8A100 70%, #B57400 100%);
+  border: 1px solid #8a5500;
+  color: #2e1900;
+  text-shadow: 0 1px 0 rgba(255,255,255,.45);
   box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.85),
-    inset 0 -3px 0 rgba(100,55,0,.22),
-    0 6px 12px rgba(217,154,0,.20);
+    inset 0 2px 0 rgba(255,255,255,.95),
+    inset 0 -3px 0 rgba(100,55,0,.28),
+    0 8px 16px rgba(217,154,0,.32),
+    0 0 0 1px rgba(255, 220, 120, .35);
 }
 
 .sv-badge-orange {
