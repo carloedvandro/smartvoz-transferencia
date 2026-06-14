@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import piggyImg from "@/assets/piggy-3d.png";
-import { fireWithdrawalSuccess } from "./SuccessFX";
+import { firePiggyExplosion } from "./SuccessFX";
 import { playCelebrate } from "@/lib/sound";
 
 export function CelebrationOverlay({
@@ -16,12 +16,22 @@ export function CelebrationOverlay({
   title?: string;
   subtitle?: string;
 }) {
+  const [phase, setPhase] = useState<"shake" | "burst">("shake");
+
   useEffect(() => {
     if (!open) return;
+    setPhase("shake");
     playCelebrate();
-    fireWithdrawalSuccess();
-    const t = setTimeout(onClose, 3200);
-    return () => clearTimeout(t);
+    // Trigger explosion right after the piggy "breaks"
+    const t1 = setTimeout(() => {
+      setPhase("burst");
+      firePiggyExplosion();
+    }, 450);
+    const t2 = setTimeout(onClose, 5200);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [open, onClose]);
 
   if (!open) return null;
@@ -33,18 +43,31 @@ export function CelebrationOverlay({
       onClick={onClose}
     >
       <div
-        className="sv-card-premium relative text-center px-10 py-12 max-w-md w-full animate-sv-scale-in"
+        className="sv-card-premium relative text-center px-10 py-12 max-w-md w-full animate-sv-scale-in overflow-hidden"
         style={{ borderRadius: 32 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          src={piggyImg}
-          alt=""
-          width={180}
-          height={180}
-          style={{ width: 180, height: 180, margin: "0 auto" }}
-          className="sv-icon-3d animate-sv-premium-success"
-        />
+        <div className="relative mx-auto" style={{ width: 200, height: 200 }}>
+          {/* Glow halo */}
+          <span
+            aria-hidden
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: "radial-gradient(circle at 50% 50%, rgba(255,215,90,.55), rgba(184,76,255,.25) 55%, transparent 75%)",
+              filter: "blur(8px)",
+              animation: "sv-halo-pulse 1.6s ease-in-out infinite",
+            }}
+          />
+          <img
+            src={piggyImg}
+            alt=""
+            width={200}
+            height={200}
+            style={{ width: 200, height: 200 }}
+            className={`relative sv-icon-3d ${phase === "shake" ? "sv-piggy-shake" : "sv-piggy-burst"}`}
+          />
+        </div>
+
         <h2
           className="mt-4 font-black text-[var(--sv-purple-deep)]"
           style={{ fontSize: 38, lineHeight: 1.05 }}
@@ -52,7 +75,7 @@ export function CelebrationOverlay({
           {title}
         </h2>
         <p className="mt-2 text-[var(--sv-muted)] text-lg">
-          {subtitle ?? "Você sacou"}
+          {subtitle ?? "Você acabou de fazer um saque pelo seu desempenho. Continue trabalhando e colhendo os frutos!"}
         </p>
         <p className="sv-balance-mega mt-2" style={{ fontSize: 48 }}>
           {amountBrl}
