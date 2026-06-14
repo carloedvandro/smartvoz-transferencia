@@ -91,7 +91,7 @@ function SaquesPage() {
       tipo: "Saldo",
       categoria: "Carteira",
       descricao: "Saldo disponível para saque ou transferência.",
-      icone: moneyImg,
+      icone: walletImg,
     },
     {
       id: "seed-2",
