@@ -151,7 +151,8 @@
   }
   /* 3D extruded glossy amounts — premium gold metallic look */
   .sv-amount-3d,
-  .sv-amount-3d-neg {
+  .sv-amount-3d-neg,
+  .sv-amount-green {
     font-weight: 900;
     letter-spacing: -0.5px;
     line-height: 1.1;
