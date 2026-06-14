@@ -266,7 +266,7 @@
    PREMIUM ADD-ONS — modal overlay, balance display, animations
    ============================================================ */
 .sv-modal-overlay {
-  background: rgba(80, 40, 120, .22);
+  background: rgba(0, 0, 0, .35);
   backdrop-filter: blur(14px) saturate(140%);
 }
 
