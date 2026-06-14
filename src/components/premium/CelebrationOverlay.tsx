@@ -16,23 +16,20 @@ export function CelebrationOverlay({
   title?: string;
   subtitle?: string;
 }) {
-  const [phase, setPhase] = useState<"shake" | "burst">("shake");
-
   useEffect(() => {
     if (!open) return;
-    setPhase("shake");
     playCelebrate();
-    // Trigger explosion right after the piggy "breaks"
+    // Coins burst out of the piggy while it stays intact (gentle shake)
     const t1 = setTimeout(() => {
-      setPhase("burst");
       firePiggyExplosion();
-    }, 900);
-    const t2 = setTimeout(onClose, 5600);
+    }, 300);
+    const t2 = setTimeout(onClose, 5200);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
     };
   }, [open, onClose]);
+
 
 
   if (!open) return null;
@@ -65,9 +62,9 @@ export function CelebrationOverlay({
             width={200}
             height={200}
             style={{ width: 200, height: 200 }}
-            className={`relative sv-icon-3d ${phase === "shake" ? "sv-piggy-shake" : "sv-piggy-burst"}`}
+            className="relative sv-icon-3d sv-piggy-shake"
           />
-          {phase === "shake" && <span aria-hidden className="sv-piggy-crack" />}
+
 
         </div>
 
