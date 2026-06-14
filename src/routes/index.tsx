@@ -504,12 +504,11 @@ function WithdrawModal({
         </>
       ) : (
         <div className="py-8 text-center">
-          <img src={piggyImg} alt="" width={130} height={130} style={{ width: 130, height: 130 }} className="mx-auto drop-shadow-[0_15px_30px_rgba(246,199,86,.5)]" />
+          <img src={piggyImg} alt="" width={130} height={130} style={{ width: 130, height: 130 }} className="mx-auto sv-icon-3d animate-sv-premium-success" />
           <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Saque solicitado!</h3>
-          <p className="mt-2 text-[var(--sv-muted)] text-lg">
-            Valor líquido de <b className="sv-text-green">{brl(net)}</b> em processamento.
-          </p>
-          <button onClick={close} className="sv-btn-premium h-14 px-10 mt-7 text-lg">Concluir</button>
+          <p className="mt-3 sv-balance-mega tabular-nums">{brl(net)}</p>
+          <p className="mt-2 text-[var(--sv-muted)] text-lg">em processamento.</p>
+          <button onClick={close} className="sv-btn-premium sv-btn-premium-tall mt-7">Concluir</button>
         </div>
       )}
     </PremiumModal>
