@@ -456,7 +456,7 @@ function SaquesPage() {
                     </div>
                     <div className="flex items-center justify-between gap-2 pl-[56px]">
                       <div className="flex items-center gap-2">
-                        <span className={nivelClass(m.nivel)} style={{ minWidth: 64, height: 28, fontSize: 11 }}>{m.nivel}</span>
+                        <span className="font-extrabold text-[var(--sv-purple-deep)] text-xs whitespace-nowrap">{nivelLabel(m.nivel)}</span>
                         <StatusBadge status={m.status} />
                       </div>
                       <button
