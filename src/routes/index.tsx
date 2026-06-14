@@ -124,6 +124,19 @@ function SaquesPage() {
       descricao: "Você subiu de nível e ganhou bônus.",
       icone: levelsImg,
     },
+    {
+      id: "seed-5",
+      titulo: "Rede expandida",
+      cliente: "Rede SmartVoz",
+      nivel: "N2",
+      data: new Date(Date.now() - 86400000 * 14),
+      status: "Concluído",
+      valor: 8,
+      tipo: "Saldo",
+      categoria: "Rede",
+      descricao: "Sua rede ativa cresceu este mês.",
+      icone: networkImg,
+    },
   ]);
 
   const [busca, setBusca] = useState("");
