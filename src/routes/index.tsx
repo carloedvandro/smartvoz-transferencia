@@ -225,15 +225,14 @@ function TransferModal({
           <label className="block font-bold text-[var(--sv-purple-deep)] mb-2 text-lg">Buscar usuário</label>
           <div className="relative">
             <span
-              className="absolute left-3 top-1/2 -translate-y-1/2 size-9 rounded-xl grid place-items-center"
-              style={{ background: "var(--gradient-gold-shine)", border: "1.5px solid var(--sv-gold)" }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 size-12 rounded-2xl grid place-items-center sv-icon-3d"
+              style={{ background: "var(--gradient-gold-shine)", border: "2px solid var(--sv-gold)" }}
             >
-              <Search className="size-4 text-[var(--sv-purple-deep)]" />
+              <Search className="size-5 text-[var(--sv-purple-deep)]" />
             </span>
             <input
               autoFocus
-              className="sv-input-premium pl-16 pr-5"
-              style={{ height: 64, fontSize: 18 }}
+              className="sv-input-premium sv-search-field pl-20 pr-5"
               placeholder="Digite o nome ou código (ex: SV123456)"
               value={q}
               onChange={(e) => setQ(e.target.value)}
