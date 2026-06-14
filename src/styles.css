@@ -166,20 +166,20 @@
   .sv-amount-3d {
     background-image: linear-gradient(
       180deg,
-      #FFF8D5 0%,
-      #FFE88A 15%,
-      #FFD24D 35%,
-      #F6C756 55%,
-      #D89A00 75%,
-      #A86C00 100%
+      #E9D5FF 0%,
+      #C9A8FF 15%,
+      #A07BF0 35%,
+      #7E54D9 55%,
+      #5B2EB8 75%,
+      #3C1A85 100%
     );
     text-shadow:
-      0 1px 0 rgba(255,255,255,.95),
-      0 2px 0 rgba(255,214,90,.55),
-      0 6px 12px rgba(168,108,0,.18);
+      0 1px 0 rgba(245,235,255,.85),
+      0 2px 0 rgba(170,120,240,.45),
+      0 6px 12px rgba(60,26,133,.22);
     filter:
-      drop-shadow(0 3px 6px rgba(246,199,86,.20))
-      drop-shadow(0 0 8px rgba(255,220,120,.18));
+      drop-shadow(0 3px 6px rgba(126,84,217,.22))
+      drop-shadow(0 0 8px rgba(180,140,255,.18));
   }
   .sv-amount-hero {
     font-size: 44px !important;
