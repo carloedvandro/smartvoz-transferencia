@@ -149,35 +149,40 @@
     text-shadow: 0 1px 0 rgba(255,255,255,.4), 0 2px 4px rgba(0, 120, 70, .15);
     letter-spacing: -0.01em;
   }
-  /* 3D extruded glossy amounts — premium candy / jelly look */
+  /* 3D extruded glossy amounts — premium gold metallic look */
   .sv-amount-3d,
   .sv-amount-3d-neg {
     font-weight: 900;
-    letter-spacing: 0.02em;
-    line-height: 1.25;
-    padding: 4px 2px 14px;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    padding: 4px 2px 12px;
     display: inline-block;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,.14)) drop-shadow(0 10px 14px rgba(0,0,0,.10));
   }
   .sv-amount-3d {
-    background-image: linear-gradient(180deg, #F3E6FF 0%, #D9B8FF 38%, #B98BFF 72%, #6A2BC9 100%);
+    background-image: linear-gradient(
+      180deg,
+      #FFF8D5 0%,
+      #FFE88A 15%,
+      #FFD24D 35%,
+      #F6C756 55%,
+      #D89A00 75%,
+      #A86C00 100%
+    );
     text-shadow:
-      0 1px 0 #c6a3ee,
-      0 2px 0 #b693e0,
-      0 3px 0 #a682d2,
-      0 4px 0 #9572c4,
-      0 5px 0 #8463b6,
-      0 6px 0 #7355a8,
-      0 7px 1px rgba(0,0,0,.10),
-      0 10px 16px rgba(80, 20, 140, .28);
+      0 1px 0 rgba(255,255,255,.95),
+      0 2px 0 rgba(255,214,90,.55),
+      0 6px 12px rgba(168,108,0,.18);
+    filter:
+      drop-shadow(0 3px 6px rgba(246,199,86,.20))
+      drop-shadow(0 0 8px rgba(255,220,120,.18));
   }
   .sv-amount-hero {
-    font-size: 58px !important;
-    letter-spacing: -2.5px !important;
+    font-size: 44px !important;
+    letter-spacing: -1.5px !important;
   }
   .sv-amount-3d-neg {
     background-image: linear-gradient(180deg, #FFE0E0 0%, #FF9B9B 38%, #E63946 72%, #7A0E14 100%);
