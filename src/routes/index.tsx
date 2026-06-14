@@ -79,7 +79,32 @@ const PAGE_SIZE = 8;
 function SaquesPage() {
   const [saldo, setSaldo] = useState(50);
   const [bloqueado] = useState(35);
-  const [movimentos, setMovimentos] = useState<Movimento[]>([]);
+  const [movimentos, setMovimentos] = useState<Movimento[]>(() => {
+    const day = 86400000;
+    const seeds: Array<{ d: number; v: number }> = [
+      { d: 6, v: 1247.8 },
+      { d: 22, v: 3189.55 },
+      { d: 41, v: 4762.3 },
+      { d: 65, v: 5438.9 },
+      { d: 89, v: 7124.6 },
+      { d: 112, v: 8956.25 },
+      { d: 138, v: 9871.4 },
+      { d: 168, v: 12483.7 },
+    ];
+    return seeds.map((s, i) => ({
+      id: `seed-saque-${i + 1}`,
+      titulo: "Solicitação de saque",
+      cliente: "Carteira SmartVoz",
+      nivel: "—",
+      data: new Date(Date.now() - s.d * day),
+      status: "Concluído" as StatusMov,
+      valor: -s.v,
+      tipo: "Saque" as TipoMov,
+      categoria: "Saque",
+      descricao: "Saque realizado e creditado em sua conta bancária.",
+      icone: piggyImg,
+    }));
+  });
 
 
   const [busca, setBusca] = useState("");
@@ -902,6 +927,22 @@ function WithdrawModal({
             <p className="text-sm font-semibold text-[var(--sv-purple-deep)] leading-snug self-center">
               Cada saque terá uma taxa de <b>3%</b> sobre o valor solicitado.
             </p>
+          </div>
+
+          <div className="mb-4 md:mb-5">
+            <p className="font-bold text-[var(--sv-purple-deep)] mb-2 text-base md:text-lg">Saldo disponível</p>
+            <div className="sv-card-balance p-4 md:p-5 flex items-center justify-between gap-3">
+              <span className="sv-text-green font-black tabular-nums text-2xl md:text-[28px]">
+                {brl(balance)}
+              </span>
+              <button
+                type="button"
+                onClick={() => setAmount(String(balance).replace(".", ","))}
+                className="text-xs md:text-sm font-bold text-[var(--sv-purple)] hover:text-[var(--sv-purple-deep)] underline-offset-2 hover:underline"
+              >
+                Usar tudo
+              </button>
+            </div>
           </div>
 
           <label className="block font-bold text-[var(--sv-purple-deep)] mb-2 text-base md:text-lg">Valor do saque</label>

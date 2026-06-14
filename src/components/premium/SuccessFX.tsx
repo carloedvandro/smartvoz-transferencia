@@ -113,26 +113,9 @@ export function firePiggyExplosion() {
     if (Date.now() < spoutEnd) setTimeout(spout, 55);
   })();
 
-  // 6) Side coin showers for 4s
-  shower({ colors: GOLD, ms: 4000, shapes: [coinShape] });
-
-  // 7) Coin rain from top — continuous gold coins for ~4.5s
-  const end = Date.now() + 4500;
-  (function rain() {
-    confetti({
-      particleCount: 6,
-      startVelocity: 12,
-      spread: 180,
-      origin: { x: Math.random(), y: -0.05 },
-      gravity: 1.3,
-      colors: GOLD,
-      shapes: [coinShape],
-      scalar: 1.4,
-      ticks: 360,
-    });
-    if (Date.now() < end) setTimeout(rain, 90);
-  })();
+  // (removed side showers and top rain — coins only burst out of the piggy itself)
 }
+
 
 
 /** Standard withdrawal success — kept for compatibility. */
