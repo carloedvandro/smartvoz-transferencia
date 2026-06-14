@@ -738,11 +738,13 @@ function TransferModal({
             : "Transferência concluída"
       }
     >
-      <div className="sv-card-balance flex items-center justify-between gap-4 p-5 mb-6">
-        <span className="text-[var(--sv-muted)] text-lg font-semibold">Saldo disponível</span>
-        <span className="sv-text-green font-black tabular-nums" style={{ fontSize: 30 }}>
-          {brl(balance)}
-        </span>
+      <div className="mb-5">
+        <p className="font-bold text-[var(--sv-purple-deep)] mb-2 text-lg">Saldo disponível</p>
+        <div className="sv-card-balance p-4 sm:p-5">
+          <span className="sv-text-green font-black tabular-nums block text-2xl md:text-[30px]">
+            {brl(balance)}
+          </span>
+        </div>
       </div>
 
       {step === "pick" && (
@@ -752,14 +754,14 @@ function TransferModal({
             <img
               src={searchImg}
               alt=""
-              width={56}
-              height={56}
-              style={{ width: 56, height: 56 }}
+              width={32}
+              height={32}
+              style={{ width: 32, height: 32 }}
               className="absolute left-3 top-1/2 -translate-y-1/2 sv-icon-3d pointer-events-none"
             />
             <input
               autoFocus
-              className="sv-input-premium sv-search-field pl-20 pr-5"
+              className="sv-input-premium sv-search-field pl-14 pr-4"
               placeholder="Digite o nome ou código (ex: SV123456)"
               value={q}
               onChange={(e) => setQ(e.target.value)}
