@@ -247,13 +247,13 @@ function SaquesPage() {
 
 
 
-          <div className="flex items-center gap-3">
+          <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:items-center sm:justify-center sm:w-auto">
             <button
               onClick={() => {
                 playClick();
                 setOpenTransfer(true);
               }}
-              className="sv-btn-action sv-btn-action-gold inline-flex items-center gap-2"
+              className="sv-btn-action sv-btn-action-gold inline-flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <ArrowLeftRight className="size-4" /> Transferir
             </button>
@@ -262,7 +262,7 @@ function SaquesPage() {
                 playClick();
                 setOpenWithdraw(true);
               }}
-              className="sv-btn-action sv-btn-action-purple inline-flex items-center gap-2"
+              className="sv-btn-action sv-btn-action-purple inline-flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <Plus className="size-4" /> Novo Saque
             </button>
@@ -950,26 +950,6 @@ function WithdrawModal({
     >
       {!done ? (
         <>
-          <div className="sv-card-balance p-5 mb-5 space-y-3">
-            <Row
-              icon={piggyImg}
-              label="Disponível para saque"
-              value={<span className="sv-text-green font-black text-2xl tabular-nums">{brl(balance)}</span>}
-            />
-            <Row
-              icon={lockImg}
-              label="Saldo bloqueado"
-              value={<span className="text-[var(--sv-orange)] font-bold text-xl tabular-nums">{brl(locked)}</span>}
-            />
-            <div className="h-px bg-[var(--sv-lilac-border)]" />
-            <Row
-              icon={walletImg}
-              label={<span className="font-bold text-[var(--sv-purple-deep)]">Saldo total</span>}
-              value={
-                <span className="font-black text-[var(--sv-purple-deep)] text-2xl tabular-nums">{brl(total)}</span>
-              }
-            />
-          </div>
 
           <div
             className="flex items-start gap-3 rounded-2xl p-4 mb-5"
