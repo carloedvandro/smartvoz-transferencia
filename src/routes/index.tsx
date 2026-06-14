@@ -631,7 +631,7 @@ function SaldoModal({
           <span className="sv-badge-status sv-badge-gold">Disponível</span>
         </div>
       </div>
-      <p className="sv-amount-3d tabular-nums text-center mt-5 block" style={{ fontSize: 48 }}>{brl(saldo)}</p>
+      <p className="sv-amount-green tabular-nums text-center mt-5 block" style={{ fontSize: 48 }}>{brl(saldo)}</p>
       <div className="flex justify-end mt-6">
         <button onClick={onClose} className="sv-btn-premium sv-btn-premium-tall">
           Fechar
