@@ -408,14 +408,14 @@ function SaquesPage() {
                           m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
                         }`}
                       >
-                        {m.valor < 0 ? "− " : ""}
+                        {m.valor < 0 ? "−\u00A0" : ""}
                         {brl(Math.abs(m.valor))}
                       </span>
                     </div>
                     <div className="flex items-center justify-between gap-2 pl-[56px]">
                       <div className="flex items-center gap-2">
                         <span className="font-extrabold text-[var(--sv-purple-deep)] text-xs whitespace-nowrap">{nivelLabel(m.nivel)}</span>
-                        <StatusBadge status={m.status} />
+
                       </div>
                       <button
                         onClick={() => {
