@@ -8,6 +8,7 @@ export function PremiumModal({
   title,
   description,
   children,
+  bare = false,
 }: {
   open: boolean;
   onClose: () => void;
@@ -15,6 +16,7 @@ export function PremiumModal({
   title: string;
   description?: string;
   children: ReactNode;
+  bare?: boolean;
 }) {
   useEffect(() => {
     if (!open) return;
