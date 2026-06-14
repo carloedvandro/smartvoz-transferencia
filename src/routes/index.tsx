@@ -77,10 +77,7 @@ function SaquesPage() {
 
           <div className="flex items-center justify-between gap-6 flex-wrap">
             <p className="text-[var(--sv-muted)] text-lg">Disponível para saque</p>
-            <p
-              className="font-black tabular-nums sv-text-green"
-              style={{ fontSize: 48, lineHeight: 1, textShadow: "0 0 20px rgba(0,210,106,.25)" }}
-            >
+            <p className="sv-balance-mega tabular-nums">
               {brl(balance)}
             </p>
           </div>
