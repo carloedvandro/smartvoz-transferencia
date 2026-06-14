@@ -34,40 +34,104 @@ function shower(opts: { colors: string[]; ms: number; shapes?: ("square" | "circ
   })();
 }
 
-/** Big piggy-bank explosion: bursts coins from center and keeps raining gold for ~4s. */
+/** Big piggy-bank explosion: shatters & gushes real coins for ~4.5s. */
 export function firePiggyExplosion() {
-  // Central burst
+  // Coin shape (emoji rendered into a particle) — falls back to circle if unsupported
+  let coinShape: any = "circle";
+  let billShape: any = "square";
+  try {
+    if (typeof (confetti as any).shapeFromText === "function") {
+      coinShape = (confetti as any).shapeFromText({ text: "🪙", scalar: 2 });
+      billShape = (confetti as any).shapeFromText({ text: "💵", scalar: 2 });
+    }
+  } catch {}
+
+  // 1) Initial gush UP from piggy center (like coins jumping out of the belly)
   confetti({
-    particleCount: 220,
-    spread: 130,
-    startVelocity: 75,
-    origin: { y: 0.5 },
-    colors: [...GOLD, ...PURPLE],
-    scalar: 1.5,
-    ticks: 260,
+    particleCount: 120,
+    angle: 90,
+    spread: 55,
+    startVelocity: 95,
+    origin: { x: 0.5, y: 0.62 },
+    colors: GOLD,
+    shapes: [coinShape],
+    scalar: 2,
+    gravity: 1.4,
+    ticks: 320,
   });
-  // Star ring
+  // 2) Wide radial burst of coins
   confetti({
-    particleCount: 90,
+    particleCount: 180,
     spread: 360,
-    startVelocity: 45,
-    origin: { y: 0.5 },
+    startVelocity: 55,
+    origin: { x: 0.5, y: 0.55 },
+    colors: GOLD,
+    shapes: [coinShape],
+    scalar: 1.8,
+    gravity: 1.3,
+    ticks: 320,
+  });
+  // 3) Cash bills mixed in
+  confetti({
+    particleCount: 40,
+    spread: 140,
+    startVelocity: 60,
+    origin: { x: 0.5, y: 0.55 },
+    colors: GREEN,
+    shapes: [billShape],
+    scalar: 2.2,
+    gravity: 1.1,
+    ticks: 360,
+  });
+  // 4) Star sparkle ring
+  confetti({
+    particleCount: 70,
+    spread: 360,
+    startVelocity: 35,
+    origin: { x: 0.5, y: 0.55 },
     colors: GOLD,
     shapes: ["star"],
-    scalar: 1.6,
+    scalar: 1.4,
     ticks: 220,
   });
-  // Side coin shower for 4s
-  shower({ colors: GOLD, ms: 4000 });
-  // Rain from top — continuous gold coins
+
+  // 5) Continuous coin spout from piggy center for ~2.5s (the "gushing" feel)
+  const spoutEnd = Date.now() + 2500;
+  (function spout() {
+    confetti({
+      particleCount: 6,
+      angle: 90,
+      spread: 70,
+      startVelocity: 65 + Math.random() * 25,
+      origin: { x: 0.5, y: 0.6 },
+      colors: GOLD,
+      shapes: [coinShape],
+      scalar: 1.6,
+      gravity: 1.5,
+      ticks: 280,
+    });
+    if (Date.now() < spoutEnd) setTimeout(spout, 55);
+  })();
+
+  // 6) Side coin showers for 4s
+  shower({ colors: GOLD, ms: 4000, shapes: [coinShape] });
+
+  // 7) Coin rain from top — continuous gold coins for ~4.5s
   const end = Date.now() + 4500;
   (function rain() {
     confetti({
-      particleCount: 8,
-      startVelocity: 15,
+      particleCount: 6,
+      startVelocity: 12,
       spread: 180,
       origin: { x: Math.random(), y: -0.05 },
-      gravity: 1.1,
+      gravity: 1.3,
+      colors: GOLD,
+      shapes: [coinShape],
+      scalar: 1.4,
+      ticks: 360,
+    });
+    if (Date.now() < end) setTimeout(rain, 90);
+
       colors: GOLD,
       shapes: ["circle"],
       scalar: 1.2,
