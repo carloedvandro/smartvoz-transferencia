@@ -12,9 +12,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
-import { fireWithdrawalSuccess } from "@/components/premium/SuccessFX";
+import { fireWithdrawalSuccess, fireCategoryFX } from "@/components/premium/SuccessFX";
 import { CelebrationOverlay } from "@/components/premium/CelebrationOverlay";
-import { playClick } from "@/lib/sound";
+import { playClick, playCategorySound } from "@/lib/sound";
 import walletImg from "@/assets/wallet-3d.png";
 import transferImg from "@/assets/transfer-3d.png";
 import piggyImg from "@/assets/piggy-3d.png";
@@ -57,6 +57,15 @@ type Movimento = {
 
 const brl = (v: number) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+function nivelClass(nivel: string) {
+  const n = nivel.toUpperCase().trim();
+  if (n === "N1") return "sv-badge-level sv-badge-level-n1";
+  if (n === "N2") return "sv-badge-level sv-badge-level-n2";
+  if (n === "N3") return "sv-badge-level sv-badge-level-n3";
+  if (n === "N4") return "sv-badge-level sv-badge-level-n4";
+  return "sv-badge-level";
+}
 
 const REDE_MOCK = [
   { code: "SV123456", name: "Carlos Andrade" },
@@ -409,7 +418,7 @@ function SaquesPage() {
                       <p className="text-sm text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
                     </div>
                     <div className="flex justify-center">
-                      <span className="sv-badge-level">{m.nivel}</span>
+                      <span className={nivelClass(m.nivel)}>{m.nivel}</span>
                     </div>
                     <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap text-center">
                       {m.data.toLocaleDateString("pt-BR")}
@@ -425,7 +434,14 @@ function SaquesPage() {
                       {m.valor < 0 ? "− " : ""}
                       {brl(Math.abs(m.valor))}
                     </span>
-                    <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm w-full">
+                    <button
+                      onClick={() => {
+                        playCategorySound(m.categoria);
+                        fireCategoryFX(m.categoria);
+                        setDetalhe(m);
+                      }}
+                      className="sv-btn-premium h-9 px-4 text-sm w-full"
+                    >
                       Visualizar
                     </button>
                   </div>
@@ -450,10 +466,17 @@ function SaquesPage() {
                     </div>
                     <div className="flex items-center justify-between gap-2 pl-[56px]">
                       <div className="flex items-center gap-2">
-                        <span className="sv-badge-level" style={{ width: 64, height: 28, fontSize: 11 }}>{m.nivel}</span>
+                        <span className={nivelClass(m.nivel)} style={{ minWidth: 64, height: 28, fontSize: 11 }}>{m.nivel}</span>
                         <StatusBadge status={m.status} />
                       </div>
-                      <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-8 px-3 text-xs">
+                      <button
+                        onClick={() => {
+                          playCategorySound(m.categoria);
+                          fireCategoryFX(m.categoria);
+                          setDetalhe(m);
+                        }}
+                        className="sv-btn-premium h-8 px-3 text-xs"
+                      >
                         Visualizar
                       </button>
                     </div>

@@ -133,3 +133,59 @@ export function playCelebrate() {
     o.stop(now + i * 0.09 + 0.4);
   });
 }
+
+/** Arpeggio of notes — building block for category sounds. */
+function playArpeggio(notes: number[], opts: { type?: OscillatorType; step?: number; gain?: number } = {}) {
+  const ac = getCtx();
+  if (!ac) return;
+  const now = ac.currentTime;
+  const step = opts.step ?? 0.08;
+  const type = opts.type ?? "triangle";
+  const gain = opts.gain ?? 0.2;
+  notes.forEach((f, i) => {
+    const o = ac.createOscillator();
+    const g = ac.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(f, now + i * step);
+    g.gain.setValueAtTime(0.0001, now + i * step);
+    g.gain.exponentialRampToValueAtTime(gain, now + i * step + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + i * step + 0.3);
+    o.connect(g).connect(ac.destination);
+    o.start(now + i * step);
+    o.stop(now + i * step + 0.35);
+  });
+}
+
+/** Plays a unique sound for each transaction category. */
+export function playCategorySound(categoria: string) {
+  switch (categoria) {
+    case "Carteira":
+      playArpeggio([784, 988, 1175, 1568], { type: "sine" });
+      break;
+    case "Comissão":
+      // Coin-drop cascade
+      playArpeggio([1568, 1318, 1046, 1318, 1568, 1975], { type: "triangle", step: 0.06 });
+      break;
+    case "Parceria":
+      // Warm chord
+      playArpeggio([523, 659, 784, 1046], { type: "sine", step: 0.05 });
+      break;
+    case "Níveis":
+      // Level-up jingle
+      playArpeggio([659, 784, 988, 1318, 1568, 1975], { type: "square", step: 0.07, gain: 0.15 });
+      break;
+    case "Rede":
+      playArpeggio([440, 587, 740, 988, 1175], { type: "triangle", step: 0.07 });
+      break;
+    case "Transferência":
+    case "Transferência de saldo":
+      playArpeggio([880, 1046, 1318, 1046, 880], { type: "sine", step: 0.06 });
+      break;
+    case "Saque":
+    case "Solicitação de saque":
+      playCelebrate();
+      break;
+    default:
+      playTap();
+  }
+}
