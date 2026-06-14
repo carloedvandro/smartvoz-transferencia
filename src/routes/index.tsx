@@ -185,11 +185,20 @@ function SaquesPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={() => setOpenTransfer(true)} className="sv-btn-gold-tall inline-flex items-center gap-2">
+            <button
+              onClick={() => {
+                playClick();
+                setOpenTransfer(true);
+              }}
+              className="sv-btn-gold-tall inline-flex items-center gap-2"
+            >
               <ArrowLeftRight className="size-5" /> Transferir
             </button>
             <button
-              onClick={() => setOpenWithdraw(true)}
+              onClick={() => {
+                playClick();
+                setOpenWithdraw(true);
+              }}
               className="sv-btn-premium sv-btn-premium-tall inline-flex items-center gap-2"
             >
               <Plus className="size-5" /> Novo Saque
@@ -458,10 +467,24 @@ function SaquesPage() {
             ...h,
           ]);
           fireWithdrawalSuccess();
+          setCelebrate({
+            open: true,
+            amount: net,
+            title: "Parabéns!",
+            subtitle: `Saque solicitado com sucesso. Você receberá`,
+          });
         }}
       />
 
       <DetalheModal item={detalhe} onClose={() => setDetalhe(null)} />
+
+      <CelebrationOverlay
+        open={celebrate.open}
+        onClose={() => setCelebrate((c) => ({ ...c, open: false }))}
+        amount={celebrate.amount}
+        title={celebrate.title}
+        subtitle={celebrate.subtitle}
+      />
     </div>
   );
 }
