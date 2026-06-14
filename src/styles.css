@@ -503,8 +503,8 @@ body { scrollbar-width: none; -ms-overflow-style: none; }
 .sv-modal-desc  { font-size: 20px; line-height: 1.5; }
 
 /* Always-on: hide scrollbar inside modal */
-.sv-modal-shell { scrollbar-width: none; -ms-overflow-style: none; }
-.sv-modal-shell::-webkit-scrollbar { width: 0; height: 0; display: none; }
+.sv-modal-shell { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+.sv-modal-shell::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; background: transparent !important; }
 
 @media (max-width: 640px) {
   .sv-btn-premium-tall { height: 52px !important; padding: 0 20px !important; font-size: 15px !important; border-radius: 16px !important; }
@@ -512,17 +512,9 @@ body { scrollbar-width: none; -ms-overflow-style: none; }
   .sv-search-field { height: 56px !important; font-size: 16px !important; border-radius: 16px !important; }
   .sv-card-premium { border-radius: 22px !important; }
 
-  /* Modal goes flush, no white card, centered */
-  .sv-modal-root { padding: 12px !important; }
-  .sv-modal-overlay { background: rgba(80, 40, 120, .10) !important; backdrop-filter: none !important; }
-  .sv-modal-shell {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    padding: 16px 14px 24px !important;
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-  }
+  /* Modal: keep white card, smaller padding, centered header */
+  .sv-modal-root { padding: 14px !important; }
+  .sv-modal-shell { padding: 22px 18px 24px !important; max-height: 92vh !important; }
   .sv-modal-header {
     flex-direction: column !important;
     align-items: center !important;
@@ -536,8 +528,14 @@ body { scrollbar-width: none; -ms-overflow-style: none; }
   .sv-modal-icon  { width: 64px !important; height: 64px !important; }
   .sv-modal-icon img { width: 64px !important; height: 64px !important; }
 
-  /* Center body content */
-  .sv-modal-body { text-align: center; }
-  .sv-modal-body .sv-card-balance { text-align: left; }
+  /* "Bare" sections on mobile: remove white card from filters & movimentações */
+  .sv-section-bare {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
 }
+
 

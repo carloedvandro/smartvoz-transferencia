@@ -316,7 +316,7 @@ function SaquesPage() {
         </section>
 
         {/* FILTERS */}
-        <section className="sv-card-premium p-4 md:p-5">
+        <section className="sv-card-premium sv-section-bare p-4 md:p-5">
           <div className="flex flex-wrap items-center gap-3">
             <select
               value={fTipo}
@@ -383,7 +383,7 @@ function SaquesPage() {
         </section>
 
         {/* MOVIMENTAÇÕES */}
-        <section className="sv-card-premium p-5 md:p-7">
+        <section className="sv-card-premium sv-section-bare p-5 md:p-7">
           <div className="mb-5">
             <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--sv-purple-deep)]">Movimentações de Saques</h2>
             <p className="text-[var(--sv-muted)] text-sm md:text-base mt-1">
