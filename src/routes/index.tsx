@@ -944,7 +944,6 @@ function WithdrawModal({
     <PremiumModal
       open={open}
       onClose={close}
-      icon={<img src={walletImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />}
       title="Solicitar Saque"
       description={done ? "Saque solicitado com sucesso" : "Preencha os dados abaixo para solicitar um saque"}
     >
@@ -1001,8 +1000,8 @@ function WithdrawModal({
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 md:gap-3 mt-5 md:mt-7">
-            <button onClick={close} className="sv-btn-ghost h-10 md:h-12 px-5 md:px-7 text-sm md:text-base rounded-xl">
+          <div className="grid grid-cols-2 gap-3 mt-5 md:mt-7 sm:flex sm:justify-end">
+            <button onClick={close} className="sv-btn-ghost h-10 md:h-12 w-full sm:w-auto px-5 md:px-7 text-sm md:text-base rounded-xl">
               Cancelar
             </button>
             <button
@@ -1011,7 +1010,7 @@ function WithdrawModal({
                 onConfirm(amt, net, fee);
                 setDone(true);
               }}
-              className="sv-btn-premium h-10 md:h-12 px-6 md:px-8 text-sm md:text-base rounded-xl"
+              className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl"
             >
               Continuar
             </button>
