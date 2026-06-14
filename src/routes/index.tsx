@@ -944,7 +944,6 @@ function WithdrawModal({
     <PremiumModal
       open={open}
       onClose={close}
-      bare
       icon={<img src={walletImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />}
       title="Solicitar Saque"
       description={done ? "Saque solicitado com sucesso" : "Preencha os dados abaixo para solicitar um saque"}
