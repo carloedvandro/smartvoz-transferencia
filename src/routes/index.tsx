@@ -397,36 +397,67 @@ function SaquesPage() {
           ) : (
             <ul className="divide-y divide-[var(--sv-lilac-border)]">
               {pageItems.map((m) => (
-                <li
-                  key={m.id}
-                  className="grid items-center gap-4 py-4"
-                  style={{ gridTemplateColumns: "64px minmax(0,1fr) 140px 110px 130px 160px 120px" }}
-                >
-                  <img src={m.icone} alt="" width={56} height={56} style={{ width: 56, height: 56 }} className="sv-icon-3d" />
-                  <div className="min-w-0">
-                    <p className="font-extrabold text-[var(--sv-purple-deep)] truncate">{m.titulo}</p>
-                    <p className="text-sm text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
-                  </div>
-                  <div className="flex justify-center">
-                    <span className="sv-badge-level">{m.nivel}</span>
-                  </div>
-                  <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap text-center">
-                    {m.data.toLocaleDateString("pt-BR")}
-                  </span>
-                  <div className="flex justify-center">
-                    <StatusBadge status={m.status} />
-                  </div>
-                  <span
-                    className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
-                      m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
-                    }`}
+                <li key={m.id} className="py-4">
+                  {/* Desktop layout */}
+                  <div
+                    className="hidden md:grid items-center gap-4"
+                    style={{ gridTemplateColumns: "64px minmax(0,1fr) 110px 110px 130px 160px 120px" }}
                   >
-                    {m.valor < 0 ? "− " : ""}
-                    {brl(Math.abs(m.valor))}
-                  </span>
-                  <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm w-full">
-                    Visualizar
-                  </button>
+                    <img src={m.icone} alt="" width={56} height={56} style={{ width: 56, height: 56 }} className="sv-icon-3d" />
+                    <div className="min-w-0">
+                      <p className="font-extrabold text-[var(--sv-purple-deep)] truncate">{m.titulo}</p>
+                      <p className="text-sm text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
+                    </div>
+                    <div className="flex justify-center">
+                      <span className="sv-badge-level">{m.nivel}</span>
+                    </div>
+                    <span className="text-sm text-[var(--sv-muted)] whitespace-nowrap text-center">
+                      {m.data.toLocaleDateString("pt-BR")}
+                    </span>
+                    <div className="flex justify-center">
+                      <StatusBadge status={m.status} />
+                    </div>
+                    <span
+                      className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
+                        m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+                      }`}
+                    >
+                      {m.valor < 0 ? "− " : ""}
+                      {brl(Math.abs(m.valor))}
+                    </span>
+                    <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-9 px-4 text-sm w-full">
+                      Visualizar
+                    </button>
+                  </div>
+
+                  {/* Mobile layout */}
+                  <div className="md:hidden flex flex-col gap-2">
+                    <div className="flex items-start gap-3">
+                      <img src={m.icone} alt="" width={44} height={44} style={{ width: 44, height: 44 }} className="sv-icon-3d shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <p className="font-extrabold text-[var(--sv-purple-deep)] truncate text-sm">{m.titulo}</p>
+                        <p className="text-xs text-[var(--sv-muted)] truncate">Cliente: {m.cliente}</p>
+                        <p className="text-[11px] text-[var(--sv-muted)] mt-0.5">{m.data.toLocaleDateString("pt-BR")}</p>
+                      </div>
+                      <span
+                        className={`font-black tabular-nums whitespace-nowrap text-base text-right shrink-0 ${
+                          m.valor < 0 ? "text-[var(--sv-orange)]" : "sv-text-green"
+                        }`}
+                      >
+                        {m.valor < 0 ? "− " : ""}
+                        {brl(Math.abs(m.valor))}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-2 pl-[56px]">
+                      <div className="flex items-center gap-2">
+                        <span className="sv-badge-level" style={{ width: 64, height: 28, fontSize: 11 }}>{m.nivel}</span>
+                        <StatusBadge status={m.status} />
+                      </div>
+                      <button onClick={() => setDetalhe(m)} className="sv-btn-premium h-8 px-3 text-xs">
+                        Visualizar
+                      </button>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>

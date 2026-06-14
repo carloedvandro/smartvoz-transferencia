@@ -132,18 +132,16 @@
     border-radius: 24px;
   }
   .sv-text-green {
-    background: linear-gradient(180deg, #9DF5C7 0%, #4FE3A2 45%, #1FB877 100%);
+    color: #1FB877;
+    text-shadow: 0 1px 0 rgba(255,255,255,.4), 0 2px 4px rgba(0, 120, 70, .15);
+    letter-spacing: -0.01em;
+  }
+  .sv-text-gold {
+    background: var(--gradient-gold-shine);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    text-shadow:
-      0 1px 0 rgba(255,255,255,.55),
-      0 6px 14px rgba(0, 170, 100, .35),
-      0 2px 4px rgba(0, 80, 50, .25);
-    -webkit-text-stroke: 0.5px rgba(0, 110, 70, .35);
-    filter: drop-shadow(0 4px 8px rgba(0, 200, 130, .25));
-    letter-spacing: -0.01em;
   }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
@@ -266,21 +264,15 @@
 .sv-hide-scrollbar::-webkit-scrollbar { display: none; }
 
 .sv-balance-mega {
-  font-size: 58px;
+  font-size: 52px;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(180deg, #B6F8D6 0%, #4FE3A2 45%, #1FB877 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  -webkit-text-stroke: 0.6px rgba(0, 110, 70, .45);
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.6),
-    0 8px 22px rgba(0, 200, 130, .35),
-    0 3px 6px rgba(0, 80, 50, .25);
-  filter: drop-shadow(0 6px 14px rgba(0, 200, 130, .25));
+  color: #1FB877;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5), 0 3px 6px rgba(0, 120, 70, .18);
   letter-spacing: -0.02em;
+}
+@media (max-width: 640px) {
+  .sv-balance-mega { font-size: 38px; }
 }
 
 .sv-icon-3d {
@@ -358,25 +350,27 @@
   box-shadow: 0 0 0 3px rgba(184, 76, 255, .18);
 }
 
-/* Level badge (lilac) */
+/* Level badge — 3D purple pill */
 .sv-badge-level {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 96px;
-  height: 36px;
+  width: 84px;
+  height: 34px;
   padding: 0 12px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F5E6FF 55%, #E6CCFF 100%);
-  color: #6A0DAD;
-  border: 1.5px solid #B470FF;
+  background: linear-gradient(180deg, #B97BFF 0%, #8A2BE2 55%, #5B0DAD 100%);
+  color: #FFFFFF;
+  border: 1.5px solid var(--sv-gold);
   font-weight: 900;
-  font-size: 14px;
-  letter-spacing: 0.4px;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  text-shadow: 0 1px 1px rgba(0,0,0,.35);
   box-shadow:
-    inset 0 1px 0 #fff,
-    inset 0 -2px 0 rgba(180, 112, 255, .25),
-    0 6px 14px rgba(138, 43, 226, .18);
+    inset 0 2px 0 rgba(255,255,255,.35),
+    inset 0 -3px 0 rgba(40,0,90,.40),
+    0 6px 14px rgba(106,13,173,.35),
+    0 0 0 1px rgba(246,199,86,.25);
 }
 
 /* Status badge base */
@@ -413,4 +407,18 @@
     inset 0 2px 0 rgba(255,255,255,.70),
     inset 0 -3px 0 rgba(120,50,0,.22),
     0 6px 12px rgba(220,100,30,.20);
+}
+
+/* ============================================================
+   MOBILE — hide horizontal scrollbars, shrink buttons
+   ============================================================ */
+html, body { overflow-x: hidden; }
+body::-webkit-scrollbar { width: 0; height: 0; background: transparent; }
+body { scrollbar-width: none; -ms-overflow-style: none; }
+
+@media (max-width: 640px) {
+  .sv-btn-premium-tall { height: 52px !important; padding: 0 20px !important; font-size: 15px !important; border-radius: 16px !important; }
+  .sv-btn-gold-tall { height: 52px !important; padding: 0 18px !important; font-size: 15px !important; border-radius: 16px !important; }
+  .sv-search-field { height: 56px !important; font-size: 16px !important; border-radius: 16px !important; }
+  .sv-card-premium { border-radius: 22px !important; }
 }
