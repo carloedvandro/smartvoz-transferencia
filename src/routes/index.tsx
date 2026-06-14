@@ -551,9 +551,16 @@ function SaquesPage() {
             },
             ...h,
           ]);
-          fireWithdrawalSuccess();
+          fireCategoryFX("Transferência de saldo");
+          setCelebrate({
+            open: true,
+            amount,
+            title: "Transferência enviada!",
+            subtitle: `Saldo enviado para ${to} com sucesso.`,
+          });
         }}
       />
+
 
       <WithdrawModal
         open={openWithdraw}
