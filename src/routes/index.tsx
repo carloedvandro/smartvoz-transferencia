@@ -375,7 +375,7 @@ function SaquesPage() {
                     </span>
                     <span
                       className={`font-black tabular-nums whitespace-nowrap text-lg text-right ${
-                        m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-3d"
+                        m.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-green"
                       }`}
                     >
                       {m.valor < 0 ? "−\u00A0" : ""}
