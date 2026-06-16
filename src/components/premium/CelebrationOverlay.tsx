@@ -41,8 +41,7 @@ export function CelebrationOverlay({
       onClick={onClose}
     >
       <div
-        className="sv-card-premium relative text-center px-10 py-12 max-w-md w-full animate-sv-scale-in overflow-hidden"
-        style={{ borderRadius: 32 }}
+        className="relative text-center px-10 py-12 max-w-md w-full animate-sv-scale-in overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative mx-auto" style={{ width: 200, height: 200 }}>
