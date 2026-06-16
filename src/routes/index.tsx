@@ -1032,7 +1032,7 @@ function WithdrawModal({
           </div>
 
           <div className="flex items-center gap-2 text-[var(--sv-purple)] font-bold mb-2">
-            <ShieldCheck className="size-5" /> Verificação de Segurança
+            <img src={shieldImg} alt="" width={28} height={28} style={{ width: 28, height: 28 }} className="sv-icon-3d" /> Verificação de Segurança
           </div>
           <label className="block text-sm md:text-base text-[var(--sv-muted)] mb-2">
             Digite o código do seu aplicativo autenticador:
