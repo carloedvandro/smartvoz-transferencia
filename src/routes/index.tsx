@@ -658,10 +658,11 @@ function TransferModal({
   balance: number;
   onConfirm: (amount: number, to: string) => void;
 }) {
-  const [step, setStep] = useState<"pick" | "amount" | "done">("pick");
+  const [step, setStep] = useState<"pick" | "amount" | "security" | "done">("pick");
   const [q, setQ] = useState("");
   const [selected, setSelected] = useState<{ code: string; name: string } | null>(null);
   const [amount, setAmount] = useState("");
+  const [token, setToken] = useState("");
 
   const results = useMemo(() => {
     if (q.trim().length < 2) return [];
@@ -673,6 +674,7 @@ function TransferModal({
 
   const amt = Number(amount.replace(/[^0-9.,]/g, "").replace(",", ".")) || 0;
   const valid = selected && amt > 0 && amt <= balance;
+  const tokenValid = /^\d{6}$/.test(token);
 
   function close() {
     onClose();
@@ -681,6 +683,7 @@ function TransferModal({
       setQ("");
       setSelected(null);
       setAmount("");
+      setToken("");
     }, 200);
   }
 
