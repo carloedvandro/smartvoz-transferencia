@@ -876,16 +876,12 @@ body::-webkit-scrollbar,
   border: 2px solid #ffd34d;
   color: #fff;
   background: linear-gradient(180deg, #d86cff 0%, #8b19dc 100%);
-  box-shadow:
-    0 10px 22px rgba(139, 25, 220, 0.28),
-    inset 0 2px 4px rgba(255,255,255,0.35);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.35);
 }
 .btn-confirm:hover {
   filter: brightness(1.06);
   transform: translateY(-1px);
-  box-shadow:
-    0 14px 28px rgba(139, 25, 220, 0.38),
-    inset 0 2px 4px rgba(255,255,255,0.35);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.35);
 }
 .btn-confirm:disabled {
   opacity: .50;
