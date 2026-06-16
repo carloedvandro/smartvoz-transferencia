@@ -1022,6 +1022,31 @@ function WithdrawModal({
 
       {step === "security" && (
         <>
+          <div className="sv-card-balance p-4 md:p-5 mb-5 space-y-2 md:space-y-3">
+            <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
+              <span>Valor solicitado:</span>
+              <span className="tabular-nums font-semibold text-[var(--sv-purple-deep)]">{brl(amt)}</span>
+            </div>
+            <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
+              <span>Taxa (3%):</span>
+              <span className="tabular-nums font-semibold text-[var(--sv-orange)]">− {brl(fee)}</span>
+            </div>
+            <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
+              <span className="inline-flex items-center gap-1">
+                Saldo bloqueado
+                <span className="text-[10px] md:text-xs text-[var(--sv-muted)]/80">(auto-débito)</span>
+              </span>
+              <span className="tabular-nums font-semibold text-[var(--sv-orange)]">− {brl(locked)}</span>
+            </div>
+            <div className="h-px bg-[var(--sv-lilac-border)]" />
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-[var(--sv-purple-deep)] text-sm md:text-lg">Valor líquido:</span>
+              <span className="sv-text-green font-black tabular-nums text-2xl md:text-[40px]">
+                {brl(net)}
+              </span>
+            </div>
+          </div>
+
           <input
             autoFocus
             inputMode="numeric"
