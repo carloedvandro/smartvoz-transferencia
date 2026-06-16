@@ -658,10 +658,11 @@ function TransferModal({
   balance: number;
   onConfirm: (amount: number, to: string) => void;
 }) {
-  const [step, setStep] = useState<"pick" | "amount" | "done">("pick");
+  const [step, setStep] = useState<"pick" | "amount" | "security" | "done">("pick");
   const [q, setQ] = useState("");
   const [selected, setSelected] = useState<{ code: string; name: string } | null>(null);
   const [amount, setAmount] = useState("");
+  const [token, setToken] = useState("");
 
   const results = useMemo(() => {
     if (q.trim().length < 2) return [];
@@ -673,6 +674,7 @@ function TransferModal({
 
   const amt = Number(amount.replace(/[^0-9.,]/g, "").replace(",", ".")) || 0;
   const valid = selected && amt > 0 && amt <= balance;
+  const tokenValid = /^\d{6}$/.test(token);
 
   function close() {
     onClose();
@@ -681,6 +683,7 @@ function TransferModal({
       setQ("");
       setSelected(null);
       setAmount("");
+      setToken("");
     }, 200);
   }
 
@@ -688,15 +691,30 @@ function TransferModal({
     <PremiumModal
       open={open}
       onClose={close}
-      plain
-      icon={<img src={transferImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />}
-      title="Transferir Saldo"
+      plain={step === "pick" || step === "amount" || step === "security"}
+      hideClose={step === "security"}
+      icon={
+        step === "security" ? (
+          <img src={shieldImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />
+        ) : undefined
+      }
+      title={
+        step === "pick"
+          ? "Transferir Saldo"
+          : step === "amount"
+            ? "Transferir Saldo"
+            : step === "security"
+              ? "Verificação de Segurança"
+              : "Transferência concluída"
+      }
       description={
         step === "pick"
           ? "Busque pelo nome ou código do usuário para quem deseja transferir"
           : step === "amount"
             ? `Informe o valor a transferir para ${selected?.name}`
-            : "Transferência concluída"
+            : step === "security"
+              ? "Digite o código do seu aplicativo autenticador:"
+              : "Transferência concluída"
       }
     >
       <div className="mb-5">
@@ -838,13 +856,60 @@ function TransferModal({
             </button>
             <button
               disabled={!valid}
-              onClick={() => {
-                onConfirm(amt, selected.name);
-                setStep("done");
-              }}
+              onClick={() => setStep("security")}
               className="sv-btn-premium h-14 px-8 text-lg"
             >
-              Confirmar transferência
+              Continuar
+            </button>
+          </div>
+        </>
+      )}
+
+      {step === "security" && (
+        <>
+          <div className="sv-card-balance flex items-center gap-3 p-4 mb-5">
+            <span
+              className="size-11 rounded-full grid place-items-center text-white font-extrabold"
+              style={{ background: "var(--gradient-purple-3d)", border: "1.5px solid var(--sv-gold)" }}
+            >
+              {selected?.name.charAt(0)}
+            </span>
+            <div className="flex-1">
+              <p className="font-bold text-[var(--sv-purple-deep)]">{selected?.name}</p>
+              <p className="text-xs text-[var(--sv-muted)]">{selected?.code}</p>
+            </div>
+          </div>
+
+          <div className="mb-5">
+            <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
+              <span>Valor a transferir:</span>
+              <span className="tabular-nums font-semibold text-[var(--sv-purple-deep)]">{brl(amt)}</span>
+            </div>
+          </div>
+
+          <input
+            autoFocus
+            inputMode="numeric"
+            maxLength={6}
+            className="security-code-input"
+            placeholder="000000"
+            value={token}
+            onChange={(e) => setToken(e.target.value.replace(/\D/g, "").slice(0, 6))}
+          />
+
+          <div className="security-actions">
+            <button onClick={() => setStep("amount")} className="btn-cancel">
+              Voltar
+            </button>
+            <button
+              disabled={!tokenValid}
+              onClick={() => {
+                onConfirm(amt, selected!.name);
+                setStep("done");
+              }}
+              className="btn-confirm"
+            >
+              Confirmar Transferência
             </button>
           </div>
         </>
@@ -853,11 +918,11 @@ function TransferModal({
       {step === "done" && (
         <div className="py-8 text-center">
           <img
-            src={transferImg}
+            src={piggyImg}
             alt=""
-            width={120}
-            height={120}
-            style={{ width: 120, height: 120 }}
+            width={130}
+            height={130}
+            style={{ width: 130, height: 130 }}
             className="mx-auto sv-icon-3d animate-sv-premium-success"
           />
           <h3 className="mt-5 text-3xl font-extrabold text-[var(--sv-purple-deep)]">Transferência realizada!</h3>
