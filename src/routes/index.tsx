@@ -420,7 +420,7 @@ function SaquesPage() {
                           fireCategoryFX(m.categoria);
                           setDetalhe(m);
                         }}
-                        className="sv-btn-premium h-8 px-4 text-xs"
+                        className="botao-visualizar text-xs"
                       >
                         Visualizar
                       </button>
