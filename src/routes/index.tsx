@@ -387,7 +387,7 @@ function SaquesPage() {
                         fireCategoryFX(m.categoria);
                         setDetalhe(m);
                       }}
-                      className="sv-btn-premium h-9 px-4 text-sm w-full"
+                      className="botao-visualizar text-sm w-full"
                     >
                       Visualizar
                     </button>
