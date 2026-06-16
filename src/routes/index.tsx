@@ -10,7 +10,6 @@ import {
   FileText,
   ChevronLeft,
   ChevronRight,
-  ShieldCheck,
 } from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
 import { fireWithdrawalSuccess, fireCategoryFX } from "@/components/premium/SuccessFX";
@@ -1040,9 +1039,9 @@ function WithdrawModal({
                 onConfirm(amt, net, fee);
                 setStep("done");
               }}
-              className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl inline-flex items-center justify-center gap-2"
+              className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl"
             >
-              <ShieldCheck className="size-4" /> Confirmar Saque
+              Confirmar Saque
             </button>
           </div>
         </>
