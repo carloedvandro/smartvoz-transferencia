@@ -1127,10 +1127,9 @@ function DetalheModal({ item, onClose }: { item: Movimento | null; onClose: () =
           <p className="mt-5 text-[var(--sv-muted)] leading-relaxed">{item.descricao}</p>
 
           <p
-            className={`mt-5 text-center font-black tabular-nums ${
+            className={`mt-5 text-center font-black tabular-nums text-[28px] md:text-[44px] ${
               item.valor < 0 ? "sv-amount-3d-neg" : "sv-amount-green"
             }`}
-            style={{ fontSize: 44 }}
           >
             {item.valor < 0 ? "− " : ""}
             {brl(Math.abs(item.valor))}
