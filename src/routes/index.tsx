@@ -906,6 +906,11 @@ function WithdrawModal({
       onClose={close}
       plain={step === "form" || step === "security"}
       hideClose={step === "form" || step === "security"}
+      icon={
+        step === "security" ? (
+          <img src={shieldImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />
+        ) : undefined
+      }
       title={
         step === "form"
           ? "Solicitar Saque"
@@ -916,9 +921,9 @@ function WithdrawModal({
       description={
         step === "form"
           ? "Preencha os dados abaixo para solicitar um saque"
-          : step === "security"
-          ? "Digite o código de 6 dígitos do seu app autenticador"
-          : "Saque solicitado com sucesso"
+          : step === "done"
+          ? "Saque solicitado com sucesso"
+          : undefined
       }
     >
       {step === "form" && (
@@ -1014,13 +1019,7 @@ function WithdrawModal({
       )}
 
       {step === "security" && (
-        <div className="security-modal">
-        <div className="security-header">
-            <h2>Verificação de Segurança</h2>
-          </div>
-          <p className="security-description">
-            Digite o código de 6 dígitos do seu app autenticador
-          </p>
+        <>
           <input
             autoFocus
             inputMode="numeric"
@@ -1046,7 +1045,7 @@ function WithdrawModal({
               Confirmar Saque
             </button>
           </div>
-        </div>
+        </>
       )}
 
       {step === "done" && (
