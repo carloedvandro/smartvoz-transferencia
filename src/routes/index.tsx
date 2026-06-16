@@ -10,6 +10,7 @@ import {
   FileText,
   ChevronLeft,
   ChevronRight,
+  Eye,
 } from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
 import { fireWithdrawalSuccess, fireCategoryFX } from "@/components/premium/SuccessFX";
