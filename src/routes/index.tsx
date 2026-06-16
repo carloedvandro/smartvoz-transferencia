@@ -1107,6 +1107,7 @@ function DetalheModal({ item, onClose }: { item: Movimento | null; onClose: () =
     <PremiumModal
       open={!!item}
       onClose={onClose}
+      plain
       icon={item ? <img src={item.icone} alt="" width={72} height={72} style={{ width: 72, height: 72 }} /> : null}
       title={item?.titulo ?? ""}
       description={item?.categoria}
