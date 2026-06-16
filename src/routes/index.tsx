@@ -904,6 +904,7 @@ function WithdrawModal({
     <PremiumModal
       open={open}
       onClose={close}
+      plain={step === "security"}
       title={
         step === "form"
           ? "Solicitar Saque"
@@ -1029,7 +1030,7 @@ function WithdrawModal({
             onChange={(e) => setToken(e.target.value.replace(/\D/g, "").slice(0, 6))}
           />
 
-          <div className="grid grid-cols-2 gap-3 mt-5 md:mt-7 sm:flex sm:justify-end">
+          <div className="flex flex-col sm:flex-row gap-3 mt-5 md:mt-7 sm:justify-end">
             <button onClick={() => setStep("form")} className="sv-btn-ghost h-10 md:h-12 w-full sm:w-auto px-5 md:px-7 text-sm md:text-base rounded-xl">
               Cancelar
             </button>
@@ -1039,7 +1040,7 @@ function WithdrawModal({
                 onConfirm(amt, net, fee);
                 setStep("done");
               }}
-              className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl"
+              className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl whitespace-nowrap"
             >
               Confirmar Saque
             </button>

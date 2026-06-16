@@ -8,6 +8,7 @@ export function PremiumModal({
   title,
   description,
   children,
+  plain = false,
 }: {
   open: boolean;
   onClose: () => void;
@@ -15,6 +16,7 @@ export function PremiumModal({
   title: string;
   description?: string;
   children: ReactNode;
+  plain?: boolean;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -31,11 +33,11 @@ export function PremiumModal({
 
   return (
     <div
-      className="sv-modal-overlay sv-modal-root fixed inset-0 z-50 flex items-center justify-center p-4"
+      className={`sv-modal-overlay ${plain ? "" : "sv-modal-overlay-dim"} sv-modal-root fixed inset-0 z-50 flex items-center justify-center p-4`}
       onClick={onClose}
     >
       <div
-        className="sv-card-premium sv-modal-shell sv-hide-scrollbar animate-sv-scale-in w-full max-w-[860px] max-h-[90vh] overflow-y-auto relative"
+        className={`sv-modal-shell sv-hide-scrollbar animate-sv-scale-in w-full max-w-[860px] max-h-[90vh] overflow-y-auto relative ${plain ? "sv-modal-shell-plain" : "sv-card-premium"}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
