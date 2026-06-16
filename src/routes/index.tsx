@@ -1013,25 +1013,26 @@ function WithdrawModal({
       )}
 
       {step === "security" && (
-        <>
-          <div className="flex items-center gap-2 text-[var(--sv-purple)] font-bold mb-2">
-            <img src={shieldImg} alt="" width={28} height={28} style={{ width: 28, height: 28 }} className="sv-icon-3d" /> Verificação de Segurança
+        <div className="security-modal">
+          <div className="security-header">
+            <img src={shieldImg} alt="" width={32} height={32} style={{ width: 32, height: 32 }} className="sv-icon-3d" />
+            <h2>Verificação de Segurança</h2>
           </div>
-          <label className="block text-sm md:text-base text-[var(--sv-muted)] mb-2">
-            Digite o código do seu aplicativo autenticador:
-          </label>
+          <p className="security-description">
+            Digite o código de 6 dígitos do seu app autenticador
+          </p>
           <input
             autoFocus
             inputMode="numeric"
             maxLength={6}
-            className="sv-input-premium h-14 md:h-16 text-2xl md:text-3xl font-extrabold tracking-[0.5em] text-center px-6 rounded-2xl"
+            className="security-code-input"
             placeholder="000000"
             value={token}
             onChange={(e) => setToken(e.target.value.replace(/\D/g, "").slice(0, 6))}
           />
 
-          <div className="flex flex-col sm:flex-row gap-3 mt-5 md:mt-7 sm:justify-end">
-            <button onClick={() => setStep("form")} className="sv-btn-ghost h-10 md:h-12 w-full sm:w-auto px-5 md:px-7 text-sm md:text-base rounded-xl">
+          <div className="security-actions">
+            <button onClick={() => setStep("form")} className="btn-cancel">
               Cancelar
             </button>
             <button
@@ -1040,12 +1041,12 @@ function WithdrawModal({
                 onConfirm(amt, net, fee);
                 setStep("done");
               }}
-              className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl whitespace-nowrap"
+              className="btn-confirm"
             >
               Confirmar Saque
             </button>
           </div>
-        </>
+        </div>
       )}
 
       {step === "done" && (
