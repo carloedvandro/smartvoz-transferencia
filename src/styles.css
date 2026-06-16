@@ -707,6 +707,40 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 
     inset 0 2px 4px rgba(255,255,255,0.35);
 }
 
+/* Compact eye icon button (replaces text "Visualizar") */
+.botao-visualizar-icon {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #d85cff 0%, #7b05d9 100%);
+  border: 2px solid #ffc233;
+  border-radius: 999px;
+  box-shadow:
+    0 10px 24px rgba(123, 5, 217, 0.35),
+    inset 0 2px 4px rgba(255,255,255,0.35);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  cursor: pointer;
+}
+.botao-visualizar-icon:hover {
+  transform: translateY(-2px) scale(1.08);
+  filter: brightness(1.1);
+  box-shadow:
+    0 14px 32px rgba(123, 5, 217, 0.45),
+    0 0 20px rgba(246, 199, 86, .45),
+    inset 0 2px 4px rgba(255,255,255,0.45);
+}
+.botao-visualizar-icon:active {
+  transform: translateY(0) scale(1);
+}
+
+.sv-eye-gold {
+  color: #F6C756;
+  filter: drop-shadow(0 0 5px rgba(246,199,86,.6)) drop-shadow(0 2px 2px rgba(100,55,0,.35));
+}
+
 /* ============================================================
    Filter grid — clean alignment on mobile + desktop
    ============================================================ */

@@ -10,6 +10,7 @@ import {
   FileText,
   ChevronLeft,
   ChevronRight,
+  Eye,
 } from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
 import { fireWithdrawalSuccess, fireCategoryFX } from "@/components/premium/SuccessFX";
@@ -387,9 +388,10 @@ function SaquesPage() {
                         fireCategoryFX(m.categoria);
                         setDetalhe(m);
                       }}
-                      className="botao-visualizar text-sm w-full"
+                      className="botao-visualizar-icon"
+                      title="Visualizar"
                     >
-                      Visualizar
+                      <Eye size={20} className="sv-eye-gold" />
                     </button>
                   </div>
 
@@ -420,9 +422,10 @@ function SaquesPage() {
                           fireCategoryFX(m.categoria);
                           setDetalhe(m);
                         }}
-                        className="botao-visualizar text-xs"
+                        className="botao-visualizar-icon"
+                        title="Visualizar"
                       >
-                        Visualizar
+                        <Eye size={18} className="sv-eye-gold" />
                       </button>
                     </div>
                   </div>
