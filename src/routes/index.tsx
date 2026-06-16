@@ -951,7 +951,7 @@ function WithdrawModal({
           <div className="mb-4 md:mb-5">
             <p className="font-bold text-[var(--sv-purple-deep)] mb-2 text-base md:text-lg">Saldo disponível</p>
             <div className="sv-card-balance p-4 md:p-5 flex items-center justify-between gap-3">
-              <span className="sv-text-green font-black tabular-nums text-2xl md:text-[28px]">
+              <span className="sv-amount-3d font-black tabular-nums text-2xl md:text-[28px]">
                 {brl(balance)}
               </span>
               <button
