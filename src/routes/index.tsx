@@ -1014,23 +1014,6 @@ function WithdrawModal({
 
       {step === "security" && (
         <>
-          <div className="sv-card-balance p-4 md:p-5 space-y-2 md:space-y-3 mb-5">
-            <p className="text-[var(--sv-muted)] text-sm md:text-base">Você está prestes a realizar o seguinte saque:</p>
-            <div className="flex justify-between text-sm md:text-base">
-              <span className="text-[var(--sv-muted)]">Valor bruto:</span>
-              <span className="tabular-nums font-semibold text-[var(--sv-purple-deep)]">{brl(amt)}</span>
-            </div>
-            <div className="flex justify-between text-sm md:text-base">
-              <span className="text-[var(--sv-muted)]">Taxa (3%):</span>
-              <span className="tabular-nums font-semibold text-[var(--sv-orange)]">− {brl(fee)}</span>
-            </div>
-            <div className="h-px bg-[var(--sv-lilac-border)]" />
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-[var(--sv-purple-deep)] text-sm md:text-lg">Valor líquido:</span>
-              <span className="sv-amount-3d sv-amount-hero tabular-nums">{brl(net)}</span>
-            </div>
-          </div>
-
           <div className="flex items-center gap-2 text-[var(--sv-purple)] font-bold mb-2">
             <img src={shieldImg} alt="" width={28} height={28} style={{ width: 28, height: 28 }} className="sv-icon-3d" /> Verificação de Segurança
           </div>
