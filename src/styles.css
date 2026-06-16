@@ -149,77 +149,55 @@
     text-shadow: 0 1px 0 rgba(255,255,255,.4), 0 2px 4px rgba(0, 120, 70, .15);
     letter-spacing: -0.01em;
   }
-  /* 3D extruded glossy amounts — premium gold metallic look */
+  /* Premium amount styles — solid color + soft glow (no gradient text) */
   .sv-amount-3d,
   .sv-amount-3d-neg,
   .sv-amount-green {
     font-weight: 900;
-    letter-spacing: -0.5px;
     line-height: 1.1;
+    letter-spacing: -0.5px;
     padding: 4px 2px 12px;
     display: inline-block;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    font-family: "Inter", "Arial", sans-serif;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: currentColor;
+    background-image: none;
+    filter: none;
   }
+  /* Roxo principal */
   .sv-amount-3d {
-    background-image: linear-gradient(
-      180deg,
-      #E9D5FF 0%,
-      #C9A8FF 15%,
-      #A07BF0 35%,
-      #7E54D9 55%,
-      #5B2EB8 75%,
-      #3C1A85 100%
-    );
+    color: #b884ff;
     text-shadow:
-      0 1px 0 rgba(245,235,255,.95),
-      0 2px 0 rgba(190,150,255,.55),
-      0 6px 14px rgba(90,40,180,.30);
-    filter:
-      drop-shadow(0 3px 6px rgba(126,84,217,.30))
-      drop-shadow(0 0 10px rgba(180,140,255,.32));
+      0 2px 0 #7a35d8,
+      0 6px 14px rgba(98, 0, 255, 0.32),
+      0 0 18px rgba(171, 111, 255, 0.45);
   }
   .sv-amount-hero {
-    font-size: 34px !important;
-    letter-spacing: -1.2px !important;
+    font-size: clamp(34px, 4vw, 56px) !important;
+    letter-spacing: -1.5px !important;
   }
+  /* Verde positivo */
   .sv-amount-green {
-    background-image: linear-gradient(
-      180deg,
-      #E8FFE8 0%,
-      #A7F3B8 15%,
-      #4ED57E 35%,
-      #1FB877 55%,
-      #0E8F58 75%,
-      #06633A 100%
-    );
+    color: #5fd59c;
     text-shadow:
-      0 1px 0 rgba(255,255,255,.9),
-      0 2px 0 rgba(120,220,150,.45),
-      0 6px 12px rgba(10,100,60,.20);
-    filter:
-      drop-shadow(0 3px 6px rgba(40,180,110,.20))
-      drop-shadow(0 0 8px rgba(140,230,170,.18));
+      0 2px 0 #239964,
+      0 6px 14px rgba(0, 170, 95, 0.25),
+      0 0 16px rgba(95, 213, 156, 0.35);
   }
+  /* Negativo legível */
   .sv-amount-3d-neg {
+    color: #ff7f8f;
     letter-spacing: -0.3px;
-    background-image: linear-gradient(
-      180deg,
-      #FFE4E4 0%,
-      #FF8A8A 25%,
-      #E5384A 55%,
-      #B11724 80%,
-      #7A0E14 100%
-    );
     text-shadow:
-      0 1px 0 rgba(255,255,255,.55),
-      0 2px 4px rgba(180,20,30,.18),
-      0 6px 14px rgba(120,10,20,.22);
-    filter:
-      drop-shadow(0 2px 4px rgba(220,60,70,.25))
-      drop-shadow(0 0 6px rgba(255,140,140,.20));
+      0 2px 0 #c93b4d,
+      0 5px 10px rgba(255, 80, 100, 0.22),
+      0 0 10px rgba(255, 110, 130, 0.28);
+  }
+  .sv-amount-3d-neg strong,
+  .sv-amount-3d-neg span {
+    filter: none;
+    opacity: 1;
   }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
