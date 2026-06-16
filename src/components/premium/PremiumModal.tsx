@@ -9,6 +9,7 @@ export function PremiumModal({
   description,
   children,
   plain = false,
+  hideClose = false,
 }: {
   open: boolean;
   onClose: () => void;
@@ -17,6 +18,7 @@ export function PremiumModal({
   description?: string;
   children: ReactNode;
   plain?: boolean;
+  hideClose?: boolean;
 }) {
   useEffect(() => {
     if (!open) return;
