@@ -28,6 +28,7 @@ import searchImg from "@/assets/search-3d.png";
 import lockImg from "@/assets/lock-3d.png";
 import infoImg from "@/assets/info-3d.png";
 import shieldImg from "@/assets/shield-3d.png";
+import eyeGoldAsset from "@/assets/eye-gold.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -391,7 +392,7 @@ function SaquesPage() {
                       className="botao-visualizar-icon"
                       title="Visualizar"
                     >
-                      <Eye size={20} className="sv-eye-gold" />
+                      <img src={eyeGoldAsset.url} alt="Visualizar" />
                     </button>
                   </div>
 
@@ -425,7 +426,7 @@ function SaquesPage() {
                         className="botao-visualizar-icon"
                         title="Visualizar"
                       >
-                        <Eye size={18} className="sv-eye-gold" />
+                        <img src={eyeGoldAsset.url} alt="Visualizar" />
                       </button>
                     </div>
                   </div>
