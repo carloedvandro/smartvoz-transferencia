@@ -706,6 +706,21 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 
 }
 
 /* ============================================================
+   Botão Visualizar (detalhe da movimentação)
+   ============================================================ */
+.botao-visualizar {
+  background: linear-gradient(180deg, #d85cff 0%, #7b05d9 100%);
+  border: 2px solid #ffc233;
+  color: #fff;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 14px 36px;
+  box-shadow:
+    0 10px 24px rgba(123, 5, 217, 0.35),
+    inset 0 2px 4px rgba(255,255,255,0.35);
+}
+
+/* ============================================================
    Filter grid — clean alignment on mobile + desktop
    ============================================================ */
 .sv-filters-grid {
