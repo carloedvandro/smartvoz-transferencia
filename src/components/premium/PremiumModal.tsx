@@ -42,13 +42,15 @@ export function PremiumModal({
         className={`sv-modal-shell sv-hide-scrollbar animate-sv-scale-in w-full max-w-[860px] max-h-[90vh] overflow-y-auto relative ${plain ? "sv-modal-shell-plain" : "sv-card-premium"}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          aria-label="Fechar"
-          onClick={onClose}
-          className="absolute top-4 right-4 size-10 rounded-full grid place-items-center text-[var(--sv-muted)] hover:bg-[var(--sv-lilac)] transition z-10"
-        >
-          <X className="size-5" />
-        </button>
+        {!hideClose && (
+          <button
+            aria-label="Fechar"
+            onClick={onClose}
+            className="absolute top-4 right-4 size-10 rounded-full grid place-items-center text-[var(--sv-muted)] hover:bg-[var(--sv-lilac)] transition z-10"
+          >
+            <X className="size-5" />
+          </button>
+        )}
 
         <header className="sv-modal-header flex items-center gap-4 mb-7">
           {icon && (
