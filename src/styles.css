@@ -174,12 +174,12 @@
       #3C1A85 100%
     );
     text-shadow:
-      0 1px 0 rgba(255,248,213,.95),
-      0 2px 0 rgba(255,214,90,.55),
-      0 6px 12px rgba(168,108,0,.25);
+      0 1px 0 rgba(245,235,255,.95),
+      0 2px 0 rgba(190,150,255,.55),
+      0 6px 14px rgba(90,40,180,.30);
     filter:
-      drop-shadow(0 3px 6px rgba(246,199,86,.28))
-      drop-shadow(0 0 8px rgba(255,220,120,.28));
+      drop-shadow(0 3px 6px rgba(126,84,217,.30))
+      drop-shadow(0 0 10px rgba(180,140,255,.32));
   }
   .sv-amount-hero {
     font-size: 34px !important;
@@ -204,16 +204,22 @@
       drop-shadow(0 0 8px rgba(140,230,170,.18));
   }
   .sv-amount-3d-neg {
-    background-image: linear-gradient(180deg, #FFE0E0 0%, #FF9B9B 38%, #E63946 72%, #7A0E14 100%);
+    letter-spacing: -0.3px;
+    background-image: linear-gradient(
+      180deg,
+      #FFE4E4 0%,
+      #FF8A8A 25%,
+      #E5384A 55%,
+      #B11724 80%,
+      #7A0E14 100%
+    );
     text-shadow:
-      0 1px 0 #df4a4a,
-      0 2px 0 #ce3a3a,
-      0 3px 0 #bd2d2d,
-      0 4px 0 #aa2424,
-      0 5px 0 #971c1c,
-      0 6px 0 #841414,
-      0 7px 1px rgba(0,0,0,.10),
-      0 10px 16px rgba(110, 10, 10, .28);
+      0 1px 0 rgba(255,255,255,.55),
+      0 2px 4px rgba(180,20,30,.18),
+      0 6px 14px rgba(120,10,20,.22);
+    filter:
+      drop-shadow(0 2px 4px rgba(220,60,70,.25))
+      drop-shadow(0 0 6px rgba(255,140,140,.20));
   }
   .sv-text-gold {
     background: var(--gradient-gold-shine);
