@@ -905,6 +905,7 @@ function WithdrawModal({
       open={open}
       onClose={close}
       plain={step === "security"}
+      hideClose={step === "security"}
       title={
         step === "form"
           ? "Solicitar Saque"
