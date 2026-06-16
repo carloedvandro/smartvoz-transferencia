@@ -388,9 +388,10 @@ function SaquesPage() {
                         fireCategoryFX(m.categoria);
                         setDetalhe(m);
                       }}
-                      className="botao-visualizar text-sm w-full"
+                      className="botao-visualizar-icon"
+                      title="Visualizar"
                     >
-                      Visualizar
+                      <Eye size={20} className="sv-eye-gold" />
                     </button>
                   </div>
 
