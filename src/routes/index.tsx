@@ -921,6 +921,8 @@ function WithdrawModal({
       description={
         step === "form"
           ? "Preencha os dados abaixo para solicitar um saque"
+          : step === "security"
+          ? "Digite o código do seu aplicativo autenticador:"
           : step === "done"
           ? "Saque solicitado com sucesso"
           : undefined
