@@ -10,6 +10,7 @@ import {
   FileText,
   ChevronLeft,
   ChevronRight,
+  ShieldCheck,
 } from "lucide-react";
 import { PremiumModal } from "@/components/premium/PremiumModal";
 import { fireWithdrawalSuccess, fireCategoryFX } from "@/components/premium/SuccessFX";
@@ -881,19 +882,22 @@ function WithdrawModal({
   onConfirm: (amount: number, net: number, fee: number) => void;
 }) {
   const [amount, setAmount] = useState("");
-  const [done, setDone] = useState(false);
+  const [step, setStep] = useState<"form" | "security" | "done">("form");
+  const [token, setToken] = useState("");
 
   const amt = Number(amount.replace(/[^0-9.,]/g, "").replace(",", ".")) || 0;
   const fee = +(amt * 0.03).toFixed(2);
   const net = +(amt - fee).toFixed(2);
   const total = balance + locked;
   const valid = amt > 0 && amt <= balance;
+  const tokenValid = /^\d{6}$/.test(token);
 
   function close() {
     onClose();
     setTimeout(() => {
       setAmount("");
-      setDone(false);
+      setToken("");
+      setStep("form");
     }, 200);
   }
 
@@ -901,10 +905,22 @@ function WithdrawModal({
     <PremiumModal
       open={open}
       onClose={close}
-      title="Solicitar Saque"
-      description={done ? "Saque solicitado com sucesso" : "Preencha os dados abaixo para solicitar um saque"}
+      title={
+        step === "form"
+          ? "Solicitar Saque"
+          : step === "security"
+          ? "Verificação de Segurança"
+          : "Saque solicitado!"
+      }
+      description={
+        step === "form"
+          ? "Preencha os dados abaixo para solicitar um saque"
+          : step === "security"
+          ? "Digite o código de 6 dígitos do seu app autenticador"
+          : "Saque solicitado com sucesso"
+      }
     >
-      {!done ? (
+      {step === "form" && (
         <>
 
           <div
@@ -987,17 +1003,69 @@ function WithdrawModal({
             </button>
             <button
               disabled={!valid}
-              onClick={() => {
-                onConfirm(amt, net, fee);
-                setDone(true);
-              }}
+              onClick={() => setStep("security")}
               className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl"
             >
               Continuar
             </button>
           </div>
         </>
-      ) : (
+      )}
+
+      {step === "security" && (
+        <>
+          <div className="sv-card-balance p-4 md:p-5 space-y-2 md:space-y-3 mb-5">
+            <p className="text-[var(--sv-muted)] text-sm md:text-base">Você está prestes a realizar o seguinte saque:</p>
+            <div className="flex justify-between text-sm md:text-base">
+              <span className="text-[var(--sv-muted)]">Valor bruto:</span>
+              <span className="tabular-nums font-semibold text-[var(--sv-purple-deep)]">{brl(amt)}</span>
+            </div>
+            <div className="flex justify-between text-sm md:text-base">
+              <span className="text-[var(--sv-muted)]">Taxa (3%):</span>
+              <span className="tabular-nums font-semibold text-[var(--sv-orange)]">− {brl(fee)}</span>
+            </div>
+            <div className="h-px bg-[var(--sv-lilac-border)]" />
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-[var(--sv-purple-deep)] text-sm md:text-lg">Valor líquido:</span>
+              <span className="sv-amount-3d sv-amount-hero tabular-nums">{brl(net)}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-[var(--sv-purple)] font-bold mb-2">
+            <ShieldCheck className="size-5" /> Verificação de Segurança
+          </div>
+          <label className="block text-sm md:text-base text-[var(--sv-muted)] mb-2">
+            Digite o código do seu aplicativo autenticador:
+          </label>
+          <input
+            autoFocus
+            inputMode="numeric"
+            maxLength={6}
+            className="sv-input-premium h-14 md:h-16 text-2xl md:text-3xl font-extrabold tracking-[0.5em] text-center px-6 rounded-2xl"
+            placeholder="000000"
+            value={token}
+            onChange={(e) => setToken(e.target.value.replace(/\D/g, "").slice(0, 6))}
+          />
+
+          <div className="grid grid-cols-2 gap-3 mt-5 md:mt-7 sm:flex sm:justify-end">
+            <button onClick={() => setStep("form")} className="sv-btn-ghost h-10 md:h-12 w-full sm:w-auto px-5 md:px-7 text-sm md:text-base rounded-xl">
+              Cancelar
+            </button>
+            <button
+              disabled={!tokenValid}
+              onClick={() => {
+                onConfirm(amt, net, fee);
+                setStep("done");
+              }}
+              className="sv-btn-premium h-10 md:h-12 w-full sm:w-auto px-6 md:px-8 text-sm md:text-base rounded-xl inline-flex items-center justify-center gap-2"
+            >
+              <ShieldCheck className="size-4" /> Confirmar Saque
+            </button>
+          </div>
+        </>
+      )}
+
+      {step === "done" && (
         <div className="py-8 text-center">
           <img
             src={piggyImg}
