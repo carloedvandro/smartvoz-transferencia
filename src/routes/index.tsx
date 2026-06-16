@@ -904,8 +904,8 @@ function WithdrawModal({
     <PremiumModal
       open={open}
       onClose={close}
-      plain={step === "security"}
-      hideClose={step === "security"}
+      plain={step === "form" || step === "security"}
+      hideClose={step === "form" || step === "security"}
       title={
         step === "form"
           ? "Solicitar Saque"
