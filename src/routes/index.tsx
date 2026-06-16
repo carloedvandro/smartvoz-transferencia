@@ -905,6 +905,7 @@ function WithdrawModal({
       open={open}
       onClose={close}
       plain={step === "security"}
+      hideClose={step === "security"}
       title={
         step === "form"
           ? "Solicitar Saque"
@@ -1014,8 +1015,7 @@ function WithdrawModal({
 
       {step === "security" && (
         <div className="security-modal">
-          <div className="security-header">
-            <img src={shieldImg} alt="" width={32} height={32} style={{ width: 32, height: 32 }} className="sv-icon-3d" />
+        <div className="security-header">
             <h2>Verificação de Segurança</h2>
           </div>
           <p className="security-description">
