@@ -616,6 +616,7 @@ function SaldoModal({
     <PremiumModal
       open={open}
       onClose={onClose}
+      plain
       icon={<img src={walletImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />}
       title="Saldo detalhado"
       description="Visão completa do seu saldo SmartVoz"
@@ -687,6 +688,7 @@ function TransferModal({
     <PremiumModal
       open={open}
       onClose={close}
+      plain
       icon={<img src={transferImg} alt="" width={72} height={72} style={{ width: 72, height: 72 }} />}
       title="Transferir Saldo"
       description={
