@@ -1025,7 +1025,7 @@ function WithdrawModal({
 
       {step === "security" && (
         <>
-          <div className="sv-card-balance p-4 md:p-5 mb-5 space-y-2 md:space-y-3">
+          <div className="mb-5 space-y-2 md:space-y-3">
             <div className="flex justify-between text-sm md:text-base text-[var(--sv-muted)]">
               <span>Valor solicitado:</span>
               <span className="tabular-nums font-semibold text-[var(--sv-purple-deep)]">{brl(amt)}</span>
@@ -1068,7 +1068,7 @@ function WithdrawModal({
               disabled={!tokenValid}
               onClick={() => {
                 onConfirm(amt, net, fee);
-                setStep("done");
+                close();
               }}
               className="btn-confirm"
             >
